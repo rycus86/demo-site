@@ -31,6 +31,7 @@ script:
       if [ "$DOCKER_TAG" == "" ]; then
         DOCKER_TAG="latest"
       fi
+      echo "Building $DOCKER_TAG from $DOCKERFILE ..."
       docker build -t demo-site:$DOCKER_TAG -f $DOCKERFILE .
       if [ "$?" -ne "0" ]; then
         echo "Docker build failed: $DOCKER_TAG"
@@ -39,12 +40,8 @@ script:
     done
 after_success:
   # push docker image
+  - docker login -u="rycus86" -p="$DOCKER_PASSWORD"
   - >
-    docker login -u="rycus86" -p="$DOCKER_PASSWORD"
-    if [ "$?" -ne "0" ]; then
-      echo "Failed to log in to Docker Hub"
-      exit 1
-    fi
     for DOCKERFILE in Dockerfile*; do
       DOCKER_TAG=$(echo "$DOCKERFILE" | sed 's/Dockerfile\.*//g')
       if [ -z "$DOCKER_TAG" ]; then
