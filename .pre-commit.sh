@@ -22,8 +22,8 @@ if [ "$RESULT" -eq "0" ]; then
 fi
 
 # run tests if Flask is installed
-HAS_FLASK=$(python -c 'import flask' 2>&1 >/dev/null; echo $?)
-if [ -z "$HAS_FLASK" ]; then
+HAS_FLASK=$(python -c 'import flask' >/dev/null 2>&1; echo $?)
+if [ "$HAS_FLASK" -eq "0" ]; then
     PYTHONPATH=src python -m unittest discover -s tests/ -v
 else
     echo "Skipping tests"

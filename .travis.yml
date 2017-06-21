@@ -1,0 +1,45 @@
+language: python
+python:
+  - '2.7'
+sudo:
+  - required
+services:
+  - docker
+install:
+  - pip install -r requirements.txt
+  - pip install coveralls
+before_script:
+  - >
+    for ALTERNATIVE_DOCKERFILE in Dockerfile.*; do
+      DIFF_LINES=$(diff -y --suppress-common-lines Dockerfile $ALTERNATIVE_DOCKERFILE | wc -l)
+      if [ "$DIFF_LINES" -ne "1" ]; then
+        echo "$ALTERNATIVE_DOCKERFILE has $DIFF_LINES lines different then the main Dockerfile, expected only one."
+        exit 1
+      fi
+    done
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+script:
+  # python tests
+  - PYTHONPATH=src python -m coverage run --branch --source=src -m unittest discover -s tests -v
+  # docker builds
+  - docker run --rm --privileged multiarch/qemu-user-static:register --reset
+  - >
+    for DOCKERFILE in Dockerfile*; do
+      DOCKER_TAG=$(echo "$DOCKERFILE" | sed 's/Dockerfile\.*//g')
+      if [ "$DOCKER_TAG" == "" ]; then
+        DOCKER_TAG="latest"
+      fi
+      docker build -t demo-site:$DOCKER_TAG -f $DOCKERFILE .
+      DOCKER_RESULT=$?
+      if [ "$DOCKER_RESULT" -ne "0" ]; then
+        exit $DOCKER_RESULT
+      fi
+    done
+after_success:
+  # coverage reports
+  - coveralls
+  - python -m coverage report -m
+  - python -m coverage xml
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
