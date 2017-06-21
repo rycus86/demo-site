@@ -1,0 +1,68 @@
+html, body {
+    font-family: 'Roboto', 'Helvetica', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.mdl-card.home {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mdl-card.home .mdl-card__actions {
+    display: flex;
+    box-sizing:border-box;
+    align-items: center;
+}
+
+.markdown h1,
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+    margin: 16px 0;
+}
+
+.markdown h1 {
+    font-size: 32px;
+}
+.markdown h2 {
+    font-size: 28px;
+}
+.markdown h3 {
+    font-size: 24px;
+}
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+    font-size: 20px;
+}
+
+.markdown code,
+.markdown pre {
+    background: #eee;
+    overflow: auto;
+    padding: 0.2em;
+    border-radius: 5px;
+}
+.markdown pre code {
+    padding: 0px;
+}
+
+.markdown a.anchor {
+    display: none;
+}
+
+.markdown a {
+    text-decoration: none;
+}
+
+.mdl-list.condensed-list {
+    padding: 0;
+}
+
+.mdl-list.condensed-list .mdl-list__item {
+    height: auto;
+    padding: 2px 16px;
+}

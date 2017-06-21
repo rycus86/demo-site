@@ -1,0 +1,22 @@
+[
+    {
+        "key": "home",
+        "title": "Intro"
+    },
+    {
+        "key": "specs",
+        "title": "Specs"
+    },
+    {
+        "key": "github",
+        "title": "GitHub"
+    },
+    {
+        "key": "dockerhub",
+        "title": "Docker Hub"
+    },
+    {
+        "key": "android",
+        "title": "Android"
+    }
+]

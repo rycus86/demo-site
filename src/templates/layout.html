@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#009688">
+
+    <title>{{ settings.title }}</title>
+
+    {% include 'include/css_js.html' %}
+</head>
+<body>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    {% include 'include/header.html' %}
+
+    <main class="mdl-layout__content">
+        
+        {% for tab in tabs %}
+        <section class="mdl-layout__tab-panel{% if loop.index == 1 %} is-active{% endif %}" id="{{ tab.key }}">
+            <div class="mdl-grid" id="panel-{{ tab.key }}">
+                {% include 'include/' + tab.key + '.html' %}
+            </div>
+        </section>
+        {% endfor %}
+
+        {% include 'include/footer.html' %}
+
+    </main>
+
+</div>
+
+{% include 'include/tracking.html' %}
+
+</body>
+</html>
