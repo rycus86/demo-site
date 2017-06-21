@@ -44,12 +44,14 @@ after_success:
   - >
     for DOCKERFILE in Dockerfile*; do
       DOCKER_TAG=$(echo "$DOCKERFILE" | sed 's/Dockerfile\.*//g')
-      if [ -z "$DOCKER_TAG" ]; then
-      docker tag demo-site:$DOCKER_TAG rycus86/demo-site:$DOCKER_TAG
-      docker push rycus86/demo-site:$DOCKER_TAG
-      if [ "$?" -ne "0" ]; then
-        echo "Failed to push docker image for $DOCKER_TAG"
-        exit 1
+      if [ -n "$DOCKER_TAG" ]; then
+        docker tag demo-site:$DOCKER_TAG rycus86/demo-site:$DOCKER_TAG
+        echo "Pushing rycus86/demo-site:$DOCKER_TAG to Docker Hub..."
+        docker push rycus86/demo-site:$DOCKER_TAG
+        if [ "$?" -ne "0" ]; then
+          echo "Failed to push docker image for $DOCKER_TAG"
+          exit 1
+        fi
       fi
     else
       echo 'Not pushing to Docker Hub'
