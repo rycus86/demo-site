@@ -15,4 +15,4 @@ where they are running behind an [nginx](https://nginx.org/en) proxy server.
 The whole process including the deployments is automated,
 the only manual step being the `git push` command.
 
-To see how it works go to the `Specs` tab or click the button below.
+To see it in action and find out how it works [go to the demo site](http://demo.viktoradam.net).

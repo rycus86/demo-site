@@ -49,5 +49,7 @@ class AssetTest(unittest.TestCase):
     def test_css_files(self):
         data = self.get_asset('styles.css', 'text/css; charset=utf-8')
 
-        # TODO
+        self.assertIn('.markdown pre code {', data)
+        self.assertIn('.markdown a.anchor {', data)
+        self.assertIn('.mdl-list.condensed-list {', data)
 

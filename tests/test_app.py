@@ -78,6 +78,12 @@ class AppTest(unittest.TestCase):
         self.assertMatches('.*<script src="/asset/[0-9a-f]{10}/datetime.js">', content)
         self.assertMatches('.*<script src="/asset/[0-9a-f]{10}/github.js">', content)
         self.assertMatches('.*<script src="/asset/[0-9a-f]{10}/dockerhub.js">', content)
+    
+    def test_tracking(self):
+        content = self.get_html('/')
+
+        self.assertIn('<!-- Cedexis for cdn.jsdelivr.net -->', content)
+        self.assertIn('<!-- Google Analytics -->', content)
 
     def test_home_panel(self):
         content = self.get_html('/')
@@ -90,3 +96,20 @@ class AppTest(unittest.TestCase):
 
         self.assertIn('<h2 class="mdl-card__title-text">Acknowledgements</h2>', content)
         self.assertIn('<code>Python</code> web framework', content)
+
+    def test_error_page(self):
+        response = self.client.get('/page/not/found')
+
+        self.assertEqual(response.status_code, 404)
+        self.assertIn('text/html', response.content_type)
+        self.assertEqual(response.charset, 'utf-8')
+
+        content = response.data
+
+        self.assertIn('<title>Page not found</title>', content)
+        self.assertIn('<h2>Oops... This page is not found.</h2>', content)
+
+        # make sure there's tracking on the error page
+        self.assertIn('<!-- Cedexis for cdn.jsdelivr.net -->', content)
+        self.assertIn('<!-- Google Analytics -->', content)
+
