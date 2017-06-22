@@ -1,0 +1,16 @@
+{
+    "build_on_cloud": null, 
+    "can_edit": false, 
+    "description": "Demo website built with Python Flask.", 
+    "full_description": "# README\n\nSample readme contents.",
+    "is_automated": true, 
+    "is_private": false, 
+    "last_updated": "2017-06-21T23:27:44.006774Z", 
+    "name": "demo-site", 
+    "namespace": "rycus86", 
+    "pull_count": 35, 
+    "repository_type": "image", 
+    "star_count": 0, 
+    "status": 1, 
+    "user": "rycus86"
+ }

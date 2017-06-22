@@ -3,7 +3,7 @@
     app.DateTime = {
 
         formatTimeFromNow: function (container_id) {
-            $(container_id + ' *[data-time]').each(function (index, item) {
+            $('#' + container_id + ' *[data-time]').each(function (index, item) {
                 var element = $(item),
                     formatted = moment(element.data('time')).fromNow(),
                     prefix = element.data('prefix');
@@ -20,7 +20,7 @@
         },
 
         formatDateTime: function (container_id) {
-            $(container_id + ' *[data-datetime]').each(function (index, item) {
+            $('#' + container_id + ' *[data-datetime]').each(function (index, item) {
                 var element = $(item);
 
                 var m = moment(element.data('datetime'));
