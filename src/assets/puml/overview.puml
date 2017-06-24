@@ -1,0 +1,26 @@
+@startuml
+
+cloud #LightGrey {
+    [Browser] #LightBlue
+}
+
+frame Backend #LightGrey {
+    [nginx] << HTTP Proxy >> #LightGreen
+    [demo-site] << Web server >> #Yellow
+    [github-proxy] << REST server >> #Orange
+    [dockerhub-proxy] << REST server >> #Orange
+    [googleplay-proxy] << REST server >> #Orange
+}
+
+[Browser] =d=> [nginx] : <b>all</b> <i>http://*.viktoradam.net</i> requests
+
+[nginx] -l-> [demo-site] : <i>demo.</i>\nviktoradam.net
+[nginx] -r-> [github-proxy] : <i>github.api.</i>\nviktoradam.net
+[nginx] -d-> [dockerhub-proxy] : <i>docker.api.</i>\nviktoradam.net
+[nginx] -d-> [googleplay-proxy] : <i>gplay.api.</i>\nviktoradam.net
+
+[Browser] ..d.> [demo-site] : HTTP GET / \n -> HTML
+[Browser] ..d.> [demo-site] : HTTP POST /render \n JSON -> HTML
+[Browser] ..d.> [github-proxy] : HTTP GET * \n -> JSON
+
+@enduml

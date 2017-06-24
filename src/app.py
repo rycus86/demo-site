@@ -9,10 +9,14 @@ app = Flask(__name__)
 @app.route('/')
 def main():
     return render_template('layout.html',
-                           markdown=markdown,
+                           markdown=pretty_markdown,
                            assets=load_static_asset_mappings(),
                            read=_read_resource_file,
                            **load_resources())
+
+
+def pretty_markdown(*args, **kwargs):
+    return markdown(*args, extensions=['markdown.extensions.fenced_code'], **kwargs)
 
 
 def load_resources():
@@ -61,7 +65,7 @@ def _relative_path(path):
 
 @app.route('/render/<template>', methods=['POST'])
 def render(template):
-    return render_template('render/%s.html' % template, data=request.json, markdown=markdown)
+    return render_template('render/%s.html' % template, data=request.json, markdown=pretty_markdown)
 
 
 @app.route('/asset/<hash>/<path:asset_file>')

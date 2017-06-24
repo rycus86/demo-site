@@ -21,12 +21,24 @@ if [ "$RESULT" -eq "0" ]; then
     exit 1
 fi
 
-# run tests if Flask is installed
-HAS_FLASK=$(python -c 'import flask' >/dev/null 2>&1; echo $?)
-if [ "$HAS_FLASK" -eq "0" ]; then
-    PYTHONPATH=src python -m unittest discover -s tests/ -v
-else
-    echo "Skipping tests"
+# run the tests
+case $(arch) in
+    arm*|aarch64) FROM="arm32v6/python:2.7-alpine3.6" ;;
+    *)            FROM="python:2.7-alpine" ;;
+esac
+
+docker build -t demo-site-test-runner - << EOF > /dev/null
+FROM ${FROM}
+RUN pip install $(cat requirements.txt | paste -s -d ' ')
+CMD PYTHONPATH=src python -m unittest discover -s tests -v
+EOF
+if [ "$?" -ne "0" ]; then
+    exit 1
+fi
+
+docker run --rm -v ${PWD}:/app:ro -w /app demo-site-test-runner
+if [ "$?" -ne "0" ]; then
+    exit 1
 fi
 
 echo

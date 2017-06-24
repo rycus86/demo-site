@@ -14,6 +14,10 @@ window.cApp = (function () {
 
                     window.cApp.Navigation.goToTab(target_id);
                 });
+
+                if (window.location.hash) {
+                    window.cApp.Navigation.goToTab(window.location.hash.split('#')[1]);
+                }
             },
 
             initSlickCarousel: function() {
@@ -37,6 +41,10 @@ window.cApp = (function () {
                 var target_id = tab_id;
 
                 if (current_id === target_id) {
+                    return;
+                }
+
+                if (!document.getElementById(target_id)) {
                     return;
                 }
 

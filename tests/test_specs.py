@@ -22,5 +22,7 @@ class SpecificationsTest(unittest.TestCase):
         content = self.get_html('/')
 
         self.assertIn('<h2 class="mdl-card__title-text">Overview</h2>', content)
-        self.assertIn('<p><em>You can find more details about each component on this page.</em></p>', content)
+        self.assertIn('<h2 class="mdl-card__title-text">Build</h2>', content)
+        self.assertIn('<h2 class="mdl-card__title-text">Continuous Integration</h2>', content)
+        self.assertIn('<h2 class="mdl-card__title-text">Continuous Deployment</h2>', content)
 

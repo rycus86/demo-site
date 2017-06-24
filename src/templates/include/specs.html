@@ -1,10 +1,12 @@
-<div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--6-col mdl-cell--top specs">
+<div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--6-col mdl-cell--top">
 
     <div class="mdl-card__title mdl-card--border mdl-color--cyan mdl-color-text--white">
         <h2 class="mdl-card__title-text">Overview</h2>
     </div>
     
-    <!-- TODO insert PlantUML diagram --> 
+    <div class="mdl-card__media mdl-card--border mdl-color--cyan">
+        <img src="{{ assets['puml/overview.svg'] }}">
+    </div>
 
     <div class="mdl-card__supporting-text markdown">
         {{ markdown(read('specs/overview.md'))|safe }}
@@ -12,16 +14,43 @@
 
 </div>
 
-<div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--6-col mdl-cell--top specs">
+<div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--6-col mdl-cell--top">
 
     <div class="mdl-card__title mdl-card--border mdl-color--cyan mdl-color-text--white">
-        <h2 class="mdl-card__title-text">CI / CD</h2>
+        <h2 class="mdl-card__title-text">Build</h2>
     </div>
     
-    <!-- TODO insert PlantUML sequence diagram --> 
+    <div class="mdl-card__media mdl-card--border mdl-color--cyan"
+         style="background: url({{ assets['images/pycharm.png'] }}) center / cover">
+
+    </div>
 
     <div class="mdl-card__supporting-text markdown">
         {{ markdown(read('specs/build.md'))|safe }}
+    </div>
+
+</div>
+
+<div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--6-col mdl-cell--top">
+
+    <div class="mdl-card__title mdl-card--border mdl-color--cyan mdl-color-text--white">
+        <h2 class="mdl-card__title-text">Continuous Integration</h2>
+    </div>
+
+    <div class="mdl-card__supporting-text markdown">
+        {{ markdown(read('specs/ci.md'))|safe }}
+    </div>
+
+</div>
+
+<div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--6-col mdl-cell--top">
+
+    <div class="mdl-card__title mdl-card--border mdl-color--cyan mdl-color-text--white">
+        <h2 class="mdl-card__title-text">Continuous Deployment</h2>
+    </div>
+
+    <div class="mdl-card__supporting-text markdown">
+        {{ markdown(read('specs/cd.md'))|safe }}
     </div>
 
 </div>
