@@ -19,7 +19,6 @@ before_script:
     done
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
 script:
   # python tests
   - PYTHONPATH=src python -m coverage run --branch --source=src -m unittest discover -s tests -v
@@ -60,4 +59,4 @@ after_success:
   - coveralls
   - python -m coverage report -m
   - python -m coverage xml
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+  - ./cc-test-reporter after-build -d --exit-code $TRAVIS_TEST_RESULT
