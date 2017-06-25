@@ -59,4 +59,4 @@ after_success:
   - coveralls
   - python -m coverage report -m
   - python -m coverage xml
-  - ./cc-test-reporter after-build -d --exit-code $TRAVIS_TEST_RESULT
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
