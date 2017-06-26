@@ -141,8 +141,8 @@ then *Travis* is not dissimilar to them but it is hosted in the cloud - and did 
 
 It can automatically start new builds whenever there is a new commit in your 
 *GitHub* project and run it using default settings based on the auto-detected settings
-but for most use-cases you'll want to have your own build process described in the `.travis.yml` file.  
-You can see my sample [.travis.yml file](https://github.com/rycus86/demo-site/blob/master/.travis.yml) here.
+but for most use-cases you'll want to have your own build process described in a `.travis.yml` file.  
+You can see my [.travis.yml file](https://github.com/rycus86/demo-site/blob/master/.travis.yml) here as an example.
 
 The main elements in the *YAML* file are:
 - *language*: the main programming language of your project
@@ -152,7 +152,7 @@ The main elements in the *YAML* file are:
 - *after_success*: any final steps after a successful build
 - *env*: environment variables to pass to the build
 
-Taking a *Python* application as an example let's see an example of the steps above:
+Taking a *Python* application as an example, let's see an example of putting together all the steps above:
 ```yaml
 language: python
 python:
@@ -188,4 +188,40 @@ and set an environment variable for *Code Climate* reporting.
 - Given the build was successful, the `after_success` section will prepare and print
 the coverage report and send it to *Coveralls* and *Code Climate*.
 
-Easy.
+*Easy.*
+
+*Travis* supports quite a few languages and can integrate with lots of other services.  
+You can get it to publish your built binaries or documentation somewhere like [PyPI](https://pypi.python.org/pypi), 
+deploy your application to *AWS*, *Heroku* or *Google App Engine* and you can also 
+build *Docker* images and upload them to [Docker Hub](https://hub.docker.com) - 
+more on this in the *Continuous deployment* section.
+
+Another great feature is the [Matrix builds](https://docs.travis-ci.com/user/build-stages/matrix-expansion/) 
+that allows you to have a build plan run multiple times for the same *git commit* but with different settings.
+For example, you might want to build your *Python* project on version *2.7* and *3.5*
+or you want to build multiple *Docker* images with different tags and/or different *Dockerfiles*.  
+*Travis* allows you to do this in an easy and intuitive way.
+Certain build sections (like `python:` above) treat multiple values as input for a matrix build, for example:
+```yaml
+language: python
+python:
+  - '2.7'
+  - '3.5'
+```
+
+This will cause your build plan to spin up 2 workers on changes, one for each *Python* version.
+A more generic approach is to define *matrix* environment variables:
+```yaml
+...
+env:
+  matrix:
+  - DOCKER_TAG=latest  DOCKERFILE=Dockerfile
+  - DOCKER_TAG=alpine  DOCKERFILE=Dockerfile.alpine
+```
+
+This for example could be input for a *Docker* build to create a standard 
+and a small version of the image but otherwise using the same build plan.
+
+You can use both approaches in the same build plan and the combination of all
+*matrix* variables will be used to start builds - 
+this might end up a big number for lots of *matrix* variables.
