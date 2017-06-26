@@ -10,7 +10,10 @@
             data: JSON.stringify(repo),
             contentType: 'application/json',
             success: function (html) {
-                placeholder.replaceWith($(html));
+                var content = $(html);
+                placeholder.replaceWith(content);
+
+                app.CodeHighlight.processCodeBlocks(content);
             }
         });
     };

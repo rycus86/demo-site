@@ -50,9 +50,7 @@ class SpecificationsTest(unittest.TestCase):
     def test_cd(self):
         content = self.get_html('/')
 
-        self.assertNotIn('TODO: docker hub', content)
-        self.assertNotIn('TODO: docker multiarch', content)
-
         self.assertIn('<h2>Docker</h2>', content)
         self.assertIn('<h2>Docker Hub</h2>', content)
-
+        self.assertIn('<h2>Multiarch builds</h2>', content)
+        self.assertIn('<h2>Hosting</h2>', content)

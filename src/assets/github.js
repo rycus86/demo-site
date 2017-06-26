@@ -19,6 +19,8 @@
                     var markup = $(readme);
                     markup.find('code').parents('p').addClass('code-wrapper');
                     $('#github-readme-' + repo.name).append(markup);
+
+                    app.CodeHighlight.processCodeBlocks(markup);
                 });
             }
         });

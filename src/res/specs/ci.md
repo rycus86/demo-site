@@ -39,7 +39,7 @@ To install, simply run:
 `pip install coverage`
 
 To measure test coverage while running the same tests above run:  
-```bash
+```shell
 PYTHONPATH=src python                     \
     -m coverage run --branch --source=src \
     -m unittest discover -s tests -v
@@ -51,7 +51,7 @@ To print the results after collecting the metrics you can run:
 `python -m coverage report -m`
 
 This outputs something like this:
-```bash
+```shell
 $ python -m coverage report -m
 Name         Stmts   Miss Branch BrPart  Cover   Missing
 --------------------------------------------------------
@@ -81,7 +81,7 @@ As an added bonus, you can also get neat coverage badges on your *README* files 
 As I mentioned, this service is free to use for open-source projects 
 and you can sign up with your *GitHub* account.
 Assuming you use *Travis* (more on *Travis* later) sending your code coverage metrics is as easy as:
-```bash
+```shell
 $ pip install coveralls
 ... run coverage ...
 $ coveralls
@@ -98,14 +98,14 @@ static code analysis to reveal duplicated code or code style issues and much mor
 
 ![Code Climate]({{ image: code-climate.png }})
 
-Your source files get graded *(from A to F)* dependending on how many issues 
+Your source files get graded *(from A to F)* depending on how many issues 
 they contain and how severe those are.
 The issues can be viewed inside the platform or you can install a [Chrome extension](https://codeclimate.com/browser-extension/)
 and see the code analysis and coverage metrics directly in *GitHub*, nice.  
 This service also provides all sorts of notification hooks and other integrations.
 
 Set-up is a bit more fiddly:
-```bash
+```shell
 $ export CC_TEST_REPORTER_ID=<your token>
 $ curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
 $ chmod +x ./cc-test-reporter
@@ -229,6 +229,5 @@ this might end up being a large number for lots of *matrix* variables.
 *Travis* will send you emails about broken and fixed builds by default
 but you can get notifications on a wide range of other channels too.
 
-And of course, we can't forget about our belowed badge either:
+And of course, we can't forget about our beloved badge either:  
 [![Build Status](https://travis-ci.org/rycus86/demo-site.svg?branch=master)](https://travis-ci.org/rycus86/demo-site)
-

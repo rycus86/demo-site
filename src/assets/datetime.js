@@ -28,6 +28,17 @@
 
                 componentHandler.upgradeElement(item);
             });
+        },
+
+        formatDate: function (container_id) {
+            $('#' + container_id + ' *[data-date]').each(function (index, item) {
+                var element = $(item);
+
+                var m = moment(element.data('date'));
+                element.html(m.format('MMMM D, YYYY'));
+
+                componentHandler.upgradeElement(item);
+            });
         }
 
     };

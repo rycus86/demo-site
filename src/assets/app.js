@@ -8,16 +8,20 @@ window.cApp = (function () {
     return {
         Startup: {
             initTabs: function() {
-                $('a.mdl-layout__tab').click(function(event) {
-                    var target_link = $(event.currentTarget);
-                    var target_id = target_link.attr('href').split('#')[1];
+                $('.mdl-layout__tab-bar').children().each(function() {
+                    $(this).on('click', function() {
+                        $('main').scrollTop(0);
 
-                    window.cApp.Navigation.goToTab(target_id);
+                        if (!!ga) {
+                            var link = $(this).find('a').first();
+                            if (!!link) {
+                                var tab = link.attr('href').slice(1);
+
+                                ga('send', 'pageview', '/tabs/' + tab);
+                            }
+                        }
+                    });
                 });
-
-                if (window.location.hash) {
-                    window.cApp.Navigation.goToTab(window.location.hash.split('#')[1]);
-                }
             },
 
             initSlickCarousel: function() {
@@ -59,6 +63,15 @@ window.cApp = (function () {
 
                     target.fadeIn(150);
                 });
+            }
+        },
+
+        CodeHighlight: {
+            processCodeBlocks: function (container) {
+                var code_blocks = $(container).find('pre code');
+                for (var idx = 0; idx < code_blocks.length; idx++) {
+                    window.hljs.highlightBlock(code_blocks[idx]);
+                }
             }
         }
     };
