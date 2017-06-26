@@ -39,7 +39,7 @@ To install, simply run:
 `pip install coverage`
 
 To measure test coverage while running the same tests above run:  
-```
+```bash
 PYTHONPATH=src python                     \
     -m coverage run --branch --source=src \
     -m unittest discover -s tests -v
@@ -51,7 +51,7 @@ To print the results after collecting the metrics you can run:
 `python -m coverage report -m`
 
 This outputs something like this:
-```
+```bash
 $ python -m coverage report -m
 Name         Stmts   Miss Branch BrPart  Cover   Missing
 --------------------------------------------------------
@@ -81,7 +81,7 @@ As an added bonus, you can also get neat coverage badges on your *README* files 
 As I mentioned, this service is free to use for open-source projects 
 and you can sign up with your *GitHub* account.
 Assuming you use *Travis* (more on *Travis* later) sending your code coverage metrics is as easy as:
-```
+```bash
 $ pip install coveralls
 ... run coverage ...
 $ coveralls
@@ -105,7 +105,7 @@ and see the code analysis and coverage metrics directly in *GitHub*, nice.
 This service also provides all sorts of notification hooks and other integrations.
 
 Set-up is a bit more fiddly:
-```
+```bash
 $ export CC_TEST_REPORTER_ID=<your token>
 $ curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
 $ chmod +x ./cc-test-reporter
@@ -192,7 +192,7 @@ the coverage report and send it to *Coveralls* and *Code Climate*.
 
 *Travis* supports quite a few languages and can integrate with lots of other services.  
 You can get it to publish your built binaries or documentation somewhere like [PyPI](https://pypi.python.org/pypi), 
-deploy your application to *AWS*, *Heroku* or *Google App Engine* and you can also 
+deploy your application to *AWS*, *Heroku*, *Google App Engine* or others and you can also 
 build *Docker* images and upload them to [Docker Hub](https://hub.docker.com) - 
 more on this in the *Continuous deployment* section.
 
@@ -224,4 +224,11 @@ and a small version of the image but otherwise using the same build plan.
 
 You can use both approaches in the same build plan and the combination of all
 *matrix* variables will be used to start builds - 
-this might end up a big number for lots of *matrix* variables.
+this might end up being a large number for lots of *matrix* variables.
+
+*Travis* will send you emails about broken and fixed builds by default
+but you can get notifications on a wide range of other channels too.
+
+And of course, we can't forget about our belowed badge either:
+[![Build Status](https://travis-ci.org/rycus86/demo-site.svg?branch=master)](https://travis-ci.org/rycus86/demo-site)
+

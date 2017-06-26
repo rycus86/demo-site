@@ -33,7 +33,7 @@ class SpecificationsTest(unittest.TestCase):
     def test_build(self):
         content = self.get_html('/')
 
-        self.assertIn('<p>To write <code>Python</code> code', content)
+        self.assertIn('<p>To write <em>Python</em> code', content)
         self.assertIn('>rycus86/docker-pycharm</a>', content)
 
     def test_ci(self):
@@ -46,4 +46,13 @@ class SpecificationsTest(unittest.TestCase):
         self.assertIn('<h3>Coveralls</h3>', content)
         self.assertIn('<h3>Code Climate</h3>', content)
         self.assertIn('<h2>Travis CI</h2>', content)
+
+    def test_cd(self):
+        content = self.get_html('/')
+
+        self.assertNotIn('TODO: docker hub', content)
+        self.assertNotIn('TODO: docker multiarch', content)
+
+        self.assertIn('<h2>Docker</h2>', content)
+        self.assertIn('<h2>Docker Hub</h2>', content)
 
