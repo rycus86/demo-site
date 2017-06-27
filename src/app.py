@@ -31,4 +31,6 @@ def page_not_found(error):
 
 
 if __name__ == '__main__':  # pragma: no cover
-    app.run(host='0.0.0.0', debug=False)
+    app.run(host=os.environ.get('HTTP_HOST', '127.0.0.1'),
+            port=int(os.environ.get('HTTP_PORT', '5000')),
+            debug=False)

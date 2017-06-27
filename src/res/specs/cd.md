@@ -1,8 +1,7 @@
 By *continuous deployment* I mean that after a `git push` you don't have to do
 anything manual to get a successful build onto the target server - 
 it should happen __*automatically*__.  
-Apart from running or hosting an actual server this can be done for free as well,
-let's see how.
+Apart from hosting an actual server this can be done for free as well, let's see how.
 
 ## Docker
 
@@ -47,7 +46,8 @@ Finally, `CMD` defines what command should be executed when starting a *containe
 this *image* unless an override is specified on the `docker run` command.
 
 To see a complete reference for [Dockerfile instructions](https://docs.docker.com/engine/reference/builder) check this link.
-While you're there, make sure to have a look at [best practises](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices) for writing *Dockerfiles*.
+While you're there, make sure to have a look at 
+[best practises](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices) for writing *Dockerfiles*.
 
 To create an *image* from a *Dockerfile* you can execute 
 `docker build -t <owner>/<image-name>:<tag> -f Dockerfile .`  
@@ -109,7 +109,7 @@ If you're not sick of badges by this point then good news, here are two more fro
 ## Multiarch builds
 
 This is all nice and good and it works well as long as you want to build *images*
-for the most common `x64` (or `x86`) architecture - 
+for the most common `x86` (or `x64`) architecture - 
 *Docker Hub* should have no problems with that.  
 But what if you want the same app available for `armv7` or `aarch64` as well?
 *- I'll explain a bit later why you would want to do that.*
@@ -137,7 +137,7 @@ Going back to *multiarch*: if we can get *Travis* to build a *Docker image* for 
 then we can get it to build *N* images for *N* different *Dockerfiles* in the same project.  
 The project running this site for example has three of them:
 
-- __Dockerfile__: for `x64` hosts
+- __Dockerfile__: for `x86` hosts
 - __Dockerfile.armhf__: for *32-bits ARM* hosts like the *Raspberry Pi*
 - __Dockerfile.aarch64__: for *64-bits ARM* hosts like the *Pine64*
 
@@ -208,7 +208,7 @@ The [multiarch/qemu-user-static](https://github.com/multiarch/qemu-user-static)
 project makes it possible to register a *static QEMU* binary with the host kernel
 so when it receives instructions for another processor architecture it will use
 that to execute the commands.
-For example on the `x64` *Travis* hosts we can run executables compiled for *ARM* 
+For example on the `x86` *Travis* hosts we can run executables compiled for *ARM* 
 architecture after this line.
 
 For the *ARM* *Docker* builds to pass we also need to make sure that the instructions
@@ -223,7 +223,8 @@ It turns out this is very simple to do and we can even do it with a *Docker Hub*
 - [rycus86/arm64v8-alpine-qemu](https://github.com/rycus86/docker-arm64v8-alpine-qemu) -
   an *alpine*-based image for *64-bits ARM* hosts
 
-To give credit, this is based on the great work the [Hypriot team documented](https://blog.hypriot.com/post/setup-simple-ci-pipeline-for-arm-images)
+To give credit, this is based on the great work the 
+[Hypriot team documented](https://blog.hypriot.com/post/setup-simple-ci-pipeline-for-arm-images)
 even though it looks like people have [come up with this](https://github.com/travis-ci/travis-ci/issues/3376) back in late 2015.
 
 OK, great, this is working nicely again but the question still stands:
@@ -254,7 +255,7 @@ as of this writing the [Raspbian OS](https://www.raspberrypi.org/downloads/raspb
 
 Porting my existing *Docker images* was easy once I've set up the `arm64v8` base images.
 I've enabled a new configuration in the *Travis matrix builds* and the rest continued 
-working as before with `x64` and `armv7`.
+working as before with `x86` and `armv7`.
 
 Getting *Docker* on *Pine64* wasn't as easy as it is on other, more common architectures
 but [Alex Ellis has a great post](http://blog.alexellis.io/get-started-with-docker-on-64-bit-arm) on how to get it up and running.
@@ -269,7 +270,7 @@ completely forget how do you usually run *container #97* how nice would it be
 to define how to run a number of them with individual settings and have them
 join virtual networks they need to be in?
 
-[docker-compose](todo:link) does that for you and more.
+[docker-compose](https://docs.docker.com/compose) does that for you and more.
 It allows you to define your *Docker* stack in a *YAML* file with all their settings.
 ```yaml
 version: '2'
@@ -306,24 +307,71 @@ This *Composefile* defines three *containers*:
 - `database` uses a third image and will run with the `USER` and `PASS`
   environment variables set
 
-To see what *docker-compose* can do check the [Composefile reference](todo:link) -
-it is quite powerful.
+To see what *docker-compose* can do check the 
+[Composefile reference](https://docs.docker.com/compose/compose-file) - it is quite powerful.
 It even allows you to *scale* your *containers* and have them running multiple
 times if you want it.
 
-[//]: # (todo: docker-compose.yml for demo-site)
+Let's have a look at this site's *Composefile* for another example:
+```yaml
+version: '2'
+services:
 
-Each application exposes its port *5000* to listen for incoming requests.
+  demo-site:
+    image: rycus86/demo-site:aarch64
+    expose:
+      - "5000"
+    restart: always
+    environment:
+      - HTTP_HOST=0.0.0.0
+  
+  github-proxy:
+    image: rycus86/github-proxy:aarch64
+    expose:
+      - "5000"
+    restart: always
+    environment:
+      - HTTP_HOST=0.0.0.0
+    env_file:
+      - github-secrets.env
+
+  dockerhub-proxy:
+    image: rycus86/dockerhub-proxy:aarch64
+    expose:
+      - "5000"
+    restart: always
+    environment:
+      - HTTP_HOST=0.0.0.0
+
+  googleplay-proxy:
+    image: rycus86/googleplay-proxy:aarch64
+    expose:
+      - "5000"
+    restart: always
+    environment:
+      - HTTP_HOST=0.0.0.0
+    env_file:
+      - gplay-secrets.env
+```
+
+Each application exposes its port *5000* to listen for incoming requests and
+they are also configured in a way that *Docker* would restart them automatically
+should they fail for whatever reason.
 The `HTTP_HOST` environment variable is set to `0.0.0.0` and is processed by 
 the *Flask* app by making it listen on all network interfaces - not only on
 *localhost* like it would do by default.
+Unlike [Docker Swarm](https://docs.docker.com/engine/swarm) *docker-compose* cannot
+manage *secrets* so those are passed to the containers as environment variables from
+a *key-value* text file.
+Note that the *containers* are all based on `aarch64` *images* built automatically
+by *Travis* and are uploaded to *Docker Hub*. 
 
 Given that each of the apps listen on port *5000* we need a way of getting
 requests to find the correct target when sent from the external network.
 
 ### Proxy server
 
-When I was looking for a solution to route requests to my apps I came accross the 
+When I was looking for a solution to route requests to my apps I came across the 
 brilliant [jwilder/nginx-proxy](https://github.com/jwilder/nginx-proxy) project on *GitHub*.
 It is a self-contained *Docker image* that will run an *nginx proxy server* plus
 a lightweight process (called *docker-gen*) that listens for *container* start and stop events 
@@ -332,7 +380,7 @@ from the *Docker daemon* and automatically reconfigures *nginx* - __*plain aweso
 It requires attaching the *Docker socket file* as a *volume* to the container so it
 can connect to the *daemon*.
 It also requires the target *containers* to *expose* their target ports and to have
-the `VIRTUAL_HOSTNAME` environment variable set to the hostname we want *nginx* to
+the `VIRTUAL_HOST` environment variable set to the domain name we want *nginx* to
 proxy the requests from.
 As *containers* start or stop (or *scale*) *nginx* is automatically reloaded with 
 the updated auto-generated configuration, load-balancing between multiple instances of
@@ -341,32 +389,96 @@ the same application if it runs as multiple *containers* by *scaling*.
 This is great because the only thing you have to worry about is starting properly
 configured *containers* and *docker-gen* will do the rest for you.
 If you want to add a new application to your stack you just start it with the 
-`VIRTUAL_HOSTNAME` environment variable set to the new domain name and you're done.
+`VIRTUAL_HOST` environment variable set to the new domain name and you're done.
 
 Having a publicly available endpoint that also has *root* access to your *Docker daemon*
 is not the most secure thing ever though but the *GitHub* project suggest a nice alternative.
 You can run *nginx* as the only *container* with an externally reachable port alongside an
-individual *docker-gen container* that has read-only access to the *daemon* and a shared
-*volume* with *nginx* to be able to update its configuration file.
+individual [docker-gen container](https://github.com/jwilder/docker-gen) that has read-only access 
+to the *daemon* and a shared *volume* with *nginx* to be able to update its configuration file.
 When it did that it will send a *UNIX signal* to the *nginx container* that causes the 
 proxy server to reload its configuration.
 
 Let's look at the *Composefile* for this site again:
+```yaml
+version: '2'
+services:
 
-[//]: # (todo: docker-compose.yml for demo-site)
+  # Proxy server
+  nginx:
+    image: rycus86/arm-nginx:aarch64
+    container_name: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - nginx-config:/etc/nginx/conf.d
+
+  nginx-gen:
+    image: rycus86/arm-docker-gen:aarch64
+    container_name: nginx-gen
+    command: -notify-sighup nginx -watch -only-exposed /etc/docker-gen/templates/nginx.tmpl /etc/nginx/conf.d/default.conf
+    volumes:
+      - nginx-config:/etc/nginx/conf.d
+      - /tmp/nginx-proxy.tmpl:/etc/docker-gen/templates/nginx.tmpl:ro
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+
+  # Demo site
+  demo-site:
+    image: rycus86/demo-site:aarch64
+    expose:
+      - "5000"
+    environment:
+      - VIRTUAL_HOST=demo.viktoradam.net
+
+  # REST services
+  github-proxy:
+    image: rycus86/github-proxy:aarch64
+    expose:
+      - "5000"
+    environment:
+      - VIRTUAL_HOST=github.api.viktoradam.net
+
+  dockerhub-proxy:
+    image: rycus86/dockerhub-proxy:aarch64
+    expose:
+      - "5000"
+    environment:
+      - VIRTUAL_HOST=docker.api.viktoradam.net
+
+  googleplay-proxy:
+    image: rycus86/googleplay-proxy:aarch64
+    expose:
+      - "5000"
+    environment:
+      - VIRTUAL_HOST=gplay.api.viktoradam.net
+
+volumes:
+  nginx-config:
+```
 
 To piece it together:
 
 - `nginx` listens on port *80* from the outside world and passes connections to port *80*
-  of the running *nginx* process
-- `docker-gen` is configured to share the configuration *volume* with it and with the name
-  of the *container* to send the reload *signal* to
+  of the running *nginx* process.
+- `nginx-gen` is configured to share the configuration *volume* with it and with the name
+  of the *container* to send the reload *signal* to.
+  It also has read-only access to the *Docker daemon* but not any other *containers*.
 - The *Flask* applications don't have *externally bound* ports, they only *expose* their
   port *5000* so *nginx* can proxy requests to them on the *Docker* virtual network.  
-  They also each have their corresponding `VIRTUAL_HOSTNAME` variable set.
+  They also each have their corresponding `VIRTUAL_HOST` variable set.
+- The `volumes` section declares the *volume* shared by both `nginx` and `nginx-gen`.
 
 Again, adding a new application to this stack is a matter of adding its configuration to
 the *Composefile* and executing a `docker-compose up -d` command.
 
 ### Dynamic DNS
 
+If you're looking to set up your own server (like I did) you might run into some hosting
+issues if your *ISP* doesn't give you a *static IP* address.
+There are good option still like [Namecheap](https://www.namecheap.com) that supports
+*Dynamic DNS* - meaning you can send them your *IP* address periodically and they will
+point the domain name at that address you sent.
+
+To help you do that you can use [ddclient](https://sourceforge.net/p/ddclient/wiki/Home)
+that supports quite a few *DNS providers*.
+It has a simple text-based configuration that looks something like this:

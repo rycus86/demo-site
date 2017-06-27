@@ -57,6 +57,3 @@ class SpecificationsTest(unittest.TestCase):
         self.assertIn('<h3>docker-compose</h3>', content)
         self.assertIn('<h3>Proxy server</h3>', content)
         self.assertIn('<h3>Dynamic DNS</h3>', content)
-
-        self.assertNotIn('todo: docker-compose.yml for demo-site', content)
-        self.assertIn('todo: docker-compose.yml', open('src/res/specs/cd.md').read())

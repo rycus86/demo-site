@@ -4,7 +4,7 @@ echo
 echo "Running pre-commit hooks"
 
 # make sure there aren't any local services
-grep -ri "localhost" src/ > /dev/null
+grep -ri "localhost" src/ | grep -vE '(^|\s*)\*localhost\*\s*' > /dev/null
 RESULT=$?
 
 if [ "$RESULT" -eq "0" ]; then
@@ -13,11 +13,18 @@ if [ "$RESULT" -eq "0" ]; then
 fi
 
 # make sure debug=False for the Flask app
-grep "debug=True" src/app.py > /dev/null
+grep -i "debug=True" src/app.py > /dev/null
 RESULT=$?
 
 if [ "$RESULT" -eq "0" ]; then
     echo "The Flask app is set to debug mode"
+    exit 1
+fi
+
+# make sure the Flask cache is in place
+grep 'Cache(app,' src/app.py | grep -vE '^\s*#' > /dev/null
+if [ "$?" -ne "0" ]; then
+    echo "The Flask cache is not enabled"
     exit 1
 fi
 
