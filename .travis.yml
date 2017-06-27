@@ -27,9 +27,8 @@ script:
   - docker build -t demo-site:$DOCKER_TAG -f $DOCKERFILE .
 after_success:
   # push docker image
-  - docker login -u="rycus86" -p="$DOCKER_PASSWORD"
   - >
-    if [ "$DOCKER_PUSH" == "yes" ]; then
+    if [ "$DOCKER_PUSH" == "yes" ] && [ "$TRAVIS_BRANCH" == "master" ]; then
       docker login -u="rycus86" -p="$DOCKER_PASSWORD"
       docker tag demo-site:$DOCKER_TAG rycus86/demo-site:$DOCKER_TAG
       docker push rycus86/demo-site:$DOCKER_TAG
