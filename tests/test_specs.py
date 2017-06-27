@@ -54,3 +54,4 @@ class SpecificationsTest(unittest.TestCase):
         self.assertIn('<h2>Docker Hub</h2>', content)
         self.assertIn('<h2>Multiarch builds</h2>', content)
         self.assertIn('<h2>Hosting</h2>', content)
+        self.assertIn('<h3>docker-compose</h3>', content)
