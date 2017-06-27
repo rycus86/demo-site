@@ -264,3 +264,109 @@ a lot of work and thought that I can probably do something better.
 
 ### docker-compose
 
+Instead of relying on your *Bash history* and worrying about whether you'll
+completely forget how do you usually run *container #97* how nice would it be
+to define how to run a number of them with individual settings and have them
+join virtual networks they need to be in?
+
+[docker-compose](todo:link) does that for you and more.
+It allows you to define your *Docker* stack in a *YAML* file with all their settings.
+```yaml
+version: '2'
+services:
+  ws:
+    image: my/fancy-web-server
+    ports:
+      - "8080:8011"
+      - "5000"
+    environment:
+      - SECRET=notsosecret
+
+  backend:
+    image: my/be-app
+    expose:
+      - "4001"
+
+  database:
+    image: my/uber-sql
+    expose:
+      - "3306"
+    environment:
+      - USER=root
+      - PASS=xyz123
+```
+
+This *Composefile* defines three *containers*:
+
+- `ws` will run having the `SECRET` environment variable set to the `xyz123` value
+  and it will listen on ports *5000* and *8011* plus the host *OS* will forward
+  traffic from its port *8080* to the *container's 8011*
+- `backend` uses a different *image* and exposes it's port *4001* 
+  (this is local to the *container*)
+- `database` uses a third image and will run with the `USER` and `PASS`
+  environment variables set
+
+To see what *docker-compose* can do check the [Composefile reference](todo:link) -
+it is quite powerful.
+It even allows you to *scale* your *containers* and have them running multiple
+times if you want it.
+
+[//]: # (todo: docker-compose.yml for demo-site)
+
+Each application exposes its port *5000* to listen for incoming requests.
+The `HTTP_HOST` environment variable is set to `0.0.0.0` and is processed by 
+the *Flask* app by making it listen on all network interfaces - not only on
+*localhost* like it would do by default.
+
+Given that each of the apps listen on port *5000* we need a way of getting
+requests to find the correct target when sent from the external network.
+
+### Proxy server
+
+When I was looking for a solution to route requests to my apps I came accross the 
+brilliant [jwilder/nginx-proxy](https://github.com/jwilder/nginx-proxy) project on *GitHub*.
+It is a self-contained *Docker image* that will run an *nginx proxy server* plus
+a lightweight process (called *docker-gen*) that listens for *container* start and stop events 
+from the *Docker daemon* and automatically reconfigures *nginx* - __*plain awesome!*__
+
+It requires attaching the *Docker socket file* as a *volume* to the container so it
+can connect to the *daemon*.
+It also requires the target *containers* to *expose* their target ports and to have
+the `VIRTUAL_HOSTNAME` environment variable set to the hostname we want *nginx* to
+proxy the requests from.
+As *containers* start or stop (or *scale*) *nginx* is automatically reloaded with 
+the updated auto-generated configuration, load-balancing between multiple instances of
+the same application if it runs as multiple *containers* by *scaling*.
+
+This is great because the only thing you have to worry about is starting properly
+configured *containers* and *docker-gen* will do the rest for you.
+If you want to add a new application to your stack you just start it with the 
+`VIRTUAL_HOSTNAME` environment variable set to the new domain name and you're done.
+
+Having a publicly available endpoint that also has *root* access to your *Docker daemon*
+is not the most secure thing ever though but the *GitHub* project suggest a nice alternative.
+You can run *nginx* as the only *container* with an externally reachable port alongside an
+individual *docker-gen container* that has read-only access to the *daemon* and a shared
+*volume* with *nginx* to be able to update its configuration file.
+When it did that it will send a *UNIX signal* to the *nginx container* that causes the 
+proxy server to reload its configuration.
+
+Let's look at the *Composefile* for this site again:
+
+[//]: # (todo: docker-compose.yml for demo-site)
+
+To piece it together:
+
+- `nginx` listens on port *80* from the outside world and passes connections to port *80*
+  of the running *nginx* process
+- `docker-gen` is configured to share the configuration *volume* with it and with the name
+  of the *container* to send the reload *signal* to
+- The *Flask* applications don't have *externally bound* ports, they only *expose* their
+  port *5000* so *nginx* can proxy requests to them on the *Docker* virtual network.  
+  They also each have their corresponding `VIRTUAL_HOSTNAME` variable set.
+
+Again, adding a new application to this stack is a matter of adding its configuration to
+the *Composefile* and executing a `docker-compose up -d` command.
+
+### Dynamic DNS
+
