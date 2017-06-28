@@ -1,0 +1,82 @@
+[
+    {
+        "key": "overview",
+        "title": "Overview",
+        "body": "overview.md",
+        "image": {
+            "path": "overview.svg",
+            "display": "foreground"
+        }
+    },
+    {
+        "key": "build",
+        "title": "Build",
+        "body": "build.md",
+        "image": "pycharm.png"
+    },
+    {
+        "key": "cicd-intro",
+        "title": "CI / CD",
+        "body": "cicd.md"
+    },
+    {
+        "key": "prep",
+        "title": "Prepare",
+        "body": "prepare.md"
+    },
+    {
+        "key": "unittest",
+        "title": "Testing",
+        "body": "unittest.md"
+    },
+    {
+        "key": "coverage",
+        "title": "Measuring quality",
+        "body": "coverage.md"
+    },
+    {
+        "key": "coveralls",
+        "title": "Coveralls",
+        "body": "coveralls.md"
+    },
+    {
+        "key": "codeclimate",
+        "title": "Code Climate",
+        "body": "codeclimate.md"
+    },
+    {
+        "key": "travis",
+        "title": "Travis CI",
+        "body": "cicd.md"
+    },
+    {
+        "key": "docker",
+        "title": "Docker",
+        "body": "docker.md"
+    },
+    {
+        "key": "dockerhub",
+        "title": "Docker Hub",
+        "body": "dockerhub.md"
+    },
+    {
+        "key": "multiarch",
+        "title": "Multiarch builds",
+        "body": "multiarch.md"
+    },
+    {
+        "key": "compose",
+        "title": "docker-compose",
+        "body": "docker-compose.md"
+    },
+    {
+        "key": "proxy",
+        "title": "Proxy server",
+        "body": "proxy.md"
+    },
+    {
+        "key": "dyndns",
+        "title": "Dynamic DNS",
+        "body": "dyndns.md"
+    }
+]

@@ -163,9 +163,8 @@ script:
   - docker build -t demo-site:$DOCKER_TAG -f $DOCKERFILE .
 after_success:
   # push docker image
-  - docker login -u="rycus86" -p="$DOCKER_PASSWORD"
   - >
-    if [ "$DOCKER_PUSH" == "yes" ]; then
+    if [ "$DOCKER_PUSH" == "yes" ] && [ "$TRAVIS_BRANCH" == "master" ]; then
       docker login -u="rycus86" -p="$DOCKER_PASSWORD"
       docker tag demo-site:$DOCKER_TAG rycus86/demo-site:$DOCKER_TAG
       docker push rycus86/demo-site:$DOCKER_TAG
@@ -186,6 +185,7 @@ What happens here is:
 - In `after_success` we log in with our *Docker Hub* credentials
   (which is nicely hidden by *Travis*) then we *tag* the *image* to be 
   pushed under our *Docker Hub* user and finally `push` it - if we want to
+  and we just built from the *master* branch
 - The `env` / `matrix` section injects the actual values for the environment
   variables for each sub-build.
 
