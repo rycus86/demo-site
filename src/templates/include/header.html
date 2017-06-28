@@ -5,7 +5,7 @@
     </div>
     <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
         {% for tab in tabs %}
-        <a class="mdl-layout__tab{% if loop.index == 1 %} is-active{% endif %}" href="#{{ tab.key }}">{{ tab.title }}</a>
+        <a class="mdl-layout__tab{% if selected_tab == tab.key %} is-active{% endif %}" href="#{{ tab.key }}">{{ tab.title }}</a>
         {% endfor %}
     </div>
 </header>

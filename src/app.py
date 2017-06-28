@@ -8,11 +8,23 @@ cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 
 @app.route('/')
 def main():
+    resources = load_resources()
+    first_tab = resources.get('tabs')[0].get('key')
+    return page(first_tab)
+
+
+@app.route('/page/<key>')
+def page(key):
+    resources = load_resources()
+    if key not in (tab.get('key') for tab in resources.get('tabs')):
+        return page_not_found('Missing tab: %s' % key)
+
     return render_template('layout.html',
+                           selected_tab=key,
                            markdown=pretty_markdown,
                            assets=load_static_asset_mappings(),
                            read=read_resource_file,
-                           **load_resources())
+                           **resources)
 
 
 @app.route('/render/<template>', methods=['POST'])

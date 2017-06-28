@@ -16,7 +16,7 @@
     <main class="mdl-layout__content">
         
         {% for tab in tabs %}
-        <section class="mdl-layout__tab-panel{% if loop.index == 1 %} is-active{% endif %}" id="{{ tab.key }}">
+        <section class="mdl-layout__tab-panel{% if selected_tab == tab.key %} is-active{% endif %}" id="{{ tab.key }}">
             <div class="mdl-grid" id="panel-{{ tab.key }}">
                 {% include 'include/' + tab.key + '.html' %}
             </div>

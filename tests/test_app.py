@@ -70,6 +70,22 @@ class AppTest(unittest.TestCase):
 
             self.assertIn('<div class="mdl-grid" id="panel-%s">' % tab['key'], content)
 
+    def test_page(self):
+        content = self.get_html('/page/github')
+        resources = app.load_resources()
+
+        for index, tab in enumerate(resources['tabs']):
+            if tab['key'] == 'github':
+                self.assertIn('<a class="mdl-layout__tab is-active" href="#%s">%s</a>' % (tab['key'], tab['title']), 
+                              content)
+                self.assertIn('<section class="mdl-layout__tab-panel is-active" id="%s">' % tab['key'], content)
+
+            else:
+                self.assertIn('<a class="mdl-layout__tab" href="#%s">%s</a>' % (tab['key'], tab['title']), content)
+                self.assertIn('<section class="mdl-layout__tab-panel" id="%s">' % tab['key'], content)
+
+            self.assertIn('<div class="mdl-grid" id="panel-%s">' % tab['key'], content)
+
     def test_css_js_includes(self):
         content = self.get_html('/')
 
