@@ -480,7 +480,7 @@ There are good option still like [Namecheap](https://www.namecheap.com) that sup
 point the domain name at that address you sent.
 
 To help you do that you can use [ddclient](https://sourceforge.net/p/ddclient/wiki/Home)
-that supports quite a few *DNS providers*.
+that supports quite a few *DNS providers*.  
 It has a simple text-based configuration that looks something like this:
 ```text
 use=web, web=dynamicdns.park-your-domain.com/getip
@@ -492,6 +492,7 @@ test, demo, www
 ```
 
 This configuration could update the *IP* addresses for:
+
 - *test.sample.com*
 - *demo.sample.com*
 - *www.sample.com*

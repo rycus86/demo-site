@@ -4,11 +4,12 @@ echo
 echo "Running pre-commit hooks"
 
 # make sure there aren't any local services
-grep -ri "localhost" src/ | grep -vE '(^|\s*)\*localhost\*\s*' > /dev/null
+grep -ri "localhost" src/ | grep -iE '\.(py|js|css):' > /dev/null
 RESULT=$?
 
 if [ "$RESULT" -eq "0" ]; then
     echo "There are references to 'localhost' in the code"
+    grep -nri "localhost" src/ | grep -iE '\.(py|js|css):' | grep --color "localhost"
     exit 1
 fi
 
