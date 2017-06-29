@@ -7,6 +7,22 @@
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-100998190-1', 'auto');
+  ga('create', 'UA-100998190-1', {'siteSpeedSampleRate': 100});
   ga('send', 'pageview');
+
+  if (window.performance) {
+      var timeSincePageLoad = Math.round(performance.now());
+      ga('send', 'timing', 'JS Dependencies', 'javascript', timeSincePageLoad);
+
+      $(window).on('load', function() {
+          setTimeout(function() {
+              var timing = window.performance.timing;
+              var page_load_time = timing.loadEventEnd - timing.navigationStart;
+              ga('send', 'timing', 'Page load', 'load', page_load_time);
+
+              var connect_time = timing.responseEnd - timing.requestStart;
+              ga('send', 'timing', 'Request time', 'request', connect_time);
+          }, 0);
+      });
+  }
 </script>

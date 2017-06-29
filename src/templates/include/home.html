@@ -9,11 +9,18 @@
     </div>
 
     <div class="mdl-card__actions mdl-card--border mdl-color--cyan">
-        <a href="#specs" onclick="javascript: cApp.Navigation.goToTab('specs');"
+        <a id="home-to-specs" href="/page/specs"
            class="mdl-button mdl-color-text--white mdl-js-button mdl-js-ripple-effect">How it works</a>
         <div class="mdl-layout-spacer"></div>
         <i class="material-icons mdl-color-text--white">launch</i>
     </div>
+
+    <script>
+        $('#home-to-specs').click(function (evt) {
+            evt.preventDefault();
+            cApp.Navigation.goToTab('specs');
+        });
+    </script>
 
 </div>
 

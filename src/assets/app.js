@@ -9,17 +9,13 @@ window.cApp = (function () {
         Startup: {
             initTabs: function() {
                 $('.mdl-layout__tab-bar').children().each(function() {
-                    $(this).on('click', function() {
+                    $(this).on('click', function(evt) {
+                        evt.preventDefault();
+
+                        var tab = $(this).attr('id').replace('tab-', '');
+
+                        cApp.Navigation.goToTab(tab);
                         $('main').scrollTop(0);
-
-                        if (!!ga) {
-                            var link = $(this).find('a').first();
-                            if (!!link) {
-                                var tab = link.attr('href').slice(1);
-
-                                ga('send', 'pageview', '/tabs/' + tab);
-                            }
-                        }
                     });
                 });
             },
@@ -39,9 +35,9 @@ window.cApp = (function () {
         Navigation: {
             goToTab: function (tab_id) {
                 var current_link = $('a.mdl-layout__tab.is-active');
-                var target_link = $('a[href="#' + tab_id + '"');
+                var target_link = $('#tab-' + tab_id);
 
-                var current_id = current_link.attr('href').split('#')[1];
+                var current_id = current_link.attr('id').replace('tab-', '');
                 var target_id = tab_id;
 
                 if (current_id === target_id) {
@@ -56,6 +52,11 @@ window.cApp = (function () {
                 var target = $('#' + target_id);
 
                 current.fadeOut(150, function() {
+                    history.pushState({}, window.title, '/page/' + tab_id);
+
+                    ga('set', 'page', '/page/' + tab_id);
+                    ga('send', 'pageview');
+
                     current_link.toggleClass('is-active');
                     target_link.toggleClass('is-active');
 
@@ -71,6 +72,28 @@ window.cApp = (function () {
                 var code_blocks = $(container).find('pre code');
                 for (var idx = 0; idx < code_blocks.length; idx++) {
                     window.hljs.highlightBlock(code_blocks[idx]);
+                }
+            }
+        },
+
+        Tracking: {
+            _all: {},
+
+            start: function (title, label) {
+                cApp.Tracking._all[label + '::' + title + '::start'] = new Date();
+            },
+
+            finish: function (title, label) {
+                _all = cApp.Tracking._all;
+
+                var finished = new Date();
+                _all[label + '::' + title + '::end'] = finished;
+
+                var started = _all[label + '::' + title + '::start'];
+
+                if (!!started) {
+                    var total = Math.round(finished - started);
+                    ga('send', 'timing', title, label, finished);
                 }
             }
         }

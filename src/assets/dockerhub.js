@@ -5,11 +5,15 @@
         target = '#panel-dockerhub';
 
     var generateMarkup = function (repo, placeholder) {
+        app.Tracking.start('Docker Hub render ' + username + '/' + repo.name, 'dockerhub');
+
         $.post({
             url: '/render/dockerhub',
             data: JSON.stringify(repo),
             contentType: 'application/json',
             success: function (html) {
+                app.Tracking.finish('Docker Hub render ' + username + '/' + repo.name, 'dockerhub');
+
                 var content = $(html);
                 placeholder.replaceWith(content);
 
@@ -22,13 +26,21 @@
         var placeholder = $('<div/>').css('display', 'none');
         $(target).append(placeholder);
 
+        app.Tracking.start('Docker Hub load ' + username + '/' + repository_name, 'dockerhub');
+
         $.get(base_url + '/repositories/' + username + '/' + repository_name, function (repo) {
+            app.Tracking.finish('Docker Hub load ' + username + '/' + repository_name, 'dockerhub');
+
             generateMarkup(repo, placeholder);
         });
     };
 
     var loadProjects = function () {
+        app.Tracking.start('Docker Hub projects', 'dockerhub');
+
         $.get(base_url + '/repositories/' + username, function (response) {
+            app.Tracking.finish('Docker Hub projects', 'dockerhub');
+
             response.results.sort(function (a, b) {
                 if (a.last_updated < b.last_updated) { return 1; } else { return -1; }
             }).forEach(function (repo) {
@@ -38,7 +50,11 @@
     };
 
     var generateTags = function (repo_full_name, container_id) {
+        app.Tracking.start('Docker Hub tags ' + repo_full_name, 'dockerhub');
+
         $.get(base_url + '/repositories/' + repo_full_name + '/tags', function (response) {
+            app.Tracking.finish('Docker Hub tags ' + repo_full_name, 'dockerhub');
+
             var container = $('#' + container_id);
 
             var list = $('<ul class="mdl-list condensed-list"/>');
@@ -65,6 +81,6 @@
 
     app.DockerHub = {
         generateTags: generateTags
-    };  // TODO
+    };
 
 })(window.cApp);

@@ -51,11 +51,13 @@ class AppTest(unittest.TestCase):
 
         for index, tab in enumerate(resources['tabs']):
             if index > 0:
-                self.assertIn('<a class="mdl-layout__tab" href="#%s">%s</a>' % (tab['key'], tab['title']), content)
+                self.assertMatches('.*<a id="tab-%s" href="/page/%s"\\s+'
+                                   'class="mdl-layout__tab">%s</a>' % (tab['key'], tab['key'], tab['title']), content)
 
             else:
-                self.assertIn('<a class="mdl-layout__tab is-active" href="#%s">%s</a>' % (tab['key'], tab['title']),
-                              content)
+                self.assertMatches('.*<a id="tab-%s" href="/page/%s"\\s+'
+                                   'class="mdl-layout__tab is-active">%s</a>' % (tab['key'], tab['key'], tab['title']),
+                                   content)
 
     def test_navigation_panels(self):
         content = self.get_html('/')
@@ -76,12 +78,14 @@ class AppTest(unittest.TestCase):
 
         for index, tab in enumerate(resources['tabs']):
             if tab['key'] == 'github':
-                self.assertIn('<a class="mdl-layout__tab is-active" href="#%s">%s</a>' % (tab['key'], tab['title']), 
-                              content)
+                self.assertMatches('.*<a id="tab-%s" href="/page/%s"\\s+'
+                                   'class="mdl-layout__tab is-active">%s</a>' % (tab['key'], tab['key'], tab['title']),
+                                   content)
                 self.assertIn('<section class="mdl-layout__tab-panel is-active" id="%s">' % tab['key'], content)
 
             else:
-                self.assertIn('<a class="mdl-layout__tab" href="#%s">%s</a>' % (tab['key'], tab['title']), content)
+                self.assertMatches('.*<a id="tab-%s" href="/page/%s"\\s+'
+                                   'class="mdl-layout__tab">%s</a>' % (tab['key'], tab['key'], tab['title']), content)
                 self.assertIn('<section class="mdl-layout__tab-panel" id="%s">' % tab['key'], content)
 
             self.assertIn('<div class="mdl-grid" id="panel-%s">' % tab['key'], content)

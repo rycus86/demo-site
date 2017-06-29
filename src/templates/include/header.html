@@ -3,9 +3,10 @@
     <div class="mdl-layout__header-row">
         <span class="mdl-layout__title">{{ settings.title }}</span>
     </div>
-    <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+    <div class="mdl-layout__tab-bar mdl-js-ripple-effect mdl-layout__tab-manual-switch">
         {% for tab in tabs %}
-        <a class="mdl-layout__tab{% if selected_tab == tab.key %} is-active{% endif %}" href="#{{ tab.key }}">{{ tab.title }}</a>
+        <a id="tab-{{ tab.key }}" href="/page/{{ tab.key }}"
+           class="mdl-layout__tab{% if selected_tab == tab.key %} is-active{% endif %}">{{ tab.title }}</a>
         {% endfor %}
     </div>
 </header>

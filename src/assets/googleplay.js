@@ -12,11 +12,15 @@
     var generateMarkup = function (application, placeholder) {
         convertUploadDateToISO(application);
 
+        app.Tracking.start('Google Play render ' + application.package_name, 'googleplay');
+
         $.post({
             url: '/render/googleplay',
             data: JSON.stringify(application),
             contentType: 'application/json',
             success: function (html) {
+                app.Tracking.finish('Google Play render ' + application.package_name, 'googleplay');
+
                 placeholder.replaceWith($(html));
             }
         });
@@ -26,13 +30,21 @@
         var placeholder = $('<div/>').css('display', 'none');
         $(target).append(placeholder);
 
+        app.Tracking.start('Google Play load ' + application.package_name, 'googleplay');
+
         $.get(base_url + '/details/' + application.package_name, function (details) {
+            app.Tracking.finish('Google Play load ' + application.package_name, 'googleplay');
+
             generateMarkup(details, placeholder);
         });
     };
 
     var loadProjects = function () {
+        app.Tracking.start('Google Play projects', 'googleplay');
+
         $.get(base_url + '/search/' + package, function (applications) {
+            app.Tracking.finish('Google Play projects', 'googleplay');
+
             applications.forEach(convertUploadDateToISO);
 
             applications.sort(function (a, b) {
