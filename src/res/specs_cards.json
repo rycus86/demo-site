@@ -27,37 +27,44 @@
     {
         "key": "testing",
         "title": "Testing",
-        "body": "testing.md"
+        "body": "testing.md",
+        "link": "https://docs.python.org/2/library/unittest.html"
     },
     {
         "key": "coverage",
         "title": "Measuring quality",
-        "body": "coverage.md"
+        "body": "coverage.md",
+        "link": "https://coverage.readthedocs.io/en/latest/"
     },
     {
         "key": "coveralls",
         "title": "Coveralls",
-        "body": "coveralls.md"
+        "body": "coveralls.md",
+        "link": "https://coveralls.io"
     },
     {
         "key": "codeclimate",
         "title": "Code Climate",
-        "body": "codeclimate.md"
+        "body": "codeclimate.md",
+        "link": "https://codeclimate.com"
     },
     {
         "key": "travis",
         "title": "Travis CI",
-        "body": "travis.md"
+        "body": "travis.md",
+        "link": "https://travis-ci.org"
     },
     {
         "key": "docker",
         "title": "Docker",
-        "body": "docker.md"
+        "body": "docker.md",
+        "link": "https://www.docker.com"
     },
     {
         "key": "dockerhub",
         "title": "Docker Hub",
-        "body": "dockerhub.md"
+        "body": "dockerhub.md",
+        "link": "https://hub.docker.com"
     },
     {
         "key": "multiarch",
@@ -72,7 +79,8 @@
     {
         "key": "compose",
         "title": "docker-compose",
-        "body": "docker-compose.md"
+        "body": "docker-compose.md",
+        "link": "https://docs.docker.com/compose"
     },
     {
         "key": "proxy",

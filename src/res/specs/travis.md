@@ -4,8 +4,8 @@ This is where *Travis* comes in.
 
 ![Travis CI]({{ image: travis-ci.png }})
 
-*Travis CI* is a *continuous integration* service that allows you to run
-complex build (and deployment) plans for your project.  
+[Travis CI](https://travis-ci.org) is a *continuous integration* service that allows 
+you to run complex build (and deployment) plans for your project.  
 It is also free for open-source projects and you can sign up with your *GitHub* account.
 
 If you're familiar with [Jenkins](https://jenkins.io) or [Bamboo](https://www.atlassian.com/software/bamboo)

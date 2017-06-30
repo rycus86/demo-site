@@ -9,7 +9,7 @@ body main section .mdl-grid .mdl-card {
     margin-right: auto;
 }
 
-.mdl-card.home .mdl-card__actions {
+.mdl-card .mdl-card__actions {
     display: flex;
     box-sizing:border-box;
     align-items: center;
@@ -83,4 +83,16 @@ body main section .mdl-grid .mdl-card {
     width: 100%;
     border-radius: 5px;
     border: 1px #bbb solid;
+}
+
+.card-fab-holder {
+    position: relative;
+    overflow: visible;
+}
+
+.card-fab-holder .mdl-button--mini-fab {
+    position: absolute;
+    overflow: visible;
+    right: 10px;
+    top: -20px;
 }
