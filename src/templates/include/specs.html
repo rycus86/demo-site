@@ -21,5 +21,14 @@
         {{ markdown(read('specs/' + card.body))|safe }}
     </div>
 
+    {% if not loop.last %}
+    <div class="mdl-card__actions mdl-card--border mdl-color--cyan">
+        <a href="#specs-card-{{ specs_cards[loop.index].key }}"
+           class="mdl-button mdl-color-text--white mdl-js-button mdl-js-ripple-effect">Go to the next section</a>
+        <div class="mdl-layout-spacer"></div>
+        <i class="material-icons mdl-color-text--white">launch</i>
+    </div>
+    {% endif %}
+
 </div>
 {% endfor %}

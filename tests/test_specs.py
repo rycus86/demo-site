@@ -65,3 +65,14 @@ class SpecificationsTest(unittest.TestCase):
         self.assertTrue(re.match('(?sm).*style="background: url\\(/asset/[^/]+/images/pycharm.png\\) center / cover', content),
                         msg='Image not found: pycharm.png')
 
+    def test_next_section_links(self):
+        content = self.get_html('/')
+        resources = app.load_resources()
+        
+        for index, card in enumerate(resources['specs_cards']):
+            if index > 0:
+                self.assertIn('<a href="#specs-card-%s"' % card['key'], content)
+
+            else:
+                self.assertNotIn('<a href="#specs-card-%s"' % card['key'], content)
+
