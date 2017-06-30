@@ -1,3 +1,4 @@
+import re
 import unittest
 
 import app
@@ -22,8 +23,6 @@ class SpecificationsTest(unittest.TestCase):
 
         self.assertIn('<h2 class="mdl-card__title-text">Overview</h2>', content)
         self.assertIn('<h2 class="mdl-card__title-text">Build</h2>', content)
-        self.assertIn('<h2 class="mdl-card__title-text">Continuous Integration</h2>', content)
-        self.assertIn('<h2 class="mdl-card__title-text">Continuous Deployment</h2>', content)
 
     def test_overview(self):
         content = self.get_html('/')
@@ -39,22 +38,30 @@ class SpecificationsTest(unittest.TestCase):
     def test_ci(self):
         content = self.get_html('/')
 
-        self.assertIn('<h2>Prepare</h2>', content)
-        self.assertIn('<h2>Testing</h2>', content)
-        self.assertIn('<h2>Measuring quality</h2>', content)
-        self.assertIn('<h2>Visualising quality</h2>', content)
-        self.assertIn('<h3>Coveralls</h3>', content)
-        self.assertIn('<h3>Code Climate</h3>', content)
-        self.assertIn('<h2>Travis CI</h2>', content)
+        self.assertIn('<h2 class="mdl-card__title-text">Prepare</h2>', content)
+        self.assertIn('<h2 class="mdl-card__title-text">Testing</h2>', content)
+        self.assertIn('<h2 class="mdl-card__title-text">Measuring quality</h2>', content)
+        self.assertIn('<h2 class="mdl-card__title-text">Coveralls</h2>', content)
+        self.assertIn('<h2 class="mdl-card__title-text">Code Climate</h2>', content)
+        self.assertIn('<h2 class="mdl-card__title-text">Travis CI</h2>', content)
 
     def test_cd(self):
         content = self.get_html('/')
 
-        self.assertIn('<h2>Docker</h2>', content)
-        self.assertIn('<h2>Docker Hub</h2>', content)
-        self.assertIn('<h2>Multiarch builds</h2>', content)
-        self.assertIn('<h2>Hosting</h2>', content)
-        self.assertIn('<h3>docker-compose</h3>', content)
-        self.assertIn('<h3>Proxy server</h3>', content)
-        self.assertIn('<h3>Dynamic DNS</h3>', content)
-        self.assertIn('<h2>Updates</h2>', content)
+        self.assertIn('<h2 class="mdl-card__title-text">Docker</h2>', content)
+        self.assertIn('<h2 class="mdl-card__title-text">Docker Hub</h2>', content)
+        self.assertIn('<h2 class="mdl-card__title-text">Multiarch builds</h2>', content)
+        self.assertIn('<h2 class="mdl-card__title-text">Hosting</h2>', content)
+        self.assertIn('<h2 class="mdl-card__title-text">docker-compose</h2>', content)
+        self.assertIn('<h2 class="mdl-card__title-text">Proxy server</h2>', content)
+        self.assertIn('<h2 class="mdl-card__title-text">Dynamic DNS</h2>', content)
+        self.assertIn('<h2 class="mdl-card__title-text">Updates</h2>', content)
+
+    def test_images(self):
+        content = self.get_html('/')
+
+        self.assertTrue(re.match('(?sm).*<img src="/asset/[^/]+/images/overview.svg', content),
+                        msg='Image not found: overview.svg')
+        self.assertTrue(re.match('(?sm).*style="background: url\\(/asset/[^/]+/images/pycharm.png\\) center / cover', content),
+                        msg='Image not found: pycharm.png')
+

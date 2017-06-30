@@ -1,56 +1,25 @@
-<div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--6-col mdl-cell--top">
+{% for card in specs_cards %}
+<div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--6-col mdl-cell--top"
+     id="specs-card-{{ card.key }}">
 
     <div class="mdl-card__title mdl-card--border mdl-color--cyan mdl-color-text--white">
-        <h2 class="mdl-card__title-text">Overview</h2>
+        <h2 class="mdl-card__title-text">{{ card.title }}</h2>
     </div>
     
-    <div class="mdl-card__media mdl-card--border mdl-color--cyan">
-        <img src="{{ assets['puml/overview.svg'] }}">
-    </div>
+    {% if card.image is defined %}
+        {% if card.image.display is defined %}
+        <div class="mdl-card__media mdl-card--border mdl-color--cyan">
+            <img src="{{ assets['images/' + card.image.path] }}">
+        </div>
+        {% else %}
+        <div class="mdl-card__media mdl-card--border mdl-color--cyan"
+             style="background: url({{ assets['images/' + card.image] }}) center / cover"></div>
+        {% endif %}
+    {% endif %}
 
     <div class="mdl-card__supporting-text markdown">
-        {{ markdown(read('specs/overview.md'))|safe }}
+        {{ markdown(read('specs/' + card.body))|safe }}
     </div>
 
 </div>
-
-<div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--6-col mdl-cell--top">
-
-    <div class="mdl-card__title mdl-card--border mdl-color--cyan mdl-color-text--white">
-        <h2 class="mdl-card__title-text">Build</h2>
-    </div>
-    
-    <div class="mdl-card__media mdl-card--border mdl-color--cyan"
-         style="background: url({{ assets['images/pycharm.png'] }}) center / cover">
-
-    </div>
-
-    <div class="mdl-card__supporting-text markdown">
-        {{ markdown(read('specs/build.md'))|safe }}
-    </div>
-
-</div>
-
-<div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--6-col mdl-cell--top">
-
-    <div class="mdl-card__title mdl-card--border mdl-color--cyan mdl-color-text--white">
-        <h2 class="mdl-card__title-text">Continuous Integration</h2>
-    </div>
-
-    <div class="mdl-card__supporting-text markdown">
-        {{ markdown(read('specs/ci.md'))|safe }}
-    </div>
-
-</div>
-
-<div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--6-col mdl-cell--top">
-
-    <div class="mdl-card__title mdl-card--border mdl-color--cyan mdl-color-text--white">
-        <h2 class="mdl-card__title-text">Continuous Deployment</h2>
-    </div>
-
-    <div class="mdl-card__supporting-text markdown">
-        {{ markdown(read('specs/cd.md'))|safe }}
-    </div>
-
-</div>
+{% endfor %}

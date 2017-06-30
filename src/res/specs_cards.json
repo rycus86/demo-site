@@ -25,9 +25,9 @@
         "body": "prepare.md"
     },
     {
-        "key": "unittest",
+        "key": "testing",
         "title": "Testing",
-        "body": "unittest.md"
+        "body": "testing.md"
     },
     {
         "key": "coverage",
@@ -47,7 +47,7 @@
     {
         "key": "travis",
         "title": "Travis CI",
-        "body": "cicd.md"
+        "body": "travis.md"
     },
     {
         "key": "docker",
@@ -63,6 +63,11 @@
         "key": "multiarch",
         "title": "Multiarch builds",
         "body": "multiarch.md"
+    },
+    {
+        "key": "hosting",
+        "title": "Hosting",
+        "body": "hosting.md"
     },
     {
         "key": "compose",
