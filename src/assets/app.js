@@ -77,24 +77,16 @@ window.cApp = (function () {
         },
 
         Tracking: {
-            _all: {},
-
             start: function (title, label) {
-                cApp.Tracking._all[label + '::' + title + '::start'] = new Date();
-            },
+                var start_time = new Date();
 
-            finish: function (title, label) {
-                _all = cApp.Tracking._all;
+                return {
+                    done: function () {
+                        var end_time = new Date();
 
-                var finished = new Date();
-                _all[label + '::' + title + '::end'] = finished;
-
-                var started = _all[label + '::' + title + '::start'];
-
-                if (!!started) {
-                    var total = Math.round(finished - started);
-                    ga('send', 'timing', title, label, finished);
-                }
+                        ga('send', 'timing', title, label, end_time - start_time);
+                    }
+                };
             }
         }
     };
