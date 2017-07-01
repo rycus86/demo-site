@@ -22,6 +22,9 @@ RUN apk add --no-cache python py2-pip ca-certificates
 ADD requirements.txt /tmp/requirements.txt
 RUN pip install -r /tmp/requirements.txt
 
+RUN adduser -S webapp
+USER webapp
+
 ADD src /app
 WORKDIR /app
 
@@ -33,6 +36,9 @@ the super-small [Alpine Linux](https://alpinelinux.org) distribution that is
 ideal for building (and transferring) *images* based on them.  
 The `RUN` instruction executes *Shell* commands like you would do if you would do this
 on an actual server the old-fashioned way.  
+`USER` changes the *Unix user* the container will run the main process with.
+This is a good idea in general to reduce the attack surface your web application
+(and its container) has.  
 `ADD` (or `COPY`) copies files or directories from your host machine into the 
 result *image* to make it available when running it as a *container*.  
 Finally, `CMD` defines what command should be executed when starting a *container* from

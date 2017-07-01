@@ -4,41 +4,7 @@ to define how to run a number of them with individual settings and have them
 join virtual networks they need to be in?
 
 [docker-compose](https://docs.docker.com/compose) does that for you and more.
-It allows you to define your *Docker* stack in a *YAML* file with all their settings.
-```yaml
-version: '2'
-services:
-  ws:
-    image: my/fancy-web-server
-    ports:
-      - "8080:8011"
-      - "5000"
-    environment:
-      - SECRET=notsosecret
-
-  backend:
-    image: my/be-app
-    expose:
-      - "4001"
-
-  database:
-    image: my/uber-sql
-    expose:
-      - "3306"
-    environment:
-      - USER=root
-      - PASS=xyz123
-```
-
-This *Composefile* defines three *containers*:
-
-- `ws` will run having the `SECRET` environment variable set to the `xyz123` value
-  and it will listen on ports *5000* and *8011* plus the host *OS* will forward
-  traffic from its port *8080* to the *container's 8011*
-- `backend` uses a different *image* and exposes it's port *4001* 
-  (this is local to the *container*)
-- `database` uses a third image and will run with the `USER` and `PASS`
-  environment variables set
+All it needs is a simple *YAML* file to describe your application stack.
 
 To see what *docker-compose* can do check the 
 [Composefile reference](https://docs.docker.com/compose/compose-file) - it is quite powerful.
@@ -52,6 +18,7 @@ services:
 
   demo-site:
     image: rycus86/demo-site:aarch64
+    read_only: true
     expose:
       - "5000"
     restart: always
@@ -60,6 +27,7 @@ services:
   
   github-proxy:
     image: rycus86/github-proxy:aarch64
+    read_only: true
     expose:
       - "5000"
     restart: always
@@ -70,14 +38,18 @@ services:
 
   dockerhub-proxy:
     image: rycus86/dockerhub-proxy:aarch64
+    read_only: true
     expose:
       - "5000"
     restart: always
     environment:
       - HTTP_HOST=0.0.0.0
+    env_file:
+      - dockerhub-secrets.env
 
   googleplay-proxy:
     image: rycus86/googleplay-proxy:aarch64
+    read_only: true
     expose:
       - "5000"
     restart: always
@@ -87,6 +59,7 @@ services:
       - gplay-secrets.env
 ```
 
+The *Composefile* defines four *read-only* applications that will work together.
 Each application exposes its port *5000* to listen for incoming requests and
 they are also configured in a way that *Docker* would restart them automatically
 should they fail for whatever reason.

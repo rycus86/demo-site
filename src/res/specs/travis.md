@@ -65,8 +65,15 @@ the coverage report and send it to *Coveralls* and *Code Climate*.
 *Travis* supports quite a few languages and can integrate with lots of other services.  
 You can get it to publish your built binaries or documentation somewhere like [PyPI](https://pypi.python.org/pypi), 
 deploy your application to *AWS*, *Heroku*, *Google App Engine* or others and you can also 
-build *Docker* images and upload them to [Docker Hub](https://hub.docker.com) - 
-more on this in the *Continuous deployment* section.
+build *Docker* images and upload them to [Docker Hub](https://hub.docker.com).
+
+You can also get a command line [client application](https://github.com/travis-ci/travis.rb)
+for *Travis* that lets you do simple tasks without having to open up the web UI.
+This includes getting build statuses, restarting builds or encrypting files or
+variables for example.
+If you're like me and don't want to install this tool and its dependencies but
+still want to use it then have a look at my [docker-travis-cli](https://github.com/rycus86/docker-travis-cli)
+project that allows you to do exactly this.
 
 Another great feature is the [Matrix builds](https://docs.travis-ci.com/user/build-stages/matrix-expansion/) 
 that allows you to have a build plan run multiple times for the same *git commit* but with different settings.
