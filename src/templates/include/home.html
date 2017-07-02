@@ -10,19 +10,12 @@
 
     <div class="mdl-card__actions mdl-card--border mdl-color--cyan">
         <div class="mdl-layout-spacer"></div>
-        <a id="home-to-specs" href="/page/specs"
+        <a href="/page/specs" data-target-tab="specs"
            class="mdl-button mdl-color-text--white mdl-js-button mdl-js-ripple-effect">
             How it works
             <i class="material-icons mdl-color-text--white">launch</i>
         </a>
     </div>
-
-    <script>
-        $('#home-to-specs').click(function (evt) {
-            evt.preventDefault();
-            cApp.Navigation.goToTab('specs');
-        });
-    </script>
 
 </div>
 

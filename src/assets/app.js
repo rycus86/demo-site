@@ -1,15 +1,17 @@
 window.cApp = (function () {
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         cApp.Startup.initSlickCarousel();
         cApp.Startup.initTabs();
+        cApp.Startup.initTabLinks();
+        cApp.CodeHighlight.initialize();
     });
 
     return {
         Startup: {
-            initTabs: function() {
-                $('.mdl-layout__tab-bar').children().each(function() {
-                    $(this).on('click', function(evt) {
+            initTabs: function () {
+                $('.mdl-layout__tab-bar').children().each(function () {
+                    $(this).on('click', function (evt) {
                         evt.preventDefault();
 
                         var tab = $(this).attr('id').replace('tab-', '');
@@ -20,7 +22,7 @@ window.cApp = (function () {
                 });
             },
 
-            initSlickCarousel: function() {
+            initSlickCarousel: function () {
                 $('.slick-carousel').slick({
                     infinite: true,
                     slidesToShow: 2,
@@ -28,6 +30,17 @@ window.cApp = (function () {
                     dots: true,
                     centerMode: true,
                     variableWidth: true
+                });
+            },
+
+            initTabLinks: function () {
+                $('a[data-target-tab]').each(function () {
+                    var target_tab = $(this).data('target-tab');
+
+                    $(this).click(function (evt) {
+                        evt.preventDefault();
+                        cApp.Navigation.goToTab(target_tab);
+                    });
                 });
             }
         },
@@ -51,7 +64,7 @@ window.cApp = (function () {
                 var current = $('#' + current_id);
                 var target = $('#' + target_id);
 
-                current.fadeOut(150, function() {
+                current.fadeOut(150, function () {
                     history.pushState({}, window.title, '/page/' + tab_id);
 
                     ga('set', 'page', '/page/' + tab_id);
@@ -68,6 +81,15 @@ window.cApp = (function () {
         },
 
         CodeHighlight: {
+            initialize: function () {
+                if (!!hljs) {
+                    hljs.configure({
+                        languages: ['java', 'python', 'dockerfile', 'yaml', 'xml', 'html', 'shell', 'bash']
+                    });
+                    hljs.initHighlightingOnLoad();
+                }
+            },
+
             processCodeBlocks: function (container) {
                 var code_blocks = $(container).find('pre code');
                 for (var idx = 0; idx < code_blocks.length; idx++) {

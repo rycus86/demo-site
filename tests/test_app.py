@@ -1,3 +1,4 @@
+# coding=utf-8
 import re
 import unittest
 
@@ -90,15 +91,26 @@ class AppTest(unittest.TestCase):
 
             self.assertIn('<div class="mdl-grid" id="panel-%s">' % tab['key'], content)
 
+    def test_missing_page(self):
+        response = self.client.get('/page/missing-page')
+
+        self.assertEqual(response.status_code, 404)
+        self.assertIn('text/html', response.content_type)
+        self.assertEqual(response.charset, 'utf-8')
+
+        content = response.data
+
+        self.assertIn('<title>Page not found</title>', content)
+
     def test_css_js_includes(self):
         content = self.get_html('/')
 
-        self.assertMatches('.*<link rel="stylesheet" href="/asset/[0-9a-f]{10}/styles.css">', content)
+        self.assertMatches('.*<link rel="stylesheet" href="/asset/[0-9a-f]{10}/styles.css" type="text/css">', content)
         self.assertMatches('.*<script src="/asset/[0-9a-f]{10}/app.js">', content)
         self.assertMatches('.*<script src="/asset/[0-9a-f]{10}/datetime.js">', content)
         self.assertMatches('.*<script src="/asset/[0-9a-f]{10}/github.js">', content)
         self.assertMatches('.*<script src="/asset/[0-9a-f]{10}/dockerhub.js">', content)
-    
+
     def test_tracking(self):
         content = self.get_html('/')
 
@@ -133,3 +145,20 @@ class AppTest(unittest.TestCase):
         self.assertIn('<!-- Cedexis for cdn.jsdelivr.net -->', content)
         self.assertIn('<!-- Google Analytics -->', content)
 
+    def test_markdown(self):
+        request_data = u"""# Testing unicode 
+        *From the TweetWear project*:
+        
+        - [Евгений Дрямин](https://github.com/bluegekkon) for Russian translation"""
+
+        response = self.client.post('/markdown', data=u'\n'.join(map(unicode.strip, request_data.splitlines())))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('text/html', response.content_type)
+        self.assertEqual(response.charset, 'utf-8')
+
+        content = response.data
+
+        self.assertIn('<h1>Testing unicode</h1>', content)
+        self.assertIn('<em>From the TweetWear project</em>:', content)
+        self.assertIn(u'Евгений Дрямин', content.decode('utf-8'))

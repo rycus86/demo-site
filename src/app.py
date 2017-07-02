@@ -32,6 +32,11 @@ def render(template):
     return render_template('render/%s.html' % template, data=request.json, markdown=pretty_markdown)
 
 
+@app.route('/markdown', methods=['POST'])
+def render_markdown():
+    return pretty_markdown(request.data.decode('utf-8'))
+
+
 @app.route('/asset/<hash>/<path:asset_file>')
 def asset(hash, asset_file):
     return send_from_directory('assets', asset_file)

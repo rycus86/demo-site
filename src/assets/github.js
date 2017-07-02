@@ -18,15 +18,25 @@
 
                 placeholder.replaceWith($(html));
 
-                var trackReadme = app.Tracking.start('GitHub readme ' + repo.full_name, 'github');
-                $.get(base_url + '/repos/' + repo.full_name + '/readme', function (readme) {
+                var trackReadme = app.Tracking.start('GitHub raw readme ' + repo.full_name, 'github');
+                $.get(base_url + '/repos/' + repo.full_name + '/readme/raw', function (raw_readme) {
                     trackReadme.done();
 
-                    var markup = $(readme);
-                    markup.find('code').parents('p').addClass('code-wrapper');
-                    $('#github-readme-' + repo.name).append(markup);
+                    var trackMarkdown = app.Tracking.start('GitHub readme markdown ' + repo.full_name, 'github');
+                    $.post({
+                        url: '/markdown',
+                        data: raw_readme,
+                        contentType: 'text/plain',
+                        success: function (readme) {
+                            trackMarkdown.done();
 
-                    app.CodeHighlight.processCodeBlocks(markup);
+                            var markup = $(readme);
+                            markup.find('code').parents('p').addClass('code-wrapper');
+                            $('#github-readme-' + repo.name).append(markup);
+
+                            app.CodeHighlight.processCodeBlocks(markup);
+                        }
+                    });
                 });
             }
         });
