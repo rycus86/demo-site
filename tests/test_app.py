@@ -115,7 +115,7 @@ class AppTest(unittest.TestCase):
         self.assertIn('This site is made up of the following components', content)
 
         self.assertIn('<h2 class="mdl-card__title-text">Acknowledgements</h2>', content)
-        self.assertIn('<code>Python</code> web framework', content)
+        self.assertIn('<em>Python</em> web framework', content)
 
     def test_error_page(self):
         response = self.client.get('/page/not/found')

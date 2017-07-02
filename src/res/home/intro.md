@@ -2,7 +2,7 @@ This website exists to showcase an example of creating
 a set of applications built, tested and deployed completely 
 with open-source and free tools.
 
-Most of the backend services are `Python` [Flask](http://flask.pocoo.org) applications 
+Most of the backend services are *Python* [Flask](http://flask.pocoo.org) applications 
 while the frontend uses the [Material Design Lite](https://getmdl.io/index.html) library 
 with [jQuery](https://jquery.com).
 
@@ -14,4 +14,4 @@ where they are running behind an [nginx](https://nginx.org/en) proxy server.
 The whole process including the deployments is automated,
 the only manual step being the `git push` command.
 
-To see how it works go to the `Specs` tab or click the button below.
+To see how it works go to the *Specs* tab or click the button below.

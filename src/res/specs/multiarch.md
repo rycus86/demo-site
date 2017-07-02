@@ -117,5 +117,5 @@ To give credit, this is based on the great work the
 [Hypriot team documented](https://blog.hypriot.com/post/setup-simple-ci-pipeline-for-arm-images)
 even though it looks like people have [come up with this](https://github.com/travis-ci/travis-ci/issues/3376) back in late 2015.
 
-OK, great, this is working nicely again but the question still stands:
+OK, great, this is working nicely again but the question still stands:  
 __*"why would we even want to do this to ourselves?"*__

@@ -73,7 +73,8 @@ This includes getting build statuses, restarting builds or encrypting files or
 variables for example.
 If you're like me and don't want to install this tool and its dependencies but
 still want to use it then have a look at my [docker-travis-cli](https://github.com/rycus86/docker-travis-cli)
-project that allows you to do exactly this.
+project that allows you to do exactly this by only installing a *Bash* script
+to execute the *Travis* commands using a *Docker* image.
 
 Another great feature is the [Matrix builds](https://docs.travis-ci.com/user/build-stages/matrix-expansion/) 
 that allows you to have a build plan run multiple times for the same *git commit* but with different settings.
