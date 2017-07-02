@@ -4,8 +4,15 @@
     </div>
     <div class="mdl-mini-footer__right-section">
         <ul class="mdl-mini-footer__link-list">
-            <li>Viktor Adam</li>
-            <li>2017</li>
+            {% for link in footer.links %}
+                <li>
+                {% if link.href is defined %}
+                    <a href="{{ link.href }}">{{ link.title }}</a>
+                {% else %}
+                    {{ link.title }}
+                {% endif %}
+                </li>
+            {% endfor %}
         </ul>
     </div>
 </footer>

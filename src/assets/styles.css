@@ -9,10 +9,37 @@ body main section .mdl-grid .mdl-card {
     margin-right: auto;
 }
 
+.content-primary-color {
+    color: #00bcd4 !important;
+}
+
+.mdl-card .mdl-card__title {
+    background-color: #00bcd4 !important;
+    color: #fff !important;
+}
+
+.mdl-card .mdl-card__media {
+    background-color: #00bcd4 !important;
+}
+
 .mdl-card .mdl-card__actions {
     display: flex;
     box-sizing:border-box;
     align-items: center;
+}
+
+.mdl-card .mdl-card__actions.card-actions-dark {
+    background-color: #00bcd4 !important;
+    color: #fff !important;
+}
+
+.mdl-card .mdl-card__actions a {
+    color: #fff !important;
+    text-decoration: none;
+}
+
+.mdl-card .mdl-chip--contact .mdl-chip__contact {
+    background-color: #00bcd4 !important;
 }
 
 .markdown h1,

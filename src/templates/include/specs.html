@@ -2,7 +2,7 @@
 <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--6-col mdl-cell--top"
      id="specs-card-{{ card.key }}">
 
-    <div class="mdl-card__title mdl-card--border mdl-color--cyan mdl-color-text--white">
+    <div class="mdl-card__title mdl-card--border">
         <h2 class="mdl-card__title-text">{{ card.title }}</h2>
     </div>
 
@@ -18,11 +18,11 @@
     
     {% if card.image is defined %}
         {% if card.image.display is defined %}
-        <div class="mdl-card__media mdl-card--border mdl-color--cyan">
+        <div class="mdl-card__media mdl-card--border">
             <img src="{{ assets['images/' + card.image.path] }}">
         </div>
         {% else %}
-        <div class="mdl-card__media mdl-card--border mdl-color--cyan"
+        <div class="mdl-card__media mdl-card--border"
              style="background: url({{ assets['images/' + card.image] }}) center / cover"></div>
         {% endif %}
     {% endif %}
@@ -32,12 +32,12 @@
     </div>
 
     {% if not loop.last %}
-    <div class="mdl-card__actions mdl-card--border mdl-color--cyan">
+    <div class="mdl-card__actions mdl-card--border card-actions-dark">
         <div class="mdl-layout-spacer"></div>
         <a href="#specs-card-{{ specs_cards[loop.index].key }}"
-           class="mdl-button mdl-color-text--white mdl-js-button mdl-js-ripple-effect">
+           class="mdl-button mdl-js-button mdl-js-ripple-effect">
             Go to the next section
-            <i class="material-icons mdl-color-text--white">launch</i>
+            <i class="material-icons">launch</i>
         </a>
     </div>
     {% endif %}

@@ -1,23 +1,20 @@
 <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--4-col mdl-cell--top github" id="github-{{ data.name }}">
 
-    <div class="mdl-card__title mdl-card--border mdl-color--cyan mdl-color-text--white"
-         style="flex-direction: column; justify-content: flex-end;">
-        <!-- TODO inline style (x3) -->
-        <h2 class="mdl-card__title-text"
-            style="align-self: flex-start;">{{ data.name }}</h2>
+    <div class="mdl-card__title mdl-card--border">
+        <h2 class="mdl-card__title-text">{{ data.name }}</h2>
     </div>
 
     <div class="mdl-card__supporting-text">
         <p>
             <span id="github-time-created-{{ data.name }}" class="mdl-chip mdl-chip--contact">
-                <i class="mdl-chip__contact material-icons mdl-color--cyan">event</i>
+                <i class="mdl-chip__contact material-icons">event</i>
                 <span class="mdl-chip__text momentjs-time" data-time="{{ data.created_at }}" data-prefix="created">
                     {{ data.created_at }}
                 </span>
             </span>
 
             <span id="github-time-pushed-{{ data.name }}" class="mdl-chip mdl-chip--contact">
-                <i class="mdl-chip__contact material-icons mdl-color--cyan">history</i>
+                <i class="mdl-chip__contact material-icons">history</i>
                 <span class="mdl-chip__text momentjs-time" data-time="{{ data.pushed_at }}" data-prefix="pushed">
                     {{ data.pushed_at }}
                 </span>
@@ -35,17 +32,15 @@
         </div>
     </div>
 
-    <div class="mdl-card__title mdl-card--border mdl-color--cyan mdl-color-text--white">README</div>
+    <div class="mdl-card__title mdl-card--border">README</div>
     <div class="mdl-card__supporting-text">
         <div class="readme markdown" id="github-readme-{{ data.name }}"></div>
     </div>
 
-    <div class="mdl-card__actions mdl-card--border">
-        <!-- TODO inline style -->
-        <a style="text-decoration: none"
-           id="github-link-{{ data.name }}" href="{{ data.html_url }}">
+    <div class="mdl-card__actions mdl-card--border card-actions-light">
+        <a id="github-link-{{ data.name }}" href="{{ data.html_url }}">
             <span class="mdl-chip mdl-chip--contact">
-                <i class="mdl-chip__contact material-icons mdl-color--cyan">public</i>
+                <i class="mdl-chip__contact material-icons">public</i>
 
                 <span class="mdl-chip__text">
                     {{ data.html_url }}

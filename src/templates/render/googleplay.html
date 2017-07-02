@@ -1,17 +1,14 @@
 <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--4-col mdl-cell--top github"
      id="googleplay-{{ data.package_name|replace('.', '_') }}">
 
-    <div class="mdl-card__title mdl-card--border mdl-color--cyan mdl-color-text--white"
-         style="flex-direction: column; justify-content: flex-end;">
-        <!-- TODO inline style (x3) -->
-        <h2 class="mdl-card__title-text"
-            style="align-self: flex-start;">{{ data.title }}</h2>
+    <div class="mdl-card__title mdl-card--border">
+        <h2 class="mdl-card__title-text">{{ data.title }}</h2>
     </div>
 
     <div class="mdl-card__supporting-text">
         <p>
             <span id="googleplay-time-updated-{{ data.package_name|replace('.', '_') }}" class="mdl-chip mdl-chip--contact">
-                <i class="mdl-chip__contact material-icons mdl-color--cyan">event</i>
+                <i class="mdl-chip__contact material-icons">event</i>
                 <span class="mdl-chip__text momentjs-time" data-time="{{ data.upload_date }}" data-prefix="last updated">
                     {{ data.upload_date }}
                 </span>
@@ -24,17 +21,15 @@
         </div>
     </div>
 
-    <div class="mdl-card__title mdl-card--border mdl-color--cyan mdl-color-text--white">README</div>
+    <div class="mdl-card__title mdl-card--border">README</div>
     <div class="mdl-card__supporting-text">
         <div class="readme">{{ data.description_html|safe }}</div>
     </div>
 
-    <div class="mdl-card__actions mdl-card--border">
-        <!-- TODO inline style -->
-        <a style="text-decoration: none"
-           id="googleplay-link-{{ data.package_name|replace('.', '_') }}" href="{{ data.share_url }}">
+    <div class="mdl-card__actions mdl-card--border card-actions-light">
+        <a id="googleplay-link-{{ data.package_name|replace('.', '_') }}" href="{{ data.share_url }}">
             <span class="mdl-chip mdl-chip--contact">
-                <i class="mdl-chip__contact material-icons mdl-color--cyan">public</i>
+                <i class="mdl-chip__contact material-icons">public</i>
 
                 <span class="mdl-chip__text">
                     Google Play Store
