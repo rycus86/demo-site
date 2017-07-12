@@ -1,6 +1,6 @@
 (function (app) {
 
-    var base_url = 'http://gplay.api.viktoradam.net',
+    var base_url = 'http://api.viktoradam.net/gplay',
         package = 'hu.rycus',
         target = '#panel-googleplay';
 
