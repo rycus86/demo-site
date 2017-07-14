@@ -7,7 +7,7 @@
     var convertUploadDateToISO = function (application) {
         var parsed_date;
 
-        if (application.upload_date.test(/^[0-9]+ [A-Z][a-z]+ [0-9]{4}$/) {
+        if (application.upload_date.test(/^[0-9]+ [A-Z][a-z]+ [0-9]{4}$/)) {
             parsed_date = moment(application.upload_date, 'D MMM YYYY');
         } else {
             parsed_date = moment(application.upload_date, 'MMM D, YYYY');
