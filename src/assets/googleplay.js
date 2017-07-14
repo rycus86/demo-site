@@ -5,7 +5,7 @@
         target = '#panel-googleplay';
 
     var convertUploadDateToISO = function (application) {
-        if (!application.hasOwnProperty('upload_date') {
+        if (!application.hasOwnProperty('upload_date')) {
             return;
         }
 
