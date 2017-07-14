@@ -1,11 +1,18 @@
 (function (app) {
 
     var base_url = 'http://api.viktoradam.net/gplay',
-        package = 'hu.rycus',
+        developer_name = 'Viktor Adam',
         target = '#panel-googleplay';
 
     var convertUploadDateToISO = function (application) {
-        var parsed_date = moment(application.upload_date, 'MMM D, YYYY');
+        var parsed_date;
+
+        if (application.upload_date.test(/^[0-9]+ [A-Z][a-z]+ [0-9]{4}$/) {
+            parsed_date = moment(application.upload_date, 'D MMM YYYY');
+        } else {
+            parsed_date = moment(application.upload_date, 'MMM D, YYYY');
+        }
+
         application.upload_date = parsed_date.format();
     };
 
@@ -42,7 +49,7 @@
     var loadProjects = function () {
         var trackProjects = app.Tracking.start('Google Play projects', 'googleplay');
 
-        $.get(base_url + '/search/' + package, function (applications) {
+        $.get(base_url + '/developer/' + developer_name, function (applications) {
             trackProjects.done();
 
             applications.forEach(convertUploadDateToISO);
