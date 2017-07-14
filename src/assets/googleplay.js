@@ -5,6 +5,10 @@
         target = '#panel-googleplay';
 
     var convertUploadDateToISO = function (application) {
+        if (!application.hasOwnProperty('upload_date') {
+            return;
+        }
+
         var parsed_date;
 
         if (application.upload_date.test(/^[0-9]+ [A-Z][a-z]+ [0-9]{4}$/)) {
@@ -55,7 +59,15 @@
             applications.forEach(convertUploadDateToISO);
 
             applications.sort(function (a, b) {
-                if (a.upload_date < b.upload_date) { return 1; } else { return -1; }
+                if (!a.hasOwnProperty('upload_date') && !b.hasOwnProperty('upload_date')) {
+                    return 0;
+                }
+
+                if (a.upload_date < b.upload_date) { 
+                    return 1; 
+                } else { 
+                    return -1; 
+                }
             }).forEach(function (application) {
                 loadProject(application);
             });
