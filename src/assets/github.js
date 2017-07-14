@@ -56,7 +56,7 @@
         });
     };
 
-    $(document).ready(function() {
+    app.Startup.addInitTask(function() {
         loadProjects();
     });
 

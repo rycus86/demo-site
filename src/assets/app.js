@@ -1,14 +1,21 @@
 window.cApp = (function () {
 
-    $(document).ready(function () {
+    $(window).on('load', function () {
         cApp.Startup.initSlickCarousel();
         cApp.Startup.initTabs();
         cApp.Startup.initTabLinks();
+
+        cApp.Startup.init_tasks.forEach(function (task) {
+            task.call();
+        });
+
         cApp.CodeHighlight.initialize();
     });
 
     return {
         Startup: {
+            init_tasks: [],
+
             initTabs: function () {
                 $('.mdl-layout__tab-bar').children().each(function () {
                     $(this).on('click', function (evt) {
@@ -42,6 +49,10 @@ window.cApp = (function () {
                         cApp.Navigation.goToTab(target_tab);
                     });
                 });
+            },
+
+            addInitTask: function (task) {
+                cApp.Startup.init_tasks.push(task);
             }
         },
 

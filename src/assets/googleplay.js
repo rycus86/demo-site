@@ -11,7 +11,7 @@
 
         var parsed_date;
 
-        if (application.upload_date.test(/^[0-9]+ [A-Z][a-z]+ [0-9]{4}$/)) {
+        if (application.upload_date.match(/^[0-9]+ [A-Z][a-z]+ [0-9]{4}$/)) {
             parsed_date = moment(application.upload_date, 'D MMM YYYY');
         } else {
             parsed_date = moment(application.upload_date, 'MMM D, YYYY');
@@ -59,11 +59,15 @@
             applications.forEach(convertUploadDateToISO);
 
             applications.sort(function (a, b) {
-                if (!a.hasOwnProperty('upload_date') && !b.hasOwnProperty('upload_date')) {
-                    return 0;
+                if (a.hasOwnProperty('upload_date') && b.hasOwnProperty('upload_date')) {
+                    if (a.upload_date < b.upload_date) {
+                        return 1;
+                    } else {
+                        return -1;
+                    }
                 }
 
-                if (a.upload_date < b.upload_date) { 
+                if (a.title > b.title) {
                     return 1; 
                 } else { 
                     return -1; 
@@ -74,7 +78,7 @@
         });
     };
 
-    $(document).ready(function() {
+    app.Startup.addInitTask(function() {
         loadProjects();
     });
 

@@ -31,7 +31,7 @@ class AssetTest(unittest.TestCase):
 
         data = self.get_asset('github.js', 'application/javascript')
 
-        self.assertIn('$(document).ready(function() {', data)
+        self.assertIn('app.Startup.addInitTask(function() {', data)
         self.assertIn('base_url = \'http://api.viktoradam.net/github\'', data)
         self.assertIn('var generateMarkup = function (repo) {', data)
         self.assertIn('var loadProjects = function () {', data)
@@ -39,7 +39,7 @@ class AssetTest(unittest.TestCase):
         data = self.get_asset('dockerhub.js', 'application/javascript')
         
         self.assertIn('app.DockerHub = {', data)
-        self.assertIn('$(document).ready(function() {', data)
+        self.assertIn('app.Startup.addInitTask(function() {', data)
         self.assertIn('base_url = \'http://api.viktoradam.net/docker\'', data)
         self.assertIn('var generateMarkup = function (repo, placeholder) {', data)
         self.assertIn('var loadProject = function (repository_name) {', data)
