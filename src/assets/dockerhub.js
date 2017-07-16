@@ -1,6 +1,6 @@
 (function (app) {
 
-    var base_url = 'http://api.viktoradam.net/docker',
+    var base_url = '//api.viktoradam.net/docker',
         username = 'rycus86',
         target = '#panel-dockerhub';
 

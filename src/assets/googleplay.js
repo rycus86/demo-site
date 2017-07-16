@@ -1,6 +1,6 @@
 (function (app) {
 
-    var base_url = 'http://api.viktoradam.net/gplay',
+    var base_url = '//api.viktoradam.net/gplay',
         developer_name = 'Viktor Adam',
         target = '#panel-googleplay';
 

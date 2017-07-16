@@ -1,6 +1,6 @@
 (function (app) {
 
-    var base_url = 'http://api.viktoradam.net/github',
+    var base_url = '//api.viktoradam.net/github',
         username = 'rycus86',
         target = '#panel-github';
 
