@@ -25,7 +25,6 @@ class RenderTest(unittest.TestCase):
         path = os.path.join(os.path.dirname(__file__), filename)
         with open(path) as input_file:
             return json.load(input_file)
-            # return input_file.read()
 
     def test_render_github(self):
         payload = self.load_payload('github_payload.json')
@@ -35,8 +34,8 @@ class RenderTest(unittest.TestCase):
         self.assertIn('<span id="github-time-pushed-%s" class="mdl-chip mdl-chip--contact">' % payload['name'], content)
         self.assertIn('href="%s"' % payload['html_url'], content)
         self.assertIn(payload['full_name'], content)
-        self.assertIn('cApp.DateTime.formatTimeFromNow(\'github-%s\');' % payload['name'], content);
-        self.assertIn('cApp.DateTime.formatDateTime(\'github-%s\');' % payload['name'], content);
+        self.assertIn('cApp.DateTime.formatTimeFromNow(\'github-%s\');' % payload['name'], content)
+        self.assertIn('cApp.DateTime.formatDateTime(\'github-%s\');' % payload['name'], content)
 
     def test_render_dockerhub(self):
         payload = self.load_payload('dockerhub_payload.json')
@@ -49,6 +48,16 @@ class RenderTest(unittest.TestCase):
         self.assertIn('<h1>README</h1>', content)
         self.assertIn('<p>Sample readme contents.</p>', content)
         self.assertIn('cApp.DateTime.formatTimeFromNow(\'dockerhub-%s\');' % payload['name'], content);
-        self.assertIn('cApp.DateTime.formatDateTime(\'dockerhub-%s\');' % payload['name'], content);
-        self.assertIn('cApp.DockerHub.generateTags(\'%s/%s\', \'dockerhub-tags-%s\');' % (payload['namespace'], payload['name'], payload['name']), content);
+        self.assertIn('cApp.DateTime.formatDateTime(\'dockerhub-%s\');' % payload['name'], content)
+        self.assertIn('cApp.DockerHub.generateTags(\'%s/%s\', \'dockerhub-tags-%s\');' % (payload['namespace'], payload['name'], payload['name']), content)
+
+    def test_replace_http_links_in_markdown(self):
+        payload = self.load_payload('dockerhub_payload.json')
+        
+        payload['full_description'] = '# HTTP link\nThis [link](http://example.com) used to use http.'
+
+        content = self.get_fragment('dockerhub', payload)
+
+        self.assertNotIn('http://', content)
+        self.assertIn('href="https://example.com"', content)
 

@@ -7,8 +7,12 @@ from flask import g
 
 
 def pretty_markdown(text, *args, **kwargs):
-    return markdown(_replace_image_placeholders(text),
+    return markdown(_replace_image_placeholders(_with_https_links_only(text)),
                     *args, extensions=['markdown.extensions.fenced_code'], **kwargs)
+
+
+def _with_https_links_only(text):
+    return text.replace('http://', 'https://')
 
 
 def _replace_image_placeholders(text):
