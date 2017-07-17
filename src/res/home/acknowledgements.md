@@ -8,6 +8,8 @@
       Cache extension for *Flask*
     - **flask-cors**: [https://github.com/corydolphin/flask-cors](https://github.com/corydolphin/flask-cors)  
       Cross Origin Resource Sharing (CORS) for *Flask*
+    - **Jinja2**: [http://jinja.pocoo.org](http://jinja.pocoo.org)  
+      Templating language and engine also used in *Flask*
     - **agithub**: [https://github.com/jpaugh/agithub](https://github.com/jpaugh/agithub)  
       Agnostic REST API client
     - **googleplay-api**: [https://github.com/NeroBurner/googleplay-api](https://github.com/NeroBurner/googleplay-api)  
