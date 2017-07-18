@@ -88,6 +88,12 @@
         "body": "proxy.md"
     },
     {
+        "key": "pygen",
+        "title": "docker-pygen",
+        "body": "docker-pygen.md",
+        "link": "https://github.com/rycus86/docker-pygen"
+    },
+    {
         "key": "dyndns",
         "title": "Dynamic DNS",
         "body": "dyndns.md"

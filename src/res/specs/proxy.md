@@ -97,3 +97,7 @@ To piece it together:
 
 Again, adding a new application to this stack is a matter of adding its configuration to
 the *Composefile* and executing a `docker-compose up -d` command.
+
+What if you want more flexibility on how the configuration file is templated *and/or*
+you're not a huge fan of Go templates?
+Enter *docker-pygen*.
