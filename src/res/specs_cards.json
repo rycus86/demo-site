@@ -99,6 +99,17 @@
         "body": "dyndns.md"
     },
     {
+        "key": "ssl",
+        "title": "SSL / HTTPS",
+        "body": "ssl.md",
+        "link": "https://letsencrypt.org"
+    },
+    {
+        "key": "http2",
+        "title": "HTTP/2",
+        "body": "http2.md"
+    },
+    {
         "key": "updates",
         "title": "Updates",
         "body": "updates.md"

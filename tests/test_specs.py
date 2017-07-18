@@ -54,7 +54,10 @@ class SpecificationsTest(unittest.TestCase):
         self.assertIn('<h2 class="mdl-card__title-text">Hosting</h2>', content)
         self.assertIn('<h2 class="mdl-card__title-text">docker-compose</h2>', content)
         self.assertIn('<h2 class="mdl-card__title-text">Proxy server</h2>', content)
+        self.assertIn('<h2 class="mdl-card__title-text">docker-pygen</h2>', content)
         self.assertIn('<h2 class="mdl-card__title-text">Dynamic DNS</h2>', content)
+        self.assertIn('<h2 class="mdl-card__title-text">SSL / HTTPS</h2>', content)
+        self.assertIn('<h2 class="mdl-card__title-text">HTTP/2</h2>', content)
         self.assertIn('<h2 class="mdl-card__title-text">Updates</h2>', content)
 
     def test_images(self):
