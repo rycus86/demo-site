@@ -10,5 +10,5 @@ This site is made up of the following components:
   [https://github.com/rycus86/googleplay-proxy](https://github.com/rycus86/googleplay-proxy)
 - __nginx__  
   [https://github.com/rycus86/docker-arm-nginx-proxy](https://github.com/rycus86/docker-arm-nginx-proxy)
-- __docker-gen__  
-  [https://github.com/jwilder/docker-gen](https://github.com/jwilder/docker-gen)
+- __docker-pygen__  
+  [https://github.com/rycus86/docker-pygen](https://github.com/rycus86/docker-pygen)

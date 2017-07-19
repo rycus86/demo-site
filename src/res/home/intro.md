@@ -9,7 +9,8 @@ with [jQuery](https://jquery.com).
 All backend services are built into [Docker](https://www.docker.com) images
 on [Travis Ci](https://travis-ci.org) 
 then pulled to a [Pine64](https://www.pine64.org/?page_id=1194) server
-where they are running behind an [nginx](https://nginx.org/en) proxy server.
+where they are running behind an [nginx](https://nginx.org/en) proxy server
+exposing secure HTTP/2 endpoints with SSL.
 
 The whole process including the deployments is automated,
 the only manual step being the `git push` command.

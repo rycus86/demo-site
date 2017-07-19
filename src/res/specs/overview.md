@@ -8,3 +8,5 @@ between the frontend and the backend:
 
 Each request will end up on the **nginx** proxy server that is the only application in the
 stack listening to requests from the external network.
+It's configuration is managed by **nginx-pygen** for the backend services and by
+**certbot-pygen** for the SSL certificates.

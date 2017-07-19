@@ -10,14 +10,22 @@ frame Backend #LightGrey {
     [github-proxy] << REST server >> #Orange
     [dockerhub-proxy] << REST server >> #Orange
     [googleplay-proxy] << REST server >> #Orange
+    
+    [nginx-pygen] << configuration generator >> #Pink
+    [certbot-pygen] << configuration generator >> #Pink
+    [certbot-helper] << SSL certificate manager >> #c99
 }
 
-[Browser] =d=> [nginx] : <b>all</b> <i>http://*.viktoradam.net</i> requests
+[Browser] =d=> [nginx] : <b>all</b> <i>https://*.viktoradam.net</i> requests
 
-[nginx] -l-> [demo-site] : <i>demo.</i>\nviktoradam.net
-[nginx] -r-> [github-proxy] : <i>github.api.</i>\nviktoradam.net
-[nginx] -d-> [dockerhub-proxy] : <i>docker.api.</i>\nviktoradam.net
-[nginx] -d-> [googleplay-proxy] : <i>gplay.api.</i>\nviktoradam.net
+[nginx] =l=> [demo-site] : <i>demo.</i>viktoradam.net
+[nginx] =r=> [github-proxy] : <i>api.</i>viktoradam.net/<i>github</i>
+[nginx] =d=> [dockerhub-proxy] : <i>api.</i>viktoradam.net/<i>docker</i>
+[nginx] =d=> [googleplay-proxy] : <i>api.</i>viktoradam.net/<i>gplay</i>
+
+[nginx-pygen] --u-> [nginx] : Configure routing
+[certbot-helper] --u-> [nginx] : Manage SSL certificates
+[certbot-pygen] -l-> [certbot-helper] : Configure secure domains
 
 [Browser] ..d.> [demo-site] : HTTP GET / \n -> HTML
 [Browser] ..d.> [demo-site] : HTTP POST /render \n JSON -> HTML
