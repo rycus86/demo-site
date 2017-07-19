@@ -14,8 +14,6 @@
                     element.append(' ');
                 }
                 element.append($('<b/>').append(formatted));
-
-                componentHandler.upgradeElement(item);
             });
         },
 
@@ -36,8 +34,6 @@
 
                 var m = moment(element.data('date'));
                 element.html(m.format('MMMM D, YYYY'));
-
-                componentHandler.upgradeElement(item);
             });
         }
 

@@ -14,7 +14,12 @@
       var timeSincePageLoad = Math.round(performance.now());
       ga('send', 'timing', 'JS Dependencies', 'javascript', timeSincePageLoad);
 
-      $(window).on('load', function() {
+      var existingWindowOnLoad = window.onload;
+      window.onload = function() {
+          if (!!existingWindowOnLoad) {
+              existingWindowOnLoad();
+          }
+
           setTimeout(function() {
               var timing = window.performance.timing;
               var page_load_time = timing.loadEventEnd - timing.navigationStart;
@@ -23,6 +28,6 @@
               var connect_time = timing.responseEnd - timing.requestStart;
               ga('send', 'timing', 'Request time', 'request', connect_time);
           }, 0);
-      });
+      };
   }
 </script>

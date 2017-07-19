@@ -56,4 +56,8 @@
     cApp.DateTime.formatTimeFromNow('dockerhub-{{ data.name }}');
     cApp.DateTime.formatDateTime('dockerhub-{{ data.name }}');
     cApp.DockerHub.generateTags('{{ data.namespace }}/{{ data.name }}', 'dockerhub-tags-{{ data.name }}');
+
+    $('#dockerhub-{{ data.name }} .mdl-tooltip').each(function (idx, item) {
+        componentHandler.upgradeElement(item);
+    });
 </script>

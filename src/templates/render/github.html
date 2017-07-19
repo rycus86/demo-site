@@ -58,4 +58,8 @@
 <script>
     cApp.DateTime.formatTimeFromNow('github-{{ data.name }}');
     cApp.DateTime.formatDateTime('github-{{ data.name }}');
+
+    $('#github-{{ data.name }} .mdl-tooltip').each(function (idx, item) {
+        componentHandler.upgradeElement(item);
+    });
 </script>

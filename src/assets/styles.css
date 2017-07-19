@@ -127,3 +127,15 @@ header a.mdl-layout__tab:hover {
     right: 10px;
     top: -20px;
 }
+
+#googleplay .slick-images .image-container {
+    padding: 0 8px;
+}
+
+#googleplay .slick-images img {
+    max-height: 200px;
+}
+
+#googleplay .mdl-card__actions a {
+    margin-right: 4px;
+}
