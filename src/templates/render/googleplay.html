@@ -7,6 +7,20 @@
 
     <div class="mdl-card__supporting-text">
         <p>
+            <span id="googleplay-download-count-{{ data.package_name|replace('.', '_') }}" class="mdl-chip mdl-chip--contact">
+                <i class="mdl-chip__contact material-icons">file_download</i>
+
+                <span class="mdl-chip__text">
+                    {{ data.download_count }}
+                </span>
+            </span>
+            <span id="googleplay-rating-{{ data.package_name|replace('.', '_') }}" class="mdl-chip mdl-chip--contact">
+                <i class="material-icons">star_rate</i>
+
+                <span class="mdl-chip__text">
+                    {{ '%.2f'|format(data.ratings.stars) }}
+                </span>
+            </span>
             <span id="googleplay-time-updated-{{ data.package_name|replace('.', '_') }}" class="mdl-chip mdl-chip--contact">
                 <i class="mdl-chip__contact material-icons">event</i>
                 <span class="mdl-chip__text momentjs-time" data-time="{{ data.upload_date }}" data-prefix="last updated">
@@ -16,10 +30,31 @@
         </p>
 
         <div class="mdl-tooltip mdl-tooltip--bottom"
+             data-mdl-for="googleplay-download-count-{{ data.package_name|replace('.', '_') }}">
+            {{ data.download_count }} downloads
+        </div>
+        <div class="mdl-tooltip mdl-tooltip--bottom"
+             data-mdl-for="googleplay-rating-{{ data.package_name|replace('.', '_') }}">
+            {{ data.ratings.stars }} stars based on {{ data.ratings.total }} ratings
+        </div>
+        <div class="mdl-tooltip mdl-tooltip--bottom"
              data-mdl-for="googleplay-time-updated-{{ data.package_name|replace('.', '_') }}" data-date="{{ data.upload_date }}">
             {{ data.upload_date }}
         </div>
     </div>
+
+    {% if data.images %}
+    <div class="mdl-card__title mdl-card--border">Images</div>
+    <div class="mdl-card__supporting-text">
+        <div class="images">
+            {% for image in data.images %}
+            <!--
+            <img src="{{ image.url }}">
+            -->
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
 
     <div class="mdl-card__title mdl-card--border">README</div>
     <div class="mdl-card__supporting-text">
@@ -29,7 +64,7 @@
     <div class="mdl-card__actions mdl-card--border card-actions-light">
         <a id="googleplay-link-{{ data.package_name|replace('.', '_') }}" href="{{ data.share_url }}">
             <span class="mdl-chip mdl-chip--contact">
-                <i class="mdl-chip__contact material-icons">public</i>
+                <i class="mdl-chip__contact material-icons">shop</i>
 
                 <span class="mdl-chip__text">
                     Google Play Store
@@ -40,6 +75,22 @@
         <div class="mdl-tooltip mdl-tooltip--bottom" data-mdl-for="googleplay-link-{{ data.package_name|replace('.', '_') }}">
             {{ data.share_url }}
         </div>
+
+        {% if data.developer_website %}
+        <a id="googleplay-website-{{ data.package_name|replace('.', '_') }}" href="{{ data.developer_website }}">
+            <span class="mdl-chip mdl-chip--contact">
+                <i class="mdl-chip__contact material-icons">public</i>
+
+                <span class="mdl-chip__text">
+                    Website
+                </span>
+            </span>
+        </a>
+            
+        <div class="mdl-tooltip mdl-tooltip--bottom" data-mdl-for="googleplay-website-{{ data.package_name|replace('.', '_') }}">
+            {{ data.developer_website }}
+        </div>
+        {% endif %}
     </div>
 
 </div>

@@ -9,6 +9,10 @@ body main section .mdl-grid .mdl-card {
     margin-right: auto;
 }
 
+header a.mdl-layout__tab:hover {
+    color: #fff;
+}
+
 .content-primary-color {
     color: #00bcd4 !important;
 }

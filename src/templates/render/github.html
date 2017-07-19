@@ -6,17 +6,17 @@
 
     <div class="mdl-card__supporting-text">
         <p>
-            <span id="github-time-created-{{ data.name }}" class="mdl-chip mdl-chip--contact">
-                <i class="mdl-chip__contact material-icons">event</i>
-                <span class="mdl-chip__text momentjs-time" data-time="{{ data.created_at }}" data-prefix="created">
-                    {{ data.created_at }}
-                </span>
-            </span>
-
             <span id="github-time-pushed-{{ data.name }}" class="mdl-chip mdl-chip--contact">
                 <i class="mdl-chip__contact material-icons">history</i>
                 <span class="mdl-chip__text momentjs-time" data-time="{{ data.pushed_at }}" data-prefix="pushed">
                     {{ data.pushed_at }}
+                </span>
+            </span>
+
+            <span id="github-time-created-{{ data.name }}" class="mdl-chip mdl-chip--contact">
+                <i class="mdl-chip__contact material-icons">event</i>
+                <span class="mdl-chip__text momentjs-time" data-time="{{ data.created_at }}" data-prefix="created">
+                    {{ data.created_at }}
                 </span>
             </span>
         </p>
@@ -24,11 +24,11 @@
             {{ data.description }}
         </p>
 
-        <div class="mdl-tooltip mdl-tooltip--bottom" data-mdl-for="github-time-created-{{ data.name }}" data-datetime="{{ data.created_at }}">
-            {{ data.created_at }}
-        </div>
         <div class="mdl-tooltip mdl-tooltip--bottom" data-mdl-for="github-time-pushed-{{ data.name }}" data-datetime="{{ data.pushed_at }}">
             {{ data.pushed_at }}
+        </div>
+        <div class="mdl-tooltip mdl-tooltip--bottom" data-mdl-for="github-time-created-{{ data.name }}" data-datetime="{{ data.created_at }}">
+            {{ data.created_at }}
         </div>
     </div>
 
