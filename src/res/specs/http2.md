@@ -132,7 +132,7 @@ The server's certificate was verified successfully:
 * Connection state changed (HTTP/2 confirmed)
 ```
 
-And finally, the response type was *gzip* compressed:
+And finally, the response was *gzip* compressed:
 
 ```
 < HTTP/2 200 
