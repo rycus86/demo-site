@@ -43,12 +43,21 @@
     };
 
     var loadProjects = function () {
+        if($(target).data('loaded')) {
+            return;
+        } else {
+            $(target).data('loaded', 'true');
+        }
+
         var trackProjects = app.Tracking.start('GitHub projects', 'github');
 
         $.get(base_url + '/repos/' + username, function (repos) {
             trackProjects.done();
 
             repos.sort(function (a, b) {
+                if (a.fork && !b.fork) { return 1; }
+                if (!a.fork && b.fork) { return -1; }
+
                 if (a.pushed_at < b.pushed_at) { return 1; } else { return -1; }
             }).forEach(function (repo) {
                 generateMarkup(repo);
@@ -57,7 +66,9 @@
     };
 
     app.Startup.addInitTask(function() {
-        loadProjects();
+        app.Navigation.onTabChange('github', function () {
+            loadProjects();
+        });
     });
 
 })(window.cApp);

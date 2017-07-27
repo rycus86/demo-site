@@ -51,6 +51,12 @@
     };
 
     var loadProjects = function () {
+        if($(target).data('loaded')) {
+            return;
+        } else {
+            $(target).data('loaded', 'true');
+        }
+
         var trackProjects = app.Tracking.start('Google Play projects', 'googleplay');
 
         $.get(base_url + '/developer/' + developer_name, function (applications) {
@@ -79,7 +85,9 @@
     };
 
     app.Startup.addInitTask(function() {
-        loadProjects();
+        app.Navigation.onTabChange('googleplay', function () {
+            loadProjects();
+        });
     });
 
 })(window.cApp);

@@ -36,6 +36,12 @@
     };
 
     var loadProjects = function () {
+        if($(target).data('loaded')) {
+            return;
+        } else {
+            $(target).data('loaded', 'true');
+        }
+
         var trackProjects = app.Tracking.start('Docker Hub projects', 'dockerhub');
 
         $.get(base_url + '/repositories/' + username, function (response) {
@@ -76,7 +82,9 @@
     };
 
     app.Startup.addInitTask(function() {
-        loadProjects();
+        app.Navigation.onTabChange('dockerhub', function () {
+            loadProjects();
+        });
     });
 
     app.DockerHub = {

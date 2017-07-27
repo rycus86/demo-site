@@ -57,6 +57,13 @@ window.cApp = (function () {
         },
 
         Navigation: {
+            on_change_listeners: [],
+
+            getSelectedTab: function () {
+                var current_link = $('a.mdl-layout__tab.is-active');
+                return current_link.attr('id').replace('tab-', '');
+            },
+
             goToTab: function (tab_id) {
                 var current_link = $('a.mdl-layout__tab.is-active');
                 var target_link = $('#tab-' + tab_id);
@@ -71,6 +78,8 @@ window.cApp = (function () {
                 if (!document.getElementById(target_id)) {
                     return;
                 }
+
+                cApp.Navigation.fireTabChange(target_id);
 
                 var current = $('#' + current_id);
                 var target = $('#' + target_id);
@@ -87,6 +96,22 @@ window.cApp = (function () {
                     $('main').scrollTop(0);
 
                     target.fadeIn(150);
+                });
+            },
+
+            onTabChange: function (target_tab, callback) {
+                cApp.Navigation.on_change_listeners.push({'target': target_tab, 'callback': callback});
+
+                if (cApp.Navigation.getSelectedTab() === target_tab) {
+                    callback();
+                }
+            },
+
+            fireTabChange: function (target_tab) {
+                cApp.Navigation.on_change_listeners.forEach(function (listener) {
+                    if (listener.target === target_tab) {
+                        listener.callback();
+                    }
                 });
             }
         },
