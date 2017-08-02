@@ -17,6 +17,7 @@ def main():
 
 
 @app.route('/page/<key>')
+@cache.memoize(timeout=7 * 24 * 60 * 60)  # 1 week
 def page(key):
     resources = load_resources()
     if key not in (tab.get('key') for tab in resources.get('tabs')):
