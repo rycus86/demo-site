@@ -4,6 +4,8 @@ from flask_cache import Cache
 from utils import *
 
 app = Flask(__name__)
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 30 * 24 * 60 * 60  # 1 month
+
 cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 
 
