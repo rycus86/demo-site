@@ -63,37 +63,39 @@
     </div>
 
     <div class="mdl-card__actions mdl-card--border card-actions-light">
-        <a id="googleplay-link-{{ app_name }}" href="{{ data.share_url }}">
-            <span class="mdl-chip mdl-chip--contact">
-                <i class="mdl-chip__contact material-icons">shop</i>
+        <div>
+            <a id="googleplay-link-{{ app_name }}" href="{{ data.share_url }}">
+                <span class="mdl-chip mdl-chip--contact">
+                    <i class="mdl-chip__contact material-icons">shop</i>
 
-                <span class="mdl-chip__text">
-                    Google Play Store
+                    <span class="mdl-chip__text">
+                        Google Play Store
+                    </span>
                 </span>
-            </span>
-        </a>
+            </a>
 
-        {% if data.developer_website %}
-        <a id="googleplay-website-{{ app_name }}" href="{{ data.developer_website }}">
-            <span class="mdl-chip mdl-chip--contact">
-                <i class="mdl-chip__contact material-icons">public</i>
+            {% if data.developer_website %}
+            <a id="googleplay-website-{{ app_name }}" href="{{ data.developer_website }}">
+                <span class="mdl-chip mdl-chip--contact">
+                    <i class="mdl-chip__contact material-icons">public</i>
 
-                <span class="mdl-chip__text">
-                    Website
+                    <span class="mdl-chip__text">
+                        Website
+                    </span>
                 </span>
-            </span>
-        </a>
-        {% endif %}
+            </a>
+            {% endif %}
 
-        <div class="mdl-tooltip mdl-tooltip--bottom" data-mdl-for="googleplay-link-{{ app_name }}">
-            {{ data.share_url }}
-        </div>
+            <div class="mdl-tooltip mdl-tooltip--bottom" data-mdl-for="googleplay-link-{{ app_name }}">
+                {{ data.share_url }}
+            </div>
 
-        {% if data.developer_website %}
-        <div class="mdl-tooltip mdl-tooltip--bottom" data-mdl-for="googleplay-website-{{ app_name }}">
-            {{ data.developer_website }}
+            {% if data.developer_website %}
+            <div class="mdl-tooltip mdl-tooltip--bottom" data-mdl-for="googleplay-website-{{ app_name }}">
+                {{ data.developer_website }}
+            </div>
+            {% endif %}
         </div>
-        {% endif %}
     </div>
 
 </div>
