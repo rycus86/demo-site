@@ -1,6 +1,6 @@
 (function (app) {
 
-    var base_url = '//api.viktoradam.net/gplay',
+    var base_url = 'https://api.viktoradam.net/gplay',
         developer_name = 'Viktor Adam',
         target = '#panel-googleplay';
 
@@ -34,7 +34,7 @@
 
                 placeholder.replaceWith($(html));
 
-                $(target).remove('.loading-panel');
+                $(target).find('.loading-panel').remove();
             }
         });
     };

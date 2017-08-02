@@ -122,7 +122,10 @@ window.cApp = (function () {
                     hljs.configure({
                         languages: ['java', 'python', 'dockerfile', 'yaml', 'xml', 'html', 'shell', 'bash']
                     });
-                    hljs.initHighlightingOnLoad();
+
+                    $('pre code').each(function(i, block) {
+                        hljs.highlightBlock(block);
+                    });
                 }
             },
 

@@ -1,6 +1,6 @@
 (function (app) {
 
-    var base_url = '//api.viktoradam.net/github',
+    var base_url = 'https://api.viktoradam.net/github',
         username = 'rycus86',
         target = '#panel-github';
 
@@ -18,7 +18,7 @@
 
                 placeholder.replaceWith($(html));
 
-                $(target).remove('.loading-panel');
+                $(target).find('.loading-panel').remove();
 
                 var trackReadme = app.Tracking.start('GitHub raw readme ' + repo.full_name, 'github');
                 $.get(base_url + '/repos/' + repo.full_name + '/readme/raw', function (raw_readme) {
@@ -36,7 +36,7 @@
                             markup.find('code').parents('p').addClass('code-wrapper');
                             $('#github-readme-' + repo.name).append(markup);
 
-                            app.CodeHighlight.processCodeBlocks(markup);
+                            app.CodeHighlight.processCodeBlocks('#github-' + repo.name + ' .readme');
                         }
                     });
                 });

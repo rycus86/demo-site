@@ -1,6 +1,6 @@
 (function (app) {
 
-    var base_url = '//api.viktoradam.net/docker',
+    var base_url = 'https://api.viktoradam.net/docker',
         username = 'rycus86',
         target = '#panel-dockerhub';
 
@@ -17,9 +17,9 @@
                 var content = $(html);
                 placeholder.replaceWith(content);
 
-                $(target).remove('.loading-panel');
+                $(target).find('.loading-panel').remove();
 
-                app.CodeHighlight.processCodeBlocks(content);
+                app.CodeHighlight.processCodeBlocks('#dockerhub-' + repo.name + ' .readme');
             }
         });
     };
