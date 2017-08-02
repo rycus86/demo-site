@@ -139,3 +139,14 @@ header a.mdl-layout__tab:hover {
 #googleplay .mdl-card__actions a {
     margin-right: 4px;
 }
+
+section div div.loading-panel {
+    width: 100%;
+    margin: 30px 0;
+    text-align: center;
+}
+
+section div div.loading-panel {
+    margin-top: 10px;
+}
+

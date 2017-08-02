@@ -17,6 +17,8 @@
                 var content = $(html);
                 placeholder.replaceWith(content);
 
+                $(target).remove('.loading-panel');
+
                 app.CodeHighlight.processCodeBlocks(content);
             }
         });

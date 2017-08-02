@@ -33,6 +33,8 @@
                 trackGenerate.done();
 
                 placeholder.replaceWith($(html));
+
+                $(target).remove('.loading-panel');
             }
         });
     };

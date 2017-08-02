@@ -106,6 +106,9 @@ class AppTest(unittest.TestCase):
         content = self.get_html('/')
 
         self.assertMatches('.*<link rel="stylesheet" href="/asset/[0-9a-f]{10}/styles.css" type="text/css">', content)
+        self.assertMatches('.*<link rel="stylesheet" href="/asset/[0-9a-f]{10}/ext/material.min.css" type="text/css">', content)
+
+        self.assertMatches('.*<script src="/asset/[0-9a-f]{10}/ext/material.min.js" defer>', content)
         self.assertMatches('.*<script src="/asset/[0-9a-f]{10}/app.js" defer>', content)
         self.assertMatches('.*<script src="/asset/[0-9a-f]{10}/datetime.js" defer>', content)
         self.assertMatches('.*<script src="/asset/[0-9a-f]{10}/github.js" defer>', content)

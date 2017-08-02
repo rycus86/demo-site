@@ -18,6 +18,8 @@
 
                 placeholder.replaceWith($(html));
 
+                $(target).remove('.loading-panel');
+
                 var trackReadme = app.Tracking.start('GitHub raw readme ' + repo.full_name, 'github');
                 $.get(base_url + '/repos/' + repo.full_name + '/readme/raw', function (raw_readme) {
                     trackReadme.done();
