@@ -28,12 +28,16 @@ def page(key):
                                              read=read_resource_file,
                                              **resources))
 
+    preload_links = list()
+
     for name, link in assets.items():
         if name.endswith('.css'):
-            response.headers.add('Link', '<%s>; rel=preload; as=style' % link)
+            preload_links.append('<%s>; rel=preload; as=style' % link)
 
         elif name.endswith('.js'):
-            response.headers.add('Link', '<%s>; rel=preload; as=script' % link)
+            preload_links.append('<%s>; rel=preload; as=script' % link)
+
+    response.headers.add('Link', ', '.join(preload_links))
 
     return response
 
