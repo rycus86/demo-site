@@ -1,4 +1,4 @@
-from flask import Flask, request, make_response, render_template, send_from_directory
+from flask import Flask, request, render_template, send_from_directory
 from flask_cache import Cache
 
 from utils import *
@@ -20,19 +20,12 @@ def page(key):
     if key not in (tab.get('key') for tab in resources.get('tabs')):
         return page_not_found('Missing tab: %s' % key)
 
-    assets = load_static_asset_mappings()
-    response = make_response(render_template('layout.html',
-                                             selected_tab=key,
-                                             markdown=pretty_markdown,
-                                             assets=assets,
-                                             read=read_resource_file,
-                                             **resources))
-
-    for name, link in assets.items():
-        if name.endswith('.css'):
-            response.headers.add('Link', '<%s>; rel=preload; as=style' % link)
-
-    return response
+    return render_template('layout.html',
+                           selected_tab=key,
+                           markdown=pretty_markdown,
+                           assets=load_static_asset_mappings(),
+                           read=read_resource_file,
+                           **resources)
 
 
 @app.route('/render/<template>', methods=['POST'])
