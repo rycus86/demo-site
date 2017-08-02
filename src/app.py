@@ -41,6 +41,11 @@ def render_markdown():
     return pretty_markdown(request.data.decode('utf-8'))
 
 
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory('assets', 'favicon.ico')
+
+
 @app.route('/asset/<hash>/<path:asset_file>')
 def asset(hash, asset_file):
     return send_from_directory('assets', asset_file)
