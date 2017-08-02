@@ -1,6 +1,7 @@
 window.cApp = (function () {
 
     $(window).on('load', function () {
+        cApp.Startup.lazyLoadCSS();
         cApp.Startup.initSlickCarousel();
         cApp.Startup.initTabs();
         cApp.Startup.initTabLinks();
@@ -15,6 +16,13 @@ window.cApp = (function () {
     return {
         Startup: {
             init_tasks: [],
+
+            lazyLoadCSS: function () {
+                $('meta[name=custom-fetch-css]').each(function () {
+                    var href = $(this).attr('content');
+                    $('head').append($('<link>').attr('rel', 'stylesheet').attr('href', href).attr('type', 'text/css'));
+                });
+            },
 
             initTabs: function () {
                 $('.mdl-layout__tab-bar').children().each(function () {
