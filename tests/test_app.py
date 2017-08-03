@@ -117,7 +117,6 @@ class AppTest(unittest.TestCase):
     def test_tracking(self):
         content = self.get_html('/')
 
-        self.assertIn('<!-- Cedexis for cdn.jsdelivr.net -->', content)
         self.assertIn('<!-- Google Analytics -->', content)
 
     def test_home_panel(self):
@@ -145,7 +144,6 @@ class AppTest(unittest.TestCase):
         self.assertIn('<h2>Oops... This page is not found.</h2>', content)
 
         # make sure there's tracking on the error page
-        self.assertIn('<!-- Cedexis for cdn.jsdelivr.net -->', content)
         self.assertIn('<!-- Google Analytics -->', content)
 
     def test_markdown(self):
