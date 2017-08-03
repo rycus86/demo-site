@@ -35,6 +35,9 @@ def page(key):
         if name.endswith('.css'):
             response.headers.add('Link', '<%s>; rel=preload; as=style' % link)
 
+        elif name.endswith('.js'):
+            response.headers.add('Link', '<%s>; rel=preload; as=script' % link)
+
     return response
 
 
