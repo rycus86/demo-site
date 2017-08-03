@@ -13,8 +13,8 @@ header a.mdl-layout__tab:hover {
     color: #fff;
 }
 
-.content-primary-color {
-    color: #00bcd4 !important;
+footer ul.mdl-mini-footer__link-list {
+    line-height: 36px;
 }
 
 .mdl-card .mdl-card__title {

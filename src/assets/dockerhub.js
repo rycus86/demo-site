@@ -70,7 +70,7 @@
 
             response.results.forEach(function (tag) {
                 var item = $('<span class="mdl-list__item-primary-content"/>')
-                            .append($('<i class="material-icons mdl-list__item-icon content-primary-color">label</i>'))
+                            .append($('<i class="material-icons mdl-list__item-icon mdl-color-text--accent">label</i>'))
                             .append($('<span/>')
                                      .append(tag.name))
                             .append($('<span class="mdl-list__item-sub-title"/>')
