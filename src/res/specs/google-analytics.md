@@ -1,5 +1,5 @@
 To know about the site's visitors and their browsing experience I use
-[Google Analytics](todo:link) tracking.
+[Google Analytics](https://analytics.google.com) tracking.
 
 The basic setup is really easy.
 After registering an account and your website *(for free)* you get
@@ -51,8 +51,9 @@ if (window.performance) {
 }
 ```
 
-If the browser supports the [Performance API](todo:link+name?)
-([most of them do](todo:caniuse-link))
+If the browser supports the 
+[Performance API](https://developer.mozilla.org/en-US/docs/Web/API/Performance)
+([most of them do](http://caniuse.com/#feat=user-timing))
 you can get *timing* metrics on how long did it take to load the
 *JavaScripts* (`JS Dependencies`) for the page or how much time did the
 `Page load` or the initial request (`Request time`) take.
@@ -74,5 +75,5 @@ ga('send', 'timing', title, label, end_time - start_time);
 Once you gathered some data about the visitors log in to the dashboard
 to analyze the results.
 
-    TODO screenshots of the GA dashboard
+![Google Analytics]({{ image: google-analytics.png }})
 

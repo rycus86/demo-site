@@ -19,8 +19,13 @@ window.cApp = (function () {
 
             lazyLoadCSS: function () {
                 $('meta[name=custom-fetch-css]').each(function () {
-                    var href = $(this).attr('content');
-                    $('head').append($('<link>').attr('rel', 'stylesheet').attr('href', href).attr('type', 'text/css'));
+                    var placeholder = $(this);
+                    var href = placeholder.attr('content');
+
+                    placeholder.replaceWith(
+                        $('<link>').attr('rel', 'stylesheet')
+                                   .attr('href', href)
+                                   .attr('type', 'text/css'));
                 });
             },
 

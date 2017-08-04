@@ -110,6 +110,30 @@
         "body": "http2.md"
     },
     {
+        "key": "google-analytics",
+        "title": "Google Analytics",
+        "body": "google-analytics.md",
+        "link": "https://analytics.google.com"
+    },
+    {
+        "key": "webmaster-tools",
+        "title": "Webmaster tools",
+        "body": "webmaster-tools.md",
+        "link": "https://www.google.com/webmasters/tools"
+    },
+    {
+        "key": "pagespeed",
+        "title": "Pagespeed Insights",
+        "body": "pagespeed.md",
+        "link": "https://developers.google.com/speed/pagespeed/insights"
+    },
+    {
+        "key": "cdn",
+        "title": "CDN",
+        "body": "cdn.md",
+        "link": "https://www.cloudflare.com"
+    },
+    {
         "key": "updates",
         "title": "Updates",
         "body": "updates.md"
