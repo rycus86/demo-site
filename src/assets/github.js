@@ -16,9 +16,14 @@
             success: function (html) {
                 trackGenerate.done();
 
-                placeholder.replaceWith($(html));
+                $(target).children('.loading-panel').remove();
 
-                $(target).find('.loading-panel').remove();
+                var content = $(html);
+                placeholder.replaceWith(content);
+
+                content.find('.mdl-js-spinner').each(function() {
+                    componentHandler.upgradeElement($(this).get(0));
+                });
 
                 var trackReadme = app.Tracking.start('GitHub raw readme ' + repo.full_name, 'github');
                 $.get(base_url + '/repos/' + repo.full_name + '/readme/raw', function (raw_readme) {
@@ -34,7 +39,7 @@
 
                             var markup = $(readme);
                             markup.find('code').parents('p').addClass('code-wrapper');
-                            $('#github-readme-' + repo.name).append(markup);
+                            $('#github-readme-' + repo.name).empty().append(markup);
 
                             app.LazyLoad.images(markup);
                             app.CodeHighlight.processCodeBlocks('#github-' + repo.name + ' .readme');

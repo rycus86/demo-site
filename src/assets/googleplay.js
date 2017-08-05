@@ -2,7 +2,8 @@
 
     var base_url = 'https://api.viktoradam.net/gplay',
         developer_name = 'Viktor Adam',
-        target = '#panel-googleplay';
+        target = '#panel-googleplay',
+        projects_to_load = -1;
 
     var convertUploadDateToISO = function (application) {
         if (!application.hasOwnProperty('upload_date')) {
@@ -36,7 +37,10 @@
                 placeholder.replaceWith(content);
 
                 app.LazyLoad.images(content);
-                $(target).find('.loading-panel').remove();
+
+                if (--projects_to_load <= 0) {
+                    $(target).children('.loading-panel').remove();
+                }
             }
         });
     };
@@ -65,6 +69,8 @@
 
         $.get(base_url + '/developer/' + developer_name, function (applications) {
             trackProjects.done();
+
+            projects_to_load = applications.length;
 
             applications.forEach(convertUploadDateToISO);
 

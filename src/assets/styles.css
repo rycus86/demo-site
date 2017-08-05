@@ -141,12 +141,5 @@ footer ul.mdl-mini-footer__link-list {
 }
 
 section div div.loading-panel {
-    width: 100%;
-    margin: 30px 0;
     text-align: center;
 }
-
-section div div.loading-panel {
-    margin-top: 10px;
-}
-

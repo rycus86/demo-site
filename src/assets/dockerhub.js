@@ -2,7 +2,8 @@
 
     var base_url = 'https://api.viktoradam.net/docker',
         username = 'rycus86',
-        target = '#panel-dockerhub';
+        target = '#panel-dockerhub',
+        projects_to_load = -1;
 
     var generateMarkup = function (repo, placeholder) {
         var trackGenerate = app.Tracking.start('Docker Hub render ' + username + '/' + repo.name, 'dockerhub');
@@ -17,7 +18,13 @@
                 var content = $(html);
                 placeholder.replaceWith(content);
 
-                $(target).find('.loading-panel').remove();
+                if (--projects_to_load <= 0) {
+                    $(target).children('.loading-panel').remove();
+                }
+
+                content.find('.mdl-js-spinner').each(function() {
+                    componentHandler.upgradeElement($(this).get(0));
+                });
 
                 app.LazyLoad.images(content);
                 app.CodeHighlight.processCodeBlocks('#dockerhub-' + repo.name + ' .readme');
@@ -50,6 +57,8 @@
         $.get(base_url + '/repositories/' + username, function (response) {
             trackProjects.done();
 
+            projects_to_load = response.results.length;
+
             response.results.sort(function (a, b) {
                 if (a.last_updated < b.last_updated) { return 1; } else { return -1; }
             }).forEach(function (repo) {
@@ -65,9 +74,7 @@
             trackTags.done();
 
             var container = $('#' + container_id);
-
             var list = $('<ul class="mdl-list condensed-list"/>');
-            container.append(list);
 
             response.results.forEach(function (tag) {
                 var item = $('<span class="mdl-list__item-primary-content"/>')
@@ -80,7 +87,7 @@
                 list.append($('<li class="mdl-list__item mdl-list__item--two-line"/>').append(item));
             });
 
-            container.show();
+            container.empty().append($('<p>').append(list));
         });
     };
 
