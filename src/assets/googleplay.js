@@ -32,8 +32,10 @@
             success: function (html) {
                 trackGenerate.done();
 
-                placeholder.replaceWith($(html));
+                var content = $(html);
+                placeholder.replaceWith(content);
 
+                app.LazyLoad.images(content);
                 $(target).find('.loading-panel').remove();
             }
         });

@@ -50,7 +50,7 @@
         <div class="images slick-images">
             {% for image in data.images %}
             <div class="image-container">
-                <img src="{{ image.url }}">
+                <img data-src="{{ image.url }}"/>
             </div>
             {% endfor %}
         </div>

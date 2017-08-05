@@ -63,9 +63,9 @@ class SpecificationsTest(unittest.TestCase):
     def test_images(self):
         content = self.get_html('/')
 
-        self.assertTrue(re.match('(?sm).*<img src="/asset/[^/]+/images/overview.svg', content),
+        self.assertTrue(re.match('(?sm).*<img data-src="/asset/[^/]+/images/overview.svg', content),
                         msg='Image not found: overview.svg')
-        self.assertTrue(re.match('(?sm).*style="background: url\\(/asset/[^/]+/images/pycharm.png\\) center / cover', content),
+        self.assertTrue(re.match('(?sm).*data-background-image="/asset/[^/]+/images/pycharm.png"', content),
                         msg='Image not found: pycharm.png')
 
     def test_next_section_links(self):

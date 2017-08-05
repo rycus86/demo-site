@@ -36,6 +36,7 @@
                             markup.find('code').parents('p').addClass('code-wrapper');
                             $('#github-readme-' + repo.name).append(markup);
 
+                            app.LazyLoad.images(markup);
                             app.CodeHighlight.processCodeBlocks('#github-' + repo.name + ' .readme');
                         }
                     });

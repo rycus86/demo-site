@@ -19,6 +19,7 @@
 
                 $(target).find('.loading-panel').remove();
 
+                app.LazyLoad.images(content);
                 app.CodeHighlight.processCodeBlocks('#dockerhub-' + repo.name + ' .readme');
             }
         });

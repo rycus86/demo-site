@@ -26,7 +26,7 @@ def page(key):
     assets = load_static_asset_mappings()
     response = make_response(render_template('layout.html',
                                              selected_tab=key,
-                                             markdown=pretty_markdown,
+                                             markdown=process_markdown,
                                              assets=assets,
                                              read=read_resource_file,
                                              **resources))
@@ -43,12 +43,12 @@ def page(key):
 
 @app.route('/render/<template>', methods=['POST'])
 def render(template):
-    return render_template('render/%s.html' % template, data=request.json, markdown=pretty_markdown)
+    return render_template('render/%s.html' % template, data=request.json, markdown=process_markdown)
 
 
 @app.route('/markdown', methods=['POST'])
 def render_markdown():
-    return pretty_markdown(request.data.decode('utf-8'))
+    return process_markdown(request.data.decode('utf-8'))
 
 
 @app.route('/favicon.ico')

@@ -51,13 +51,17 @@ class RenderTest(unittest.TestCase):
         self.assertIn('cApp.DateTime.formatDateTime(\'dockerhub-%s\');' % payload['name'], content)
         self.assertIn('cApp.DockerHub.generateTags(\'%s/%s\', \'dockerhub-tags-%s\');' % (payload['namespace'], payload['name'], payload['name']), content)
 
-    def test_replace_http_links_in_markdown(self):
-        payload = self.load_payload('dockerhub_payload.json')
-        
-        payload['full_description'] = '# HTTP link\nThis [link](http://example.com) used to use http.'
+    def test_render_markdown(self):
+        response = self.client.post('/markdown',
+                                    data='This will be a lazy loaded image from a placeholder:\n'
+                                         '[![img]({{ image: pycharm.png }})](/link/target)',
+                                    content_type='text/plain')
 
-        content = self.get_fragment('dockerhub', payload)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('text/html', response.content_type)
+        self.assertEqual(response.charset, 'utf-8')
 
-        self.assertNotIn('http://', content)
-        self.assertIn('href="https://example.com"', content)
+        content = response.data
 
+        self.assertIn('<a href="/link/target">', content)
+        self.assertRegexpMatches(content, '(?ms).*<img [^>]*data-src="/asset/[0-9a-f]+/images/pycharm.png".*')

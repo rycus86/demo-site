@@ -1,31 +1,48 @@
+import hashlib
+import json
 import os
 import re
-import json
-import hashlib
-from markdown import markdown
+
 from flask import g
+from markdown import markdown, Extension
+from markdown.preprocessors import Preprocessor
+from markdown.treeprocessors import Treeprocessor
 
 
-def pretty_markdown(text, *args, **kwargs):
-    return markdown(_replace_image_placeholders(_with_https_links_only(text)),
-                    *args, extensions=['markdown.extensions.fenced_code'], **kwargs)
+class _ImagePlaceholderPreprocessor(Preprocessor):
+    pattern = re.compile(r'{{\s*image:\s*([^}]+?)\s*}}')
+
+    def run(self, lines):
+        mappings = load_static_asset_mappings()
+        changed = list()
+
+        for line in lines:
+            for match in self.pattern.finditer(line):
+                filename = match.group(1)
+                mapped = mappings['images/%s' % filename]
+
+                line = line.replace(match.group(0), mapped)
+
+            changed.append(line)
+
+        return changed
 
 
-def _with_https_links_only(text):
-    return text.replace('http://', 'https://')
+class _LazyLoadingImageProcessor(Treeprocessor):
+    def run(self, root):
+        for img in root.iter('img'):
+            img.attrib['data-src'] = img.attrib['src']
+            del img.attrib['src']
 
 
-def _replace_image_placeholders(text):
-    mappings = load_static_asset_mappings()
+class _MarkdownExtension(Extension):
+    def extendMarkdown(self, md, md_globals):
+        md.preprocessors['img-proc'] = _ImagePlaceholderPreprocessor()
+        md.treeprocessors.add('img-lazy', _LazyLoadingImageProcessor(), '_end')
 
-    # placeholders look like: {{ image: filename.ext }}
-    for match in re.finditer(r'{{\s*image:\s*([^}]+?)\s*}}', text):
-        filename = match.group(1)
-        mapped = mappings['images/%s' % filename]
 
-        text = text.replace(match.group(0), mapped)
-
-    return text
+def process_markdown(text, *args, **kwargs):
+    return markdown(text, *args, extensions=['markdown.extensions.fenced_code', _MarkdownExtension()], **kwargs)
 
 
 def load_resources():

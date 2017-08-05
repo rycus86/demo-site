@@ -1,7 +1,9 @@
 window.cApp = (function () {
 
     $(window).on('load', function () {
-        cApp.Startup.lazyLoadCSS();
+        cApp.LazyLoad.css();
+        cApp.LazyLoad.images($('body'));
+
         cApp.Startup.initSlickCarousel();
         cApp.Startup.initTabs();
         cApp.Startup.initTabLinks();
@@ -16,18 +18,6 @@ window.cApp = (function () {
     return {
         Startup: {
             init_tasks: [],
-
-            lazyLoadCSS: function () {
-                $('meta[name=custom-fetch-css]').each(function () {
-                    var placeholder = $(this);
-                    var href = placeholder.attr('content');
-
-                    placeholder.replaceWith(
-                        $('<link>').attr('rel', 'stylesheet')
-                                   .attr('href', href)
-                                   .attr('type', 'text/css'));
-                });
-            },
 
             initTabs: function () {
                 $('.mdl-layout__tab-bar').children().each(function () {
@@ -67,6 +57,34 @@ window.cApp = (function () {
             addInitTask: function (task) {
                 cApp.Startup.init_tasks.push(task);
             }
+        },
+
+        LazyLoad: {
+            css: function () {
+                $('meta[name=custom-fetch-css]').each(function () {
+                    var placeholder = $(this);
+                    var href = placeholder.attr('content');
+
+                    placeholder.replaceWith(
+                        $('<link>').attr('rel', 'stylesheet')
+                                   .attr('href', href)
+                                   .attr('type', 'text/css'));
+                });
+            },
+
+            images: function (container) {
+                container.find('img[data-src]').each(function () {
+                    var img = $(this);
+                    img.attr('src', img.data('src'));
+                    img.removeAttr('data-src');
+                });
+
+                container.find('*[data-background-image]').each(function () {
+                    var item = $(this);
+                    item.css('background', 'url(' + item.data('background-image') + ') center / cover');
+                    item.removeAttr('data-background-image');
+                });
+            },
         },
 
         Navigation: {

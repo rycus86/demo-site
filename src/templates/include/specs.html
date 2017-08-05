@@ -19,11 +19,11 @@
     {% if card.image is defined %}
         {% if card.image.display is defined %}
         <div class="mdl-card__media mdl-card--border">
-            <img src="{{ assets['images/' + card.image.path] }}">
+            <img data-src="{{ assets['images/' + card.image.path] }}">
         </div>
         {% else %}
         <div class="mdl-card__media mdl-card--border"
-             style="background: url({{ assets['images/' + card.image] }}) center / cover"></div>
+             data-background-image="{{ assets['images/' + card.image] }}"></div>
         {% endif %}
     {% endif %}
 
