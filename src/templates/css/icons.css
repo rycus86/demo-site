@@ -1,8 +1,11 @@
+/* Material icons */
+/* From: https://fonts.gstatic.com/s/materialicons/v27/2fcrYFNaTjcS6g4U3t-Y5StnKWgpfO2iSkLzTz-AABg.ttf */
+
 @font-face {
   font-family: 'Material Icons';
   font-style: normal;
   font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/materialicons/v27/2fcrYFNaTjcS6g4U3t-Y5StnKWgpfO2iSkLzTz-AABg.ttf) format('truetype');
+  src: url({{ assets["ext/fonts/material-icons.ttf"] }}) format('truetype');
 }
 
 .material-icons {

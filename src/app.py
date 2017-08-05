@@ -38,6 +38,9 @@ def page(key):
         elif name.endswith('.js'):
             response.headers.add('Link', '<%s>; rel=preload; as=script' % link)
 
+        elif name.endswith('.woff2'):
+            response.headers.add('Link', '<%s>; rel=preload; as=font; type="font/woff2"' % link)
+
     return response
 
 

@@ -1,7 +1,9 @@
 <link rel="stylesheet" href="{{ assets['styles.css'] }}" type="text/css"/>
 
-<link rel="stylesheet" href="{{ assets['ext/material/fonts.css'] }}" type="text/css"/>
-<link rel="stylesheet" href="{{ assets['ext/material/icons.css'] }}" type="text/css"/>
+<style>
+{% include 'css/fonts.css' %}
+{% include 'css/icons.css' %}
+</style>
 <link rel="stylesheet" href="{{ assets['ext/material/material.min.css'] }}" type="text/css"/>
 
 <meta name="custom-fetch-css" content="{{ assets['ext/slick/slick.css'] }}"/>
