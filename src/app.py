@@ -45,13 +45,6 @@ def add_preload_headers(response):
         elif name.endswith('.js'):
             response.headers.add('Link', '<%s>; rel=preload; as=script' % link)
 
-        elif name.endswith('.woff2'):
-            response.headers.add('Link', '<%s>; rel=preload; as=font; type="font/woff2"' % link)
-
-        # also preload the material icons
-        elif name.endswith('material-icons.ttf'):
-            response.headers.add('Link', '<%s>; rel=preload; as=font' % link)
-
 
 @app.route('/render/<template>', methods=['POST'])
 def render(template):
