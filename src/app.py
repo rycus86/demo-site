@@ -23,13 +23,20 @@ def page(key):
     if key not in (tab.get('key') for tab in resources.get('tabs')):
         return page_not_found('Missing tab: %s' % key)
 
-    assets = load_static_asset_mappings()
     response = make_response(render_template('layout.html',
                                              selected_tab=key,
                                              markdown=process_markdown,
-                                             assets=assets,
+                                             assets=load_static_asset_mappings(),
                                              read=read_resource_file,
                                              **resources))
+
+    add_preload_headers(response)
+
+    return response
+
+
+def add_preload_headers(response):
+    assets = load_static_asset_mappings()
 
     for name, link in assets.items():
         if name.endswith('.css'):
@@ -41,7 +48,9 @@ def page(key):
         elif name.endswith('.woff2'):
             response.headers.add('Link', '<%s>; rel=preload; as=font; type="font/woff2"' % link)
 
-    return response
+        # also preload the material icons
+        elif name.endswith('material-icons.ttf'):
+            response.headers.add('Link', '<%s>; rel=preload; as=font' % link)
 
 
 @app.route('/render/<template>', methods=['POST'])
