@@ -23,7 +23,9 @@
         </div>
         {% else %}
         <div class="mdl-card__media mdl-card--border"
-             data-background-image="{{ assets['images/' + card.image] }}"></div>
+             data-background-image="{{ assets['images/' + card.image] }}"
+             data-background-position="center"
+             data-background-size="cover"></div>
         {% endif %}
     {% endif %}
 

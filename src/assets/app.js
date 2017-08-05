@@ -81,7 +81,20 @@ window.cApp = (function () {
 
                 container.find('*[data-background-image]').each(function () {
                     var item = $(this);
-                    item.css('background', 'url(' + item.data('background-image') + ') center / cover');
+
+                    var position = item.data('background-position');
+                    if (!!position) {
+                        item.css('background-position', position);
+                        item.removeAttr('data-background-position');
+                    }
+
+                    var size = item.data('background-size');
+                    if (!!size) {
+                        item.css('background-size', size);
+                        item.removeAttr('data-background-size');
+                    }
+
+                    item.css('background-image', 'url(' + item.data('background-image') + ')');
                     item.removeAttr('data-background-image');
                 });
             },
