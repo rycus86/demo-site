@@ -23,8 +23,11 @@ def page(key):
     if key not in (tab.get('key') for tab in resources.get('tabs')):
         return page_not_found('Missing tab: %s' % key)
 
+    current_tab = next(tab for tab in resources.get('tabs') if tab.get('key') == key)
+
     response = make_response(render_template('layout.html',
                                              selected_tab=key,
+                                             seo_data=current_tab.get('seo'),
                                              markdown=process_markdown,
                                              assets=load_static_asset_mappings(),
                                              read=read_resource_file,

@@ -1,0 +1,9 @@
+{% if seo_data and seo_data.title %}
+    <title>{{ seo_data.title }}</title>
+    {% if seo_data.description %}
+    <meta name="description" content="{{ seo_data.description }}"/>
+    {% endif %}
+{% else %}
+    <title>{{ settings.title }}</title>
+{% endif %}
+

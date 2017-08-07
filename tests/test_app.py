@@ -163,3 +163,23 @@ class AppTest(unittest.TestCase):
         self.assertIn('<h1>Testing unicode</h1>', content)
         self.assertIn('<em>From the TweetWear project</em>:', content)
         self.assertIn(u'Евгений Дрямин', content.decode('utf-8'))
+
+    def test_seo_metadata(self):
+        self.assert_seo_metadata_is_correct('/page/home')
+        self.assert_seo_metadata_is_correct('/page/specs')
+        self.assert_seo_metadata_is_correct('/page/github')
+
+    def assert_seo_metadata_is_correct(self, uri):
+        content = self.get_html(uri)
+
+        resources = app.load_resources()
+        current_tab = next(tab for tab in resources.get('tabs') if uri.endswith(tab.get('key')))
+        
+        self.assertIsNotNone(current_tab, 'Tab not found for %s' % uri)
+        
+        data = current_tab.get('seo')
+
+        self.assertIsNotNone(data, 'SEO metadata not found on tab %s' % current_tab.get('key'))
+        self.assertIn('<title>%s</title>' % data.get('title'), content)
+        self.assertIn('<meta name="description" content="%s"/>' % data.get('description'), content)
+
