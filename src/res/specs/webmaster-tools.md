@@ -52,4 +52,3 @@ Other metrics like time spent on the site by visitors and
 
 Both visitors and *Google* takes into consideration how quickly they
 can load pages of the website so let's run some tests to find out!
-

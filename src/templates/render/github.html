@@ -43,19 +43,15 @@
     </div>
 
     <div class="mdl-card__actions mdl-card--border card-actions-light">
-        <a id="github-link-{{ data.name }}" href="{{ data.html_url }}">
+        <a href="{{ data.html_url }}">
             <span class="mdl-chip mdl-chip--contact">
                 <i class="mdl-chip__contact material-icons">public</i>
 
                 <span class="mdl-chip__text">
-                    {{ data.html_url }}
+                    {{ data.full_name }}
                 </span>
             </span>
         </a>
-
-        <div class="mdl-tooltip mdl-tooltip--right" data-mdl-for="github-link-{{ data.name }}">
-            {{ data.full_name }}
-        </div>
     </div>
 
 </div>

@@ -17,12 +17,13 @@ but for most use-cases you'll want to have your own build process described in a
 You can see my [.travis.yml file](https://github.com/rycus86/demo-site/blob/master/.travis.yml) here as an example.
 
 The main elements in the *YAML* file are:
-- *language*: the main programming language of your project
-- *install*: running installation instructions on the build environment
-- *before_script*: build preparation
-- *script*: the actual build instructions
-- *after_success*: any final steps after a successful build
-- *env*: environment variables to pass to the build
+
+- *language:* the main programming language of your project
+- *install:* running installation instructions on the build environment
+- *before_script:* build preparation
+- *script:* the actual build instructions
+- *after_success:* any final steps after a successful build
+- *env:* environment variables to pass to the build
 
 Taking a *Python* application as an example, let's see an example of putting together all the steps above:
 ```yaml

@@ -131,6 +131,10 @@ window.cApp = (function () {
                 current.fadeOut(150, function () {
                     history.pushState({}, window.title, '/page/' + tab_id);
 
+                    if (!!window.TabTitles && target_id in window.TabTitles) {
+                        document.title = window.TabTitles[target_id];
+                    }
+
                     ga('set', 'page', '/page/' + tab_id);
                     ga('send', 'pageview');
 

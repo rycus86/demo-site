@@ -38,19 +38,15 @@
     </div>
 
     <div class="mdl-card__actions mdl-card--border card-actions-light">
-        <a id="dockerhub-link-{{ data.name }}" href="https://hub.docker.com/r/{{ data.namespace }}/{{ data.name }}/">
+        <a href="https://hub.docker.com/r/{{ data.namespace }}/{{ data.name }}/">
             <span class="mdl-chip mdl-chip--contact">
                 <i class="mdl-chip__contact material-icons">public</i>
 
                 <span class="mdl-chip__text">
-                    https://hub.docker.com/r/{{ data.namespace }}/{{ data.name }}/
+                    {{ data.namespace }}/{{ data.name }}
                 </span>
             </span>
         </a>
-
-        <div class="mdl-tooltip mdl-tooltip--right" data-mdl-for="dockerhub-link-{{ data.name }}">
-            {{ data.namespace }}/{{ data.name }}
-        </div>
     </div>
 
 </div>

@@ -14,3 +14,11 @@
 <script src="{{ assets['github.js'] }}" defer></script>
 <script src="{{ assets['dockerhub.js'] }}" defer></script>
 
+<script>
+    window.TabTitles = {};
+    {% for tab in tabs %}
+        {% if tab.seo and tab.seo.title %}
+        window.TabTitles['{{ tab.key }}'] = '{{ tab.seo.title }}';
+        {% endif %}
+    {% endfor %}
+</script>

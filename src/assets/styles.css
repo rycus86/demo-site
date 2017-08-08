@@ -131,3 +131,14 @@ footer ul.mdl-mini-footer__link-list {
 section div div.loading-panel {
     text-align: center;
 }
+
+@media screen and (max-width: 600px) {
+    #panel-specs .mdl-card__media {
+        text-align: center;
+        height: 200px;
+    }
+
+    footer.mdl-mini-footer .mdl-mini-footer__right-section ul.mdl-mini-footer__link-list {
+        display: block;
+    }
+}
