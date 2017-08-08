@@ -12,8 +12,6 @@
       Templating language and engine also used in *Flask*
     - **agithub**: [https://github.com/jpaugh/agithub](https://github.com/jpaugh/agithub)  
       Agnostic REST API client
-    - **googleplay-api**: [https://github.com/NeroBurner/googleplay-api](https://github.com/NeroBurner/googleplay-api)  
-      Google Play *Unofficial* Python API
     - **markdown**: [http://pythonhosted.org/Markdown](http://pythonhosted.org/Markdown)  
       *Markdown* implementation
 
@@ -42,8 +40,6 @@
   *Container* platform
 - **Docker Hub**: [https://hub.docker.com](https://hub.docker.com)  
   *Container* registry
-- **Google Play**: [https://play.google.com/store/apps](https://play.google.com/store/apps)  
-  App store for *Android*
 - **nginx**: [https://nginx.org/en](https://nginx.org/en)  
   HTTP and reverse proxy server
 - **docker-gen**: [https://github.com/jwilder/docker-gen](https://github.com/jwilder/docker-gen)  

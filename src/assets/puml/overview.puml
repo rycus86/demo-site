@@ -9,7 +9,6 @@ frame Backend #LightGrey {
     [demo-site] << Web server >> #Yellow
     [github-proxy] << REST server >> #Orange
     [dockerhub-proxy] << REST server >> #Orange
-    [googleplay-proxy] << REST server >> #Orange
     
     [nginx-pygen] << configuration generator >> #Pink
     [certbot-pygen] << configuration generator >> #Pink
@@ -21,7 +20,6 @@ frame Backend #LightGrey {
 [nginx] =l=> [demo-site] : <i>demo.</i>viktoradam.net
 [nginx] =r=> [github-proxy] : <i>api.</i>viktoradam.net/<i>github</i>
 [nginx] =d=> [dockerhub-proxy] : <i>api.</i>viktoradam.net/<i>docker</i>
-[nginx] =d=> [googleplay-proxy] : <i>api.</i>viktoradam.net/<i>gplay</i>
 
 [nginx-pygen] --u-> [nginx] : Configure routing
 [certbot-helper] --u-> [nginx] : Manage SSL certificates

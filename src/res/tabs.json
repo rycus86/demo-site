@@ -31,9 +31,5 @@
             "title": "Docker Hub projects | Demo site by Viktor Adam | @rycus86",
             "description": "Docker projects and the details of their images from Docker Hub used to host the demo website (and more)."
         }
-    },
-    {
-        "key": "googleplay",
-        "title": "Google Play"
     }
 ]

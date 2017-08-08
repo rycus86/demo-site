@@ -72,13 +72,6 @@ services:
     environment:
       - VIRTUAL_HOST=docker.api.viktoradam.net
 
-  googleplay-proxy:
-    image: rycus86/googleplay-proxy:aarch64
-    expose:
-      - "5000"
-    environment:
-      - VIRTUAL_HOST=gplay.api.viktoradam.net
-
 volumes:
   nginx-config:
 ```

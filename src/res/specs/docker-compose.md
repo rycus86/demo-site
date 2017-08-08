@@ -46,20 +46,9 @@ services:
       - HTTP_HOST=0.0.0.0
     env_file:
       - dockerhub-secrets.env
-
-  googleplay-proxy:
-    image: rycus86/googleplay-proxy:aarch64
-    read_only: true
-    expose:
-      - "5000"
-    restart: always
-    environment:
-      - HTTP_HOST=0.0.0.0
-    env_file:
-      - gplay-secrets.env
 ```
 
-The *Composefile* defines four *read-only* applications that will work together.
+The *Composefile* defines three *read-only* applications that will work together.
 Each application exposes its port *5000* to listen for incoming requests and
 they are also configured in a way that *Docker* would restart them automatically
 should they fail for whatever reason.
