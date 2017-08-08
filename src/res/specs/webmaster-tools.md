@@ -18,13 +18,38 @@ There are multiple ways to do it but having *Google Analytics* set up already
 you can get the system to verify that the website has tracking code on it
 associated with your account.
 
-Once that is done and your pages are getting indexed and showing up in the
+You can see useful metrics and information about how the *crawler* interprets
+your site, how often does it check it or any issues it has identified.
+
+![Search crawler]({{ image: search-crawler.png }})
+
+Once your pages are getting indexed and start showing up in the
 search results, you can find statistics about them in the dashboard.
 
 ![Search traffic]({{ image: search-impressions.png }})
 
-You can also see other useful metrics and information about how the *crawler*
-interprets your site, how often does it check it or any issues it has
-identified.
+You can influence your pages look like in the search result.
+To control the basics, make sure you have short and meaningful titles in the
+`<title>` tags and have a nice summary of the content in the description as:
 
-![Search crawler]({{ image: search-crawler.png }})
+```html
+<meta name="description" content="...">
+```
+
+If you can refer to your pages with multiple URLs, you might want to also
+add canonical links to them to tell *Google* that they are the same and
+which URL is your preferred one.
+
+```html
+<!-- Make sure to use absolute URLs here. -->
+<link rel="canonical" href="https://my.site.com/preferred/url"/>
+```
+
+There are a number of factors influencing the *ranking* of the pages
+including having relevant and frequently updated content on them.
+Other metrics like time spent on the site by visitors and
+*bounce rate* might also have an effect on it.
+
+Both visitors and *Google* takes into consideration how quickly they
+can load pages of the website so let's run some tests to find out!
+

@@ -4,7 +4,8 @@
         "title": "Intro",
         "seo": {
             "title": "Demo site",
-            "description": "A website showcasing free and open-source continuous integration and continuous deployment tools to build applications for the web."
+            "description": "A website showcasing free and open-source continuous integration and continuous deployment tools to build applications for the web.",
+            "canonical": "https://demo.viktoradam.net/"
         }
     },
     {

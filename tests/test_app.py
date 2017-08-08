@@ -183,3 +183,6 @@ class AppTest(unittest.TestCase):
         self.assertIn('<title>%s</title>' % data.get('title'), content)
         self.assertIn('<meta name="description" content="%s"/>' % data.get('description'), content)
 
+        if 'canonical' in data:
+            self.assertIn('<link rel="canonical" href="%s"/>' % data.get('canonical'), content)
+

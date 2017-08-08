@@ -1,8 +1,14 @@
 {% if seo_data and seo_data.title %}
+
     <title>{{ seo_data.title }}</title>
+
     {% if seo_data.description %}
     <meta name="description" content="{{ seo_data.description }}"/>
     {% endif %}
+    {% if seo_data.canonical %}
+    <link rel="canonical" href="{{ seo_data.canonical }}"/>
+    {% endif %}
+
 {% else %}
     <title>{{ settings.title }}</title>
 {% endif %}
