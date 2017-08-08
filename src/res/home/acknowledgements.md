@@ -19,12 +19,18 @@
 
 - **jQuery**: [https://jquery.com](https://jquery.com)  
   *JavaScript* library
+- **Moment.js**: [https://momentjs.com](https://momentjs.com)
+  *JavaScript* date/time library
 - **Material Design Lite**: [https://getmdl.io/index.html](https://getmdl.io/index.html)  
   *Material Design* component library
 - **Material Icons**: [https://material.io/icons](https://material.io/icons)  
   *Material Design* icons
-- **Google Analytics**: [https://www.google.com/analytics](https://www.google.com/analytics)  
-  Tracking
+- **Roboto**: [https://fonts.google.com/specimen/Roboto](https://fonts.google.com/specimen/Roboto)
+  Web font
+- **Slick**: [https://kenwheeler.github.io/slick](https://kenwheeler.github.io/slick)
+  *JavaScript* carousel
+- **highlight.js**: [https://highlightjs.org](https://highlightjs.org)
+  *JavaScript* code highlighter
 
 ## Infrastructure
 
@@ -44,3 +50,20 @@
   HTTP and reverse proxy server
 - **docker-gen**: [https://github.com/jwilder/docker-gen](https://github.com/jwilder/docker-gen)  
   Automatic configuration file generation - *for containers behind nginx*
+- **ddclient**: [https://sourceforge.net/p/ddclient/wiki/Home](https://sourceforge.net/p/ddclient/wiki/Home)
+  Dynamic DNS updater
+- **Google Analytics**: [https://www.google.com/analytics](https://www.google.com/analytics)  
+  Tracking
+- **Google PageSpeed Insights**: [https://developers.google.com/speed/pagespeed/insights](https://developers.google.com/speed/pagespeed/insights)
+  Page speed optimization tool
+- **Google Webmasters Tool**: [https://www.google.com/webmasters/tools](https://www.google.com/webmasters/tools)
+  *Google* search index dashboard
+- **Webpage Test**: [https://www.webpagetest.org](https://www.webpagetest.org)
+  Website Performance and Optimization Test
+- **Cloudflare**: [https://www.cloudflare.com](https://www.cloudflare.com)
+  Content Delivery Network
+- **LetsEncrypt**: [https://letsencrypt.org](https://letsencrypt.org)
+  Free SSL/TLS Certificates
+- **Certbot**: [https://certbot.eff.org](https://certbot.eff.org)
+  Automatic certificate renewal tool for *LetsEncrypt*
+
