@@ -3,7 +3,7 @@
         "key": "home",
         "title": "Intro",
         "seo": {
-            "title": "Demo site",
+            "title": "Demo site by Viktor Adam | @rycus86",
             "description": "A website showcasing free and open-source continuous integration and continuous deployment tools to build applications for the web.",
             "canonical": "https://demo.viktoradam.net/"
         }
@@ -12,7 +12,7 @@
         "key": "specs",
         "title": "Specs",
         "seo": {
-            "title": "How is it built | Demo site",
+            "title": "How is it built | Demo site by Viktor Adam | @rycus86",
             "description": "An in-depth explanation of how the demo website and its related services are built and deployed using open-source CI / CD tools."
         }
     },
@@ -20,7 +20,7 @@
         "key": "github",
         "title": "GitHub",
         "seo": {
-            "title": "GitHub projects | Demo site",
+            "title": "GitHub projects | Demo site by Viktor Adam | @rycus86",
             "description": "Open-source GitHub projects related to building, deploying and hosting the demo website (and others)."
         }
     },
@@ -28,7 +28,7 @@
         "key": "dockerhub",
         "title": "Docker Hub",
         "seo": {
-            "title": "Docker Hub projects | Demo site",
+            "title": "Docker Hub projects | Demo site by Viktor Adam | @rycus86",
             "description": "Docker projects and the details of their images from Docker Hub used to host the demo website (and more)."
         }
     },
