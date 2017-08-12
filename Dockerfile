@@ -20,4 +20,6 @@ USER webapp
 ADD src /app
 WORKDIR /app
 
+STOPSIGNAL SIGINT
+
 CMD [ "python", "app.py" ]
