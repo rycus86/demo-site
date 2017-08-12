@@ -77,11 +77,11 @@ window.cApp = (function () {
                     var img = $(this);
                     var source = img.data('src');
 
-                    if (source.indexOf('https://') === 0) {
-                        // only load images on HTTPS
+                    if (source.indexOf('http://') !== 0) {
+                        // do not load images on HTTP
                         img.attr('src', source);
                     }
-                    
+
                     img.removeAttr('data-src');
                 });
 
