@@ -13,10 +13,11 @@
             url: '/render/github',
             data: JSON.stringify(repo),
             contentType: 'application/json',
+            complete: function () {
+                $(target).children('.loading-panel').remove();
+            },
             success: function (html) {
                 trackGenerate.done();
-
-                $(target).children('.loading-panel').remove();
 
                 var content = $(html);
                 placeholder.replaceWith(content);
@@ -26,25 +27,34 @@
                 });
 
                 var trackReadme = app.Tracking.start('GitHub raw readme ' + repo.full_name, 'github');
-                $.get(base_url + '/repos/' + repo.full_name + '/readme/raw', function (raw_readme) {
-                    trackReadme.done();
+                $.get({
+                    url: base_url + '/repos/' + repo.full_name + '/readme/raw',
+                    error: function () {
+                        $('#github-readme-' + repo.name).empty().append($('<p><i>None</i></p>'));
+                    },
+                    success: function (raw_readme) {
+                        trackReadme.done();
 
-                    var trackMarkdown = app.Tracking.start('GitHub readme markdown ' + repo.full_name, 'github');
-                    $.post({
-                        url: '/markdown',
-                        data: raw_readme,
-                        contentType: 'text/plain',
-                        success: function (readme) {
-                            trackMarkdown.done();
+                        var trackMarkdown = app.Tracking.start('GitHub readme markdown ' + repo.full_name, 'github');
+                        $.post({
+                            url: '/markdown',
+                            data: raw_readme,
+                            contentType: 'text/plain',
+                            error: function () {
+                                $('#github-readme-' + repo.name).empty().append($('<p><i>Failed to render</i></p>'));
+                            },
+                            success: function (readme) {
+                                trackMarkdown.done();
 
-                            var markup = $(readme);
-                            markup.find('code').parents('p').addClass('code-wrapper');
-                            $('#github-readme-' + repo.name).empty().append(markup);
+                                var markup = $(readme);
+                                markup.find('code').parents('p').addClass('code-wrapper');
+                                $('#github-readme-' + repo.name).empty().append(markup);
 
-                            app.LazyLoad.images(markup);
-                            app.CodeHighlight.processCodeBlocks('#github-' + repo.name + ' .readme');
-                        }
-                    });
+                                app.LazyLoad.images(markup);
+                                app.CodeHighlight.processCodeBlocks('#github-' + repo.name + ' .readme');
+                            }
+                        });
+                    }
                 });
             }
         });
@@ -59,17 +69,23 @@
 
         var trackProjects = app.Tracking.start('GitHub projects', 'github');
 
-        $.get(base_url + '/repos/' + username, function (repos) {
-            trackProjects.done();
+        $.get({
+            url: base_url + '/repos/' + username,
+            error: function () {
+                $(target).children('.loading-panel').remove();
+            },
+            success: function (repos) {
+                trackProjects.done();
 
-            repos.sort(function (a, b) {
-                if (a.fork && !b.fork) { return 1; }
-                if (!a.fork && b.fork) { return -1; }
+                repos.sort(function (a, b) {
+                    if (a.fork && !b.fork) { return 1; }
+                    if (!a.fork && b.fork) { return -1; }
 
-                if (a.pushed_at < b.pushed_at) { return 1; } else { return -1; }
-            }).forEach(function (repo) {
-                generateMarkup(repo);
-            });
+                    if (a.pushed_at < b.pushed_at) { return 1; } else { return -1; }
+                }).forEach(function (repo) {
+                    generateMarkup(repo);
+                });
+            }
         });
     };
 

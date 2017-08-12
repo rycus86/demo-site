@@ -5,6 +5,12 @@
         target = '#panel-dockerhub',
         projects_to_load = -1;
 
+    var projectLoadFinished = function () {
+        if (--projects_to_load <= 0) {
+            $(target).children('.loading-panel').remove();
+        }
+    };
+
     var generateMarkup = function (repo, placeholder) {
         var trackGenerate = app.Tracking.start('Docker Hub render ' + username + '/' + repo.name, 'dockerhub');
 
@@ -12,15 +18,14 @@
             url: '/render/dockerhub',
             data: JSON.stringify(repo),
             contentType: 'application/json',
+            complete: function () {
+                projectLoadFinished();
+            },
             success: function (html) {
                 trackGenerate.done();
 
                 var content = $(html);
                 placeholder.replaceWith(content);
-
-                if (--projects_to_load <= 0) {
-                    $(target).children('.loading-panel').remove();
-                }
 
                 content.find('.mdl-js-spinner').each(function() {
                     componentHandler.upgradeElement($(this).get(0));
@@ -38,10 +43,16 @@
 
         var trackProject = app.Tracking.start('Docker Hub load ' + username + '/' + repository_name, 'dockerhub');
 
-        $.get(base_url + '/repositories/' + username + '/' + repository_name, function (repo) {
-            trackProject.done();
+        $.get({
+            url: base_url + '/repositories/' + username + '/' + repository_name,
+            error: function () {
+                projectLoadFinished();
+            },
+            success: function (repo) {
+                trackProject.done();
 
-            generateMarkup(repo, placeholder);
+                generateMarkup(repo, placeholder);
+            }
         });
     };
 
@@ -54,40 +65,52 @@
 
         var trackProjects = app.Tracking.start('Docker Hub projects', 'dockerhub');
 
-        $.get(base_url + '/repositories/' + username, function (response) {
-            trackProjects.done();
+        $.get({
+            url: base_url + '/repositories/' + username,
+            error: function () {
+                $(target).children('.loading-panel').remove();
+            },
+            success: function (response) {
+                trackProjects.done();
 
-            projects_to_load = response.results.length;
+                projects_to_load = response.results.length;
 
-            response.results.sort(function (a, b) {
-                if (a.last_updated < b.last_updated) { return 1; } else { return -1; }
-            }).forEach(function (repo) {
-                loadProject(repo.name);
-            });
+                response.results.sort(function (a, b) {
+                    if (a.last_updated < b.last_updated) { return 1; } else { return -1; }
+                }).forEach(function (repo) {
+                    loadProject(repo.name);
+                });
+            }
         });
     };
 
     var generateTags = function (repo_full_name, container_id) {
         var trackTags = app.Tracking.start('Docker Hub tags ' + repo_full_name, 'dockerhub');
 
-        $.get(base_url + '/repositories/' + repo_full_name + '/tags', function (response) {
-            trackTags.done();
+        $.get({
+            url: base_url + '/repositories/' + repo_full_name + '/tags',
+            error: function () {
+                $('#' + container_id).empty().append($('<p><i>Failed to load tags</i></p>'));
+            },
+            success: function (response) {
+                trackTags.done();
 
-            var container = $('#' + container_id);
-            var list = $('<ul class="mdl-list condensed-list"/>');
+                var container = $('#' + container_id);
+                var list = $('<ul class="mdl-list condensed-list"/>');
 
-            response.results.forEach(function (tag) {
-                var item = $('<span class="mdl-list__item-primary-content"/>')
-                            .append($('<i class="material-icons mdl-list__item-icon mdl-color-text--accent">label</i>'))
-                            .append($('<span/>')
-                                     .append(tag.name))
-                            .append($('<span class="mdl-list__item-sub-title"/>')
-                                     .append((tag.full_size / (1024.0 * 1024.0)).toFixed(2) + ' MB'));
+                response.results.forEach(function (tag) {
+                    var item = $('<span class="mdl-list__item-primary-content"/>')
+                                .append($('<i class="material-icons mdl-list__item-icon mdl-color-text--accent">label</i>'))
+                                .append($('<span/>')
+                                         .append(tag.name))
+                                .append($('<span class="mdl-list__item-sub-title"/>')
+                                         .append((tag.full_size / (1024.0 * 1024.0)).toFixed(2) + ' MB'));
 
-                list.append($('<li class="mdl-list__item mdl-list__item--two-line"/>').append(item));
-            });
+                    list.append($('<li class="mdl-list__item mdl-list__item--two-line"/>').append(item));
+                });
 
-            container.empty().append($('<p>').append(list));
+                container.empty().append($('<p>').append(list));
+            }
         });
     };
 

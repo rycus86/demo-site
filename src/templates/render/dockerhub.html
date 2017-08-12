@@ -30,14 +30,18 @@
         </div>
     </div>
 
-    {% if data.full_description %}
     <div class="mdl-card__title mdl-card--border">README</div>
     <div class="mdl-card__supporting-text">
         <div class="readme markdown">
-            {{ markdown(data.full_description)|safe }}
+            {% if data.full_description %}
+                {{ markdown(data.full_description)|safe }}
+            {% else %}
+            <p>
+                <i>None</i>
+            </p>
+            {% endif %}
         </div>
     </div>
-    {% endif %}
 
     <div class="mdl-card__actions mdl-card--border card-actions-light">
         <a href="https://hub.docker.com/r/{{ data.namespace }}/{{ data.name }}/">

@@ -77,7 +77,7 @@ class RenderTest(unittest.TestCase):
                       content)
         self.assertIn('href="https://hub.docker.com/r/%s/%s/"' % (payload['namespace'], payload['name']), content)
         self.assertIn(payload['description'], content)
-        self.assertNotIn('<h1>README</h1>', content)
+        self.assertIn('<i>None</i>', content)
         self.assertIn('cApp.DateTime.formatTimeFromNow(\'dockerhub-%s\');' % payload['name'], content);
         self.assertIn('cApp.DateTime.formatDateTime(\'dockerhub-%s\');' % payload['name'], content)
         self.assertIn('cApp.DockerHub.generateTags(\'%s/%s\', \'dockerhub-tags-%s\');' % (
