@@ -65,3 +65,20 @@ class RenderTest(unittest.TestCase):
 
         self.assertIn('<a href="/link/target">', content)
         self.assertRegexpMatches(content, '(?ms).*<img [^>]*data-src="/asset/[0-9a-f]+/images/pycharm.png".*')
+
+    def test_render_dockerhub_without_description(self):
+        payload = self.load_payload('dockerhub_payload_without_description.json')
+        content = self.get_fragment('dockerhub', payload)
+
+        self.assertIn(
+            '<div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--4-col mdl-cell--top dockerhub" id="dockerhub-%s">' %
+            payload['name'], content)
+        self.assertIn('<span id="dockerhub-time-pushed-%s" class="mdl-chip mdl-chip--contact">' % payload['name'],
+                      content)
+        self.assertIn('href="https://hub.docker.com/r/%s/%s/"' % (payload['namespace'], payload['name']), content)
+        self.assertIn(payload['description'], content)
+        self.assertNotIn('<h1>README</h1>', content)
+        self.assertIn('cApp.DateTime.formatTimeFromNow(\'dockerhub-%s\');' % payload['name'], content);
+        self.assertIn('cApp.DateTime.formatDateTime(\'dockerhub-%s\');' % payload['name'], content)
+        self.assertIn('cApp.DockerHub.generateTags(\'%s/%s\', \'dockerhub-tags-%s\');' % (
+        payload['namespace'], payload['name'], payload['name']), content)
