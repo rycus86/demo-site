@@ -75,7 +75,13 @@ window.cApp = (function () {
             images: function (container) {
                 container.find('img[data-src]').each(function () {
                     var img = $(this);
-                    img.attr('src', img.data('src'));
+                    var source = img.data('src');
+
+                    if (source.indexOf('https://') === 0) {
+                        // only load images on HTTPS
+                        img.attr('src', source);
+                    }
+                    
                     img.removeAttr('data-src');
                 });
 
