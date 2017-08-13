@@ -4,7 +4,6 @@ window.cApp = (function () {
         cApp.LazyLoad.css();
         cApp.LazyLoad.images($('body'));
 
-        cApp.Startup.initSlickCarousel();
         cApp.Startup.initTabs();
         cApp.Startup.initTabLinks();
 
@@ -12,6 +11,7 @@ window.cApp = (function () {
             task.call();
         });
 
+        cApp.Navigation.ensureActiveTabIsVisible();
         cApp.CodeHighlight.initialize();
     });
 
@@ -29,17 +29,6 @@ window.cApp = (function () {
                         cApp.Navigation.goToTab(tab);
                         $('main').scrollTop(0);
                     });
-                });
-            },
-
-            initSlickCarousel: function () {
-                $('.slick-carousel').slick({
-                    infinite: true,
-                    slidesToShow: 2,
-                    slidesToScroll: 1,
-                    dots: true,
-                    centerMode: true,
-                    variableWidth: true
                 });
             },
 
@@ -149,8 +138,23 @@ window.cApp = (function () {
 
                     $('main').scrollTop(0);
 
+                    cApp.Navigation.ensureActiveTabIsVisible();
+
                     target.fadeIn(150);
                 });
+            },
+
+            ensureActiveTabIsVisible: function () {
+                var $target = $('a.mdl-layout__tab.is-active');
+                var bounds = $target.get(0).getBoundingClientRect();
+
+                if (bounds.left < 0) {
+                    var offset = bounds.left - 4;
+                    $target.parent().scrollLeft($target.parent().scrollLeft() + offset);
+                } else if (bounds.right > $(window).width()) {
+                    var offset = bounds.right - $(window).width() + 4;
+                    $target.parent().scrollLeft($target.parent().scrollLeft() + offset);
+                }
             },
 
             onTabChange: function (target_tab, callback) {

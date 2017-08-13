@@ -20,8 +20,8 @@ class AssetTest(unittest.TestCase):
     def test_javascript_files(self):
         data = self.get_asset('app.js', 'application/javascript')
 
-        self.assertIn('cApp.Startup.initSlickCarousel();', data)
         self.assertIn('cApp.Startup.initTabs();', data)
+        self.assertIn('cApp.Navigation.ensureActiveTabIsVisible();', data)
 
         data = self.get_asset('datetime.js', 'application/javascript')
 
