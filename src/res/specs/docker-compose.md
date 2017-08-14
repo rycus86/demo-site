@@ -3,11 +3,11 @@ completely forget how do you usually run *container #97* how nice would it be
 to define how to run a number of them with individual settings and have them
 join virtual networks they need to be in?
 
-[docker-compose](https://docs.docker.com/compose) does that for you and more.
+[docker-compose](https://docs.docker.com/compose/) does that for you and more.
 All it needs is a simple *YAML* file to describe your application stack.
 
 To see what *docker-compose* can do check the 
-[Composefile reference](https://docs.docker.com/compose/compose-file) - it is quite powerful.
+[Composefile reference](https://docs.docker.com/compose/compose-file/) - it is quite powerful.
 It even allows you to *scale* your *containers* and have them running multiple
 times if you want it.
 
@@ -55,7 +55,7 @@ should they fail for whatever reason.
 The `HTTP_HOST` environment variable is set to `0.0.0.0` and is processed by 
 the *Flask* app by making it listen on all network interfaces - not only on
 *localhost* like it would do by default.
-Unlike [Docker Swarm](https://docs.docker.com/engine/swarm) *docker-compose* cannot
+Unlike [Docker Swarm](https://docs.docker.com/engine/swarm/) *docker-compose* cannot
 manage *secrets* so those are passed to the containers as environment variables from
 a *key-value* text file.
 Note that the *containers* are all based on `aarch64` *images* built automatically

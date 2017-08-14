@@ -80,7 +80,7 @@
         "key": "compose",
         "title": "docker-compose",
         "body": "docker-compose.md",
-        "link": "https://docs.docker.com/compose"
+        "link": "https://docs.docker.com/compose/"
     },
     {
         "key": "proxy",
@@ -113,7 +113,7 @@
         "key": "google-analytics",
         "title": "Google Analytics",
         "body": "google-analytics.md",
-        "link": "https://analytics.google.com"
+        "link": "https://analytics.google.com/analytics/web/"
     },
     {
         "key": "webmaster-tools",
@@ -125,7 +125,7 @@
         "key": "pagespeed",
         "title": "Pagespeed Insights",
         "body": "pagespeed.md",
-        "link": "https://developers.google.com/speed/pagespeed/insights"
+        "link": "https://developers.google.com/speed/pagespeed/insights/"
     },
     {
         "key": "webpagetest",

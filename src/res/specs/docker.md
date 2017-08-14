@@ -4,7 +4,7 @@ Since the start *Docker* is now able to do much more than that including but not
 virtual network management and multi-host orchestration with load-balancing and 
 automatic fail-over.  
 Make sure you're familiar with *Docker* for this part by 
-[reading their documentation](https://docs.docker.com/get-started).
+[reading their documentation](https://docs.docker.com/get-started/).
 
 The idea behind it is that if you can build a *Docker* *image* that you can run on one machine
 that same image should work on *any* machine having *Docker*.  
@@ -44,9 +44,9 @@ result *image* to make it available when running it as a *container*.
 Finally, `CMD` defines what command should be executed when starting a *container* from
 this *image* unless an override is specified on the `docker run` command.
 
-To see a complete reference for [Dockerfile instructions](https://docs.docker.com/engine/reference/builder) check this link.
+To see a complete reference for [Dockerfile instructions](https://docs.docker.com/engine/reference/builder/) check this link.
 While you're there, make sure to have a look at 
-[best practises](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices) for writing *Dockerfiles*.
+[best practises](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/) for writing *Dockerfiles*.
 
 To create an *image* from a *Dockerfile* you can execute 
 `docker build -t <owner>/<image-name>:<tag> -f Dockerfile .`  

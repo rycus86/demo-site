@@ -4,7 +4,7 @@
   Programming language
 - **Flask**: [http://flask.pocoo.org](http://flask.pocoo.org)  
   *Python* web framework
-- **Flask-Cache**: [https://pythonhosted.org/Flask-Cache](https://pythonhosted.org/Flask-Cache)  
+- **Flask-Cache**: [https://pythonhosted.org/Flask-Cache](https://pythonhosted.org/Flask-Cache/)  
   Cache extension for *Flask*
 - **flask-cors**: [https://github.com/corydolphin/flask-cors](https://github.com/corydolphin/flask-cors)  
   Cross Origin Resource Sharing (CORS) for *Flask*
@@ -12,7 +12,7 @@
   Templating language and engine also used in *Flask*
 - **agithub**: [https://github.com/jpaugh/agithub](https://github.com/jpaugh/agithub)  
   Agnostic REST API client
-- **markdown**: [http://pythonhosted.org/Markdown](http://pythonhosted.org/Markdown)  
+- **markdown**: [http://pythonhosted.org/Markdown](http://pythonhosted.org/Markdown/)  
   *Markdown* implementation
 
 ## Frontend
@@ -23,11 +23,11 @@
   *JavaScript* date/time library
 - **Material Design Lite**: [https://getmdl.io/index.html](https://getmdl.io/index.html)  
   *Material Design* component library
-- **Material Icons**: [https://material.io/icons](https://material.io/icons)  
+- **Material Icons**: [https://material.io/icons](https://material.io/icons/)  
   *Material Design* icons
 - **Roboto**: [https://fonts.google.com/specimen/Roboto](https://fonts.google.com/specimen/Roboto)  
   Web font
-- **Slick**: [https://kenwheeler.github.io/slick](https://kenwheeler.github.io/slick)  
+- **Slick**: [https://kenwheeler.github.io/slick](https://kenwheeler.github.io/slick/)  
   *JavaScript* carousel
 - **highlight.js**: [https://highlightjs.org](https://highlightjs.org)  
   *JavaScript* code highlighter
@@ -46,15 +46,15 @@
   *Container* platform
 - **Docker Hub**: [https://hub.docker.com](https://hub.docker.com)  
   *Container* registry
-- **nginx**: [https://nginx.org/en](https://nginx.org/en)  
+- **nginx**: [https://nginx.org/en](https://nginx.org/en/)  
   HTTP and reverse proxy server
 - **docker-gen**: [https://github.com/jwilder/docker-gen](https://github.com/jwilder/docker-gen)  
   Automatic configuration file generation - *for containers behind nginx*
-- **ddclient**: [https://sourceforge.net/p/ddclient/wiki/Home](https://sourceforge.net/p/ddclient/wiki/Home)  
+- **ddclient**: [https://sourceforge.net/p/ddclient/wiki/Home](https://sourceforge.net/p/ddclient/wiki/Home/)  
   Dynamic DNS updater
-- **Google Analytics**: [https://www.google.com/analytics](https://www.google.com/analytics)  
+- **Google Analytics**: [https://www.google.com/analytics](https://www.google.com/analytics/)  
   Tracking
-- **Google PageSpeed Insights**: [https://developers.google.com/speed/pagespeed/insights](https://developers.google.com/speed/pagespeed/insights)  
+- **Google PageSpeed Insights**: [https://developers.google.com/speed/pagespeed/insights](https://developers.google.com/speed/pagespeed/insights/)  
   Page speed optimization tool
 - **Google Webmasters Tool**: [https://www.google.com/webmasters/tools](https://www.google.com/webmasters/tools)  
   *Google* search index dashboard

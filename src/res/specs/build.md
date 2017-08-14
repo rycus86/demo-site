@@ -3,7 +3,7 @@ switch to another *OS* or machine I tend to avoid installing anything on it
 apart from *Docker* and *Git* (though *Git* comes pre-installed I think on *Debian*).
 
 To write *Python* code and related configurations (like *Dockerfiles*, *Bash* scripts, etc.)
-I use the excellent [PyCharm CE](https://www.jetbrains.com/pycharm) from JetBrains - 
+I use the excellent [PyCharm CE](https://www.jetbrains.com/pycharm/) from JetBrains - 
 in a *Docker* container of course.  
 Check out the [rycus86/docker-pycharm](https://github.com/rycus86/docker-pycharm) 
 repository to see how to use it on (probably) anything with *X11* on it.  

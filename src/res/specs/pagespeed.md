@@ -3,7 +3,7 @@ you might find that the experience is not that great when you're not connecting
 to the site on *localhost* on your laptop.
 
 A great tool that can help you identify some of the problems is *Google's*
-[PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights)
+[PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights/)
 that processes a page on your website and analyzes its performance from both
 mobile and desktop perspective.
 It also gives you helpful hints on how to resolve those problems.
@@ -97,7 +97,7 @@ still some more things to improve:
 - Minify CSS
 - Minify JavaScript
 
-One could use the [PageSpeed Module](https://developers.google.com/speed/pagespeed/module)
+One could use the [PageSpeed Module](https://developers.google.com/speed/pagespeed/module/)
 as suggested by the tool which is an add-on for *Apache* or *nginx* webservers.
 I did not want to install additional modules on mine though so I have opted for
 a different approach.

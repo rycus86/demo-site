@@ -114,7 +114,7 @@ It turns out this is very simple to do and we can even do it with a *Docker Hub*
   an *alpine*-based image for *64-bits ARM* hosts
 
 To give credit, this is based on the great work the 
-[Hypriot team documented](https://blog.hypriot.com/post/setup-simple-ci-pipeline-for-arm-images)
+[Hypriot team documented](https://blog.hypriot.com/post/setup-simple-ci-pipeline-for-arm-images/)
 even though it looks like people have [come up with this](https://github.com/travis-ci/travis-ci/issues/3376) back in late 2015.
 
 OK, great, this is working nicely again but the question still stands:  

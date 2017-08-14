@@ -1,5 +1,5 @@
 To know about the site's visitors and their browsing experience I use
-[Google Analytics](https://analytics.google.com) tracking.
+[Google Analytics](https://analytics.google.com/analytics/web/) tracking.
 
 The basic setup is really easy.
 After registering an account and your website *(for free)* you get
@@ -53,7 +53,7 @@ if (window.performance) {
 
 If the browser supports the 
 [Performance API](https://developer.mozilla.org/en-US/docs/Web/API/Performance)
-([most of them do](http://caniuse.com/#feat=user-timing))
+([most of them do](https://caniuse.com/#feat=user-timing))
 you can get *timing* metrics on how long did it take to load the
 *JavaScripts* (`JS Dependencies`) for the page or how much time did the
 `Page load` or the initial request (`Request time`) take.

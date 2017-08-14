@@ -4,7 +4,7 @@ with open-source and free tools.
 
 Most of the backend services are *Python* [Flask](http://flask.pocoo.org) applications
 using [Jinja2](http://jinja.pocoo.org) templates
-and [markdown](http://pythonhosted.org/Markdown) 
+and [markdown](http://pythonhosted.org/Markdown/) 
 while the frontend uses the [Material Design Lite](https://getmdl.io/index.html) library 
 with [jQuery](https://jquery.com).
 
@@ -13,7 +13,7 @@ on [Travis Ci](https://travis-ci.org)
 from source code on [GitHub](https://github.com).
 The images are then pulled from [Docker Hub](https://hub.docker.com)
 onto a [Pine64](https://www.pine64.org/?page_id=1194) server
-where they are running behind an [nginx](https://nginx.org/en) proxy server
+where they are running behind an [nginx](https://nginx.org/en/) proxy server
 exposing secure HTTP/2 endpoints with SSL certificates
 from [Let's Encrypt](https://letsencrypt.org).
 

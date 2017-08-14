@@ -4,7 +4,7 @@ There are good option still like [Namecheap](https://www.namecheap.com) that sup
 *Dynamic DNS* - meaning you can send them your *IP* address periodically and they will
 point the domain name at that address you sent.
 
-To help you do that you can use [ddclient](https://sourceforge.net/p/ddclient/wiki/Home)
+To help you do that you can use [ddclient](https://sourceforge.net/p/ddclient/wiki/Home/)
 that supports quite a few *DNS providers*.  
 It has a simple text-based configuration that looks something like this:
 ```text

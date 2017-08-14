@@ -27,10 +27,10 @@ built this way will be marked as *automated build* on *Docker Hub* also displayi
 Multiple versions (e.g. *tags*) are also supported.
 If you have different branches in *GitHub* then *Docker Hub* by default will take
 branch name and use it as *Docker tag* to build the *Dockerfile* in that branch.
-See the [rycus86/pycharm](https://hub.docker.com/r/rycus86/pycharm/tags) image 
+See the [rycus86/pycharm](https://hub.docker.com/r/rycus86/pycharm/tags/) image 
 for example and the [related repository](https://github.com/rycus86/docker-pycharm).
 
 If you're not sick of badges by this point then good news, here are two more from
 [Shields.io](https://shields.io):  
-[![Build Status](https://img.shields.io/docker/build/rycus86/demo-site.svg)](https://hub.docker.com/r/rycus86/demo-site)
-[![Pulls](https://img.shields.io/docker/pulls/rycus86/demo-site.svg)](https://hub.docker.com/r/rycus86/demo-site)
+[![Build Status](https://img.shields.io/docker/build/rycus86/demo-site.svg)](https://hub.docker.com/r/rycus86/demo-site/)
+[![Pulls](https://img.shields.io/docker/pulls/rycus86/demo-site.svg)](https://hub.docker.com/r/rycus86/demo-site/)
