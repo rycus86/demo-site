@@ -9,7 +9,7 @@ while the frontend uses the [Material Design Lite](https://getmdl.io/index.html)
 with [jQuery](https://jquery.com).
 
 All backend services are built into [Docker](https://www.docker.com) images
-on [Travis Ci](https://travis-ci.org)
+on [Travis CI](https://travis-ci.org)
 from source code on [GitHub](https://github.com).
 The images are then pulled from [Docker Hub](https://hub.docker.com)
 onto a [Pine64](https://www.pine64.org/?page_id=1194) server
