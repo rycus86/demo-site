@@ -23,8 +23,9 @@ Porting my existing *Docker images* was easy once I've set up the `arm64v8` base
 I've enabled a new configuration in the *Travis matrix builds* and the rest continued 
 working as before with `x86` and `armv7`.
 
-Getting *Docker* on *Pine64* wasn't as easy as it is on other, more common architectures
-but [Alex Ellis has a great post](https://blog.alexellis.io/get-started-with-docker-on-64-bit-arm) on how to get it up and running.
+Getting *Docker* on *Pine64* wasn't as easy as it is on other, more common architectures but
+[Alex Ellis has a great post](https://blog.alexellis.io/get-started-with-docker-on-64-bit-arm/)
+on how to get it up and running.
 
 After running and updating a few containers manually I realised that this is
 a lot of work and thought that I can probably do something better.
