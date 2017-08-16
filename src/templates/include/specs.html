@@ -1,3 +1,28 @@
+<div style="position: fixed; bottom: 20px; right: 20px; z-index: 999;">
+<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--colored"
+        id="menu1">
+  <i class="material-icons">list</i>
+</button>
+
+<div style="position: relative; right: 35px; bottom: -15px;">
+
+<table for="menu1" class="mdl-menu mdl-menu--top-right mdl-js-menu mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+    <tbody>
+        <tr>
+            {% for card in specs_cards|sort(attribute='title') %}
+            <td class="mdl-data-table__cell--non-numeric">
+              <a href="#specs-card-{{ card.key }}">{{ card.title }}</a>
+            </td>
+                {% if loop.index % 3 == 0 and not loop.last %} </tr><tr> {% endif %}
+            {% endfor %}
+        </tr>
+    </tbody>
+</table>
+
+</div>
+
+</div>
+
 {% for card in specs_cards %}
 <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--6-col mdl-cell--top"
      id="specs-card-{{ card.key }}">
