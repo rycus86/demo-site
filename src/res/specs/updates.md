@@ -11,4 +11,7 @@ been updated or the corresponding *Composefile* configuration has changed.
 All other services are unaffected and continue to run as they did so far.
 
 This process is very basic at the moment but it does allow me to forget about *everything*
-needed to get my changes live - the only thing I have to do is `git push`.
+needed to get my changes live - the __only thing__ I have to do is `git push`.
+
+Now that we have our services up and running we should keep track of how they are doing.
+It is time to add some monitoring for the stack!

@@ -3,9 +3,9 @@ A great open-source software to monitor your applications is
 It has a multi-dimensional data model to keep track of time series with
 key/value pairs and a flexible query language to make great use of it.
 
-[](#todo: insert image)
+[//]: # (todo: insert image)
 
-*Prometheus* uses an *HTTP*-based *pull model* for collecting metrics.
+*Prometheus* uses an *HTTP-based pull model* for collecting metrics.
 That means that the applications you want to monitor should normally expose
 a `/metrics` *HTTP* endpoint that *Prometheus* can access.
 It then periodically *scrapes* the configured targets to retrieve the latest
@@ -65,7 +65,7 @@ functions to start an *HTTP* endpoint doing this for you.
 *Prometheus* comes with a simple *UI* to check the configuration, the status
 of the scrape targets and query and visualisation page.
 
-[](#todo: insert image)
+[//]: # (todo: insert image)
 
 This gives you a quick and easy way to run queries ad-hoc but for visualization
 you will probably want something more sophisticated.

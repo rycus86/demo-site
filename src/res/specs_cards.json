@@ -143,5 +143,17 @@
         "key": "updates",
         "title": "Updates",
         "body": "updates.md"
+    },
+    {
+        "key": "prometheus",
+        "title": "Prometheus",
+        "body": "prometheus.md",
+        "link": "https://prometheus.io"
+    },
+    {
+        "key": "grafana",
+        "title": "Grafana",
+        "body": "grafana.md",
+        "link": "https://grafana.com"
     }
 ]
