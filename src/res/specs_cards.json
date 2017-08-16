@@ -78,7 +78,7 @@
     },
     {
         "key": "compose",
-        "title": "docker-compose",
+        "title": "Docker-Compose",
         "body": "docker-compose.md",
         "link": "https://docs.docker.com/compose/"
     },
@@ -89,7 +89,7 @@
     },
     {
         "key": "pygen",
-        "title": "docker-pygen",
+        "title": "Docker-PyGen",
         "body": "docker-pygen.md",
         "link": "https://github.com/rycus86/docker-pygen"
     },

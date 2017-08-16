@@ -28,7 +28,7 @@ footer ul.mdl-mini-footer__link-list {
 
 .mdl-card .mdl-card__actions {
     display: flex;
-    box-sizing:border-box;
+    box-sizing: border-box;
     align-items: center;
 }
 
@@ -114,6 +114,63 @@ footer ul.mdl-mini-footer__link-list {
     width: 100%;
     border-radius: 5px;
     border: 1px #bbb solid;
+}
+
+#specs .specs-fab-menu {
+    display: none;
+}
+
+#specs.is-active .specs-fab-menu {
+    display: block;
+}
+
+#panel-specs button#specs-menu {
+    color: #424242;
+    background-color: #ffeb3b;
+}
+
+#panel-specs .specs-fab-menu {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999;
+}
+
+#panel-specs .specs-menu-popup {
+    position: relative;
+    right: 35px;
+    bottom: -15px;
+}
+
+#panel-specs .specs-menu-popup .popup-wrapper {
+    overflow-y: scroll;
+    height: 220px;
+    padding: 0;
+    margin: 0;
+}
+
+#panel-specs .specs-menu-popup thead {
+    display: none;
+}
+
+#panel-specs .specs-menu-popup tr {
+    background: none;
+}
+
+#panel-specs .specs-menu-popup td {
+    border: 1px solid rgba(0,0,0,.12);
+    transition-duration: .28s;
+    transition-timing-function: cubic-bezier(.4,0,.2,1);
+    transition-property: background-color;
+}
+
+#panel-specs .specs-menu-popup td:hover {
+    background-color: #eee;
+}
+
+#panel-specs .specs-menu-popup a {
+    text-decoration: none;
+    display: block;
 }
 
 .card-fab-holder {

@@ -52,13 +52,15 @@ class SpecificationsTest(unittest.TestCase):
         self.assertIn('<h2 class="mdl-card__title-text">Docker Hub</h2>', content)
         self.assertIn('<h2 class="mdl-card__title-text">Multiarch builds</h2>', content)
         self.assertIn('<h2 class="mdl-card__title-text">Hosting</h2>', content)
-        self.assertIn('<h2 class="mdl-card__title-text">docker-compose</h2>', content)
+        self.assertIn('<h2 class="mdl-card__title-text">Docker-Compose</h2>', content)
         self.assertIn('<h2 class="mdl-card__title-text">Proxy server</h2>', content)
-        self.assertIn('<h2 class="mdl-card__title-text">docker-pygen</h2>', content)
+        self.assertIn('<h2 class="mdl-card__title-text">Docker-PyGen</h2>', content)
         self.assertIn('<h2 class="mdl-card__title-text">Dynamic DNS</h2>', content)
         self.assertIn('<h2 class="mdl-card__title-text">SSL / HTTPS</h2>', content)
         self.assertIn('<h2 class="mdl-card__title-text">HTTP/2</h2>', content)
         self.assertIn('<h2 class="mdl-card__title-text">Updates</h2>', content)
+        self.assertIn('<h2 class="mdl-card__title-text">Prometheus</h2>', content)
+        self.assertIn('<h2 class="mdl-card__title-text">Grafana</h2>', content)
 
     def test_images(self):
         content = self.get_html('/')
@@ -74,8 +76,10 @@ class SpecificationsTest(unittest.TestCase):
         
         for index, card in enumerate(resources['specs_cards']):
             if index > 0:
-                self.assertIn('<a href="#specs-card-%s"' % card['key'], content)
+                self.assertTrue(re.match('(?sm).*<a href="#specs-card-%s"\s*class="mdl-button' % card['key'], content),
+                                msg='Next card link not found for %s' % card['key'])
 
             else:
-                self.assertNotIn('<a href="#specs-card-%s"' % card['key'], content)
+                self.assertFalse(re.match('(?sm).*<a href="#specs-card-%s"\s*class="mdl-button' % card['key'], content),
+                                 msg='Next card link not expected for %s' % card['key'])
 

@@ -1,26 +1,30 @@
-<div style="position: fixed; bottom: 20px; right: 20px; z-index: 999;">
-<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--colored"
-        id="menu1">
-  <i class="material-icons">list</i>
-</button>
-
-<div style="position: relative; right: 35px; bottom: -15px;">
-
-<table for="menu1" class="mdl-menu mdl-menu--top-right mdl-js-menu mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
-    <tbody>
-        <tr>
-            {% for card in specs_cards|sort(attribute='title') %}
-            <td class="mdl-data-table__cell--non-numeric">
-              <a href="#specs-card-{{ card.key }}">{{ card.title }}</a>
-            </td>
-                {% if loop.index % 3 == 0 and not loop.last %} </tr><tr> {% endif %}
-            {% endfor %}
-        </tr>
-    </tbody>
-</table>
-
-</div>
-
+<div class="specs-fab-menu">
+    <button id="specs-menu" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-shadow--4dp fixed-fab">
+        <i class="material-icons">list</i>
+    </button>
+    <div class="specs-menu-popup">
+        <div for="specs-menu" class="mdl-menu mdl-menu--top-right mdl-js-menu mdl-shadow--4dp popup-wrapper">
+            <table class="mdl-data-table mdl-js-data-table">
+                <thead>
+                    <tr>
+                        <th colspan="2"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        {% for card in specs_cards|sort(attribute='title') %}
+                        <td class="mdl-data-table__cell--non-numeric">
+                            <a href="#specs-card-{{ card.key }}">{{ card.title }}</a>
+                        </td>
+                        {% if loop.index % 2 == 0 and not loop.last %}
+                    </tr>
+                    <tr> {% endif %}
+                        {% endfor %}
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 
 {% for card in specs_cards %}
@@ -40,7 +44,7 @@
         </a>
     </div>
     {% endif %}
-    
+
     {% if card.image is defined %}
         {% if card.image.display is defined %}
         <div class="mdl-card__media mdl-card--border">

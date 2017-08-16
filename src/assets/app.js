@@ -12,6 +12,9 @@ window.cApp = (function () {
             task.call();
         });
 
+        cApp.Scroll.initialize();
+        cApp.Scroll.registerListeners();
+
         cApp.Navigation.ensureActiveTabIsVisible();
         cApp.CodeHighlight.initialize();
     });
@@ -171,6 +174,84 @@ window.cApp = (function () {
                     if (listener.target === target_tab) {
                         listener.callback();
                     }
+                });
+            }
+        },
+
+        Scroll: {
+            listeners: [],
+
+            pending: false,
+            endScrollHandle: null,
+
+            initialize: function () {
+                var $this = cApp.Scroll;
+
+                $('main').scroll(function () {
+                    if ($this.pending) {
+                        return;
+                    }
+
+                    $this.pending = true;
+
+                    clearTimeout($this.endScrollHandle);
+
+                    $this.onScroll();
+
+                    setTimeout(function () {
+                        $this.pending = false;
+                    }, 300);
+
+                    $this.endScrollHandle = setTimeout(function () {
+                        $this.onScroll();
+                    }, 500);
+                });
+            },
+
+            registerListeners: function () {
+                cApp.Scroll.setupFab();
+            },
+
+            onScroll: function () {
+                cApp.Scroll.listeners.forEach(function (listener) {
+                    listener();
+                });
+            },
+
+            setupFab: function () {
+                var button = $('.specs-fab-menu');
+                var footer = $('footer');
+
+                cApp.Scroll.listeners.push(function () {
+                    var margin = button.css('margin-bottom');
+                    if (!!margin) {
+                        margin = parseInt(margin.substring(0, margin.length - 2));
+                    }
+
+                    var threshold = button.offset().top + button.outerHeight() / 2 + margin;
+                    var offset = footer.offset().top;
+
+                    if (offset < threshold) {
+                        button.stop().animate({'margin-bottom': '-100px'}, 'fast').addClass('off-screen');
+                    } else if (offset > threshold) {
+                        button.removeClass('off-screen').stop().animate({'margin-bottom': '0'}, 'fast');
+                    }
+                });
+
+                var $header = $('header');
+                var $main = $('main');
+
+                button.find('a').each(function (index, item) {
+                    var $item = $(item);
+                    var $target = $($item.attr('href'));
+
+                    $item.click(function (event) {
+                        event.preventDefault();
+
+                        $main.animate({
+                            scrollTop: $target.offset().top + $main.scrollTop() - $header.outerHeight()
+                        }, 1000);
+                    });
                 });
             }
         },
