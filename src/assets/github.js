@@ -1,4 +1,5 @@
 (function (app) {
+    'use strict';
 
     var base_url = 'https://api.viktoradam.net/github',
         username = 'rycus86',

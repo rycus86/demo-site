@@ -61,3 +61,12 @@ class AssetTest(unittest.TestCase):
 
         path = os.path.join(os.path.dirname(__file__), '../src/assets/favicon.ico')
         self.assertEqual(response.data, open(path).read())
+
+    def test_use_strict(self):
+        base_directory = os.path.join(os.path.dirname(__file__), '../src/assets')
+
+        for item in os.listdir(base_directory):
+            if item.endswith('.js'):
+                with open(os.path.join(base_directory, item)) as script:
+                    self.assertIn("'use strict';", script.read())
+

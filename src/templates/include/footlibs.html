@@ -17,6 +17,8 @@
 <script src="{{ assets['dockerhub.js'] }}" defer></script>
 
 <script>
+    'use strict';
+
     window.TabTitles = {};
     {% for tab in tabs %}
         {% if tab.seo and tab.seo.title %}
