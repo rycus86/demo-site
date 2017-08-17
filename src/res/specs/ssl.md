@@ -29,13 +29,13 @@ certbot certonly -n -d my.domain.com --keep --standalone \
 
 You might already have a webserver in place though so this method of verification
 would not work.
-On this demo site I have *nginx* listening on both of those ports and I can easily
+On this demo site I have *Nginx* listening on both of those ports and I can easily
 get it to accept the challenges.
 All it takes is to define a *root* folder for static content on the target domain
 and save the challenge response in a file in there before the request arrives.
 You can achieve this manually with a couple of *Shell commands* but why not automate it?
 
-Using my *docker-py* tool and a *container* having *certbot* with a couple of scripts
+Using my *Docker-PyGen* tool and a *container* having *certbot* with a couple of scripts
 I can generate a list of *Shell commands* to instruct *certbot* to request or renew
 certificates for domains defined as *labels* on the running *containers*.  
 The template for this is really quite simple:
@@ -54,13 +54,13 @@ Once the list of commands is generated, I can send a signal to the *container* t
 has *certbot* to take them one-by-one and execute them.
 In the template, the `--manual-auth-hook` parameter refers to a *Shell script* that will
 save the challenge file with the appropriate content on a *shared volume* that maps
-onto the static file folder on *nginx*.
+onto the static file folder on *Nginx*.
 This is run before the actual challenge starts and can be cleaned up using the
 `--manual-cleanup-hook` parameter once it's finished.
 
 *certbot* saves the certificates in the `/etc/letsencrypt/live/<domain>`
 folder by default so we just need to make sure this also resides on a *shared volume*
-to make it accessible for *nginx*.
+to make it accessible for *Nginx*.
 
 ### Putting it all together
 
@@ -116,7 +116,7 @@ volumes:
   letsencrypt-challenge:
 ```
 
-The changes in the *nginx* *docker-py* template are:
+The changes in the *Nginx* *Docker-PyGen* template are:
 
 ```
 server {

@@ -13,7 +13,7 @@
         "title": "Specs",
         "seo": {
             "title": "How is it built | Demo site by Viktor Adam | @rycus86",
-            "description": "An in-depth explanation of how the demo website and its related services are built and deployed using open-source CI / CD tools."
+            "description": "An in-depth explanation of how the demo website and its related services are built, deployed and monitored using open-source CI / CD tools."
         }
     },
     {
@@ -21,7 +21,7 @@
         "title": "GitHub",
         "seo": {
             "title": "GitHub projects | Demo site by Viktor Adam | @rycus86",
-            "description": "Open-source GitHub projects related to building, deploying and hosting the demo website (and others)."
+            "description": "Open-source GitHub projects related to building, deploying, monitoring and hosting the demo website (and others)."
         }
     },
     {

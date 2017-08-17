@@ -2,7 +2,7 @@ I found *docker-gen* amazing and it *mostly* did what I wanted but I'm not
 familiar with Go or its templates so it would have been difficult to get it
 to do *exactly* what I wanted.
 
-For this reason I started working on [docker-pygen](https://github.com/rycus86/docker-pygen).
+For this reason I started working on [Docker-PyGen](https://github.com/rycus86/docker-pygen).
 It is the same concept but implemented in *Python* and it uses
 [Jinja2 templates](http://jinja.pocoo.org/docs) to generate content for configuration files -
 the same language that *Flask* uses for rendering content and is behind this page and site too.
@@ -35,6 +35,6 @@ in a *Compose project* for example.
 Like *docker-gen*, this tool can also *signal* or restart other containers
 when the target configuration file is updated.
 I wanted to remove the need having to run the target container as a single
-instance with a pre-defined name so *docker-pygen* supports targeting
+instance with a pre-defined name so *Docker-PyGen* supports targeting
 *containers* by *Compose service name* or specific labels / environment
 variables too.

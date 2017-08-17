@@ -71,7 +71,7 @@ lazyLoadCSS: function () {
 
 ##### Enable compression
 
-I could easily enable this in *nginx* as described already with a little
+I could easily enable this in *Nginx* as described already with a little
 bit of configuration.
 
 ```
@@ -98,6 +98,6 @@ still some more things to improve:
 - Minify JavaScript
 
 One could use the [PageSpeed Module](https://developers.google.com/speed/pagespeed/module/)
-as suggested by the tool which is an add-on for *Apache* or *nginx* webservers.
+as suggested by the tool which is an add-on for *Apache* or *Nginx* webservers.
 I did not want to install additional modules on mine though so I have opted for
 a different approach.

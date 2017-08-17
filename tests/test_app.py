@@ -126,7 +126,7 @@ class AppTest(unittest.TestCase):
         self.assertIn('This website exists to showcase an example', content)
 
         self.assertIn('<h2 class="mdl-card__title-text">Components</h2>', content)
-        self.assertIn('This site is made up of the following components', content)
+        self.assertIn('This site and its related services use the following projects', content)
 
         self.assertIn('<h2 class="mdl-card__title-text">Acknowledgements</h2>', content)
         self.assertIn('<em>Python</em> web framework', content)

@@ -78,7 +78,7 @@ volumes:
   prometheus-config:
 ```
 
-This way I can get the [docker-pygen](https://github.com/rycus86/docker-pygen)
+This way I can get the [Docker-PyGen](https://github.com/rycus86/docker-pygen)
 container to reload the *Prometheus* configuration when new services are
 available and have *Grafana* point to it as `http://prometheus:9090`.
 *Simple, isn't it?*

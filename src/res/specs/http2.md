@@ -8,7 +8,7 @@ This is great for serving many *small* static files like *JavaScript* and *CSS*
 but also if the *frontend* needs to issue *tons of AJAX calls* to *backend*
 services that are all on the some domain - like this site.  
 
-As it turns out, enabling *HTTP/2* on *nginx* is as easy as changing:
+As it turns out, enabling *HTTP/2* on *Nginx* is as easy as changing:
 
 ```
 server {
@@ -29,7 +29,7 @@ server {
 Having mentioned small static files (but also any kind of response - from *REST*
 endpoints for example) it's generally a good idea to enable *gzip compression* on
 all the responses where we can.
-In my case it can be everything and on *nginx* you could do that in the main
+In my case it can be everything and on *Nginx* you could do that in the main
 configuration file (at `/etc/nginx/nginx.conf` by default) like this:
 
 ```

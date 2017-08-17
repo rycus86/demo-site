@@ -13,9 +13,14 @@ on [Travis CI](https://travis-ci.org)
 from source code on [GitHub](https://github.com).
 The images are then pulled from [Docker Hub](https://hub.docker.com)
 onto a [Pine64](https://www.pine64.org/?page_id=1194) server
-where they are running behind an [nginx](https://nginx.org/en/) proxy server
+where they are running behind an [Nginx](https://nginx.org/en/) proxy server
 exposing secure HTTP/2 endpoints with SSL certificates
 from [Let's Encrypt](https://letsencrypt.org).
+
+Monitoring is done via
+**Google Analytics**: [https://www.google.com/analytics](https://www.google.com/analytics/)
+on the frontend and with [Prometheus](https://prometheus.io) and
+[Grafana](https://grafana.com) on the backend.
 
 The whole process including the deployments is automated,
 the only manual step being the `git push` command.

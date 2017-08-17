@@ -46,10 +46,10 @@
   *Container* platform
 - **Docker Hub**: [https://hub.docker.com](https://hub.docker.com)  
   *Container* registry
-- **nginx**: [https://nginx.org/en](https://nginx.org/en/)  
+- **Nginx**: [https://nginx.org/en](https://nginx.org/en/)  
   HTTP and reverse proxy server
 - **docker-gen**: [https://github.com/jwilder/docker-gen](https://github.com/jwilder/docker-gen)  
-  Automatic configuration file generation - *for containers behind nginx*
+  Automatic configuration file generation - *for containers behind Nginx*
 - **ddclient**: [https://sourceforge.net/p/ddclient/wiki/Home](https://sourceforge.net/p/ddclient/wiki/Home/)  
   Dynamic DNS updater
 - **Google Analytics**: [https://www.google.com/analytics](https://www.google.com/analytics/)  
@@ -66,4 +66,10 @@
   Free SSL/TLS Certificates
 - **Certbot**: [https://certbot.eff.org](https://certbot.eff.org)  
   Automatic certificate renewal tool for *LetsEncrypt*
+- **Prometheus**: [https://prometheus.io](https://prometheus.io)  
+  Monitoring for *time-series*
+- **Grafana**: [https://grafana.com](https://grafana.com)  
+  Visualization platform for analytics and monitoring
+- **Portainer**: [https://portainer.io](https://portainer.io)  
+  *Docker* management UI
 

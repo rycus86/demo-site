@@ -55,7 +55,7 @@ It allows the web server to send resources to the browser *before* it would
 realise it will need them, for example *CSS* or *JavaScript* files included
 in the response document. 
 
-Unfortunately, *nginx* does not support this in the *community* version, only
+Unfortunately, *Nginx* does not support this in the *community* version, only
 in the *paid Plus* version so I could not use it easily.
 *Cloudflare* does handle them though beautifully and all you need to do is
 send *HTTP headers* like these in the response:

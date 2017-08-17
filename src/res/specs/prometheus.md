@@ -50,7 +50,7 @@ scrape_configs:
 
 The server conveniently responds to *SIGHUP* signals by reloading itsi
 configuration which makes it an excellent candidate for integrating with
-[docker-pygen](https://github.com/rycus86/docker-pygen).
+[Docker-PyGen](https://github.com/rycus86/docker-pygen).
 It supports many other configuration options though for service discovery
 so make sure to have a look at the
 [configuration reference](https://prometheus.io/docs/operating/configuration/)
