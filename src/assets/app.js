@@ -140,6 +140,9 @@ window.cApp = (function () {
                     current_link.toggleClass('is-active');
                     target_link.toggleClass('is-active');
 
+                    current.toggleClass('is-active');
+                    target.toggleClass('is-active');
+
                     $('main').scrollTop(0);
 
                     cApp.Navigation.ensureActiveTabIsVisible();
