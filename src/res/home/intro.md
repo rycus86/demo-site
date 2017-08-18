@@ -18,7 +18,7 @@ exposing secure HTTP/2 endpoints with SSL certificates
 from [Let's Encrypt](https://letsencrypt.org).
 
 Monitoring is done via
-**Google Analytics**: [https://www.google.com/analytics](https://www.google.com/analytics/)
+[Google Analytics](https://www.google.com/analytics/)
 on the frontend and with [Prometheus](https://prometheus.io) and
 [Grafana](https://grafana.com) on the backend.
 

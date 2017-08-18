@@ -83,3 +83,8 @@ container to reload the *Prometheus* configuration when new services are
 available and have *Grafana* point to it as `http://prometheus:9090`.
 *Simple, isn't it?*
 
+You can see *live* dashboards at [metrics.viktoradam.net](https://metrics.viktoradam.net):
+
+- [Machine metrics](https://metrics.viktoradam.net/dashboard/db/machine-metrics)
+- [Prometheus metrics](https://metrics.viktoradam.net/dashboard/db/prometheus-stats)
+
