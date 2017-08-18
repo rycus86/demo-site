@@ -155,5 +155,11 @@
         "title": "Grafana",
         "body": "grafana.md",
         "link": "https://grafana.com"
+    },
+    {
+        "key": "portainer",
+        "title": "Portainer",
+        "body": "portainer.md",
+        "link": "https://portainer.io"
     }
 ]
