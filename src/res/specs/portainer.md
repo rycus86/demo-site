@@ -20,12 +20,12 @@ of containers, images, volumes and *Docker* networks you have plus basic
 information about the node it is connected to and about
 [Swarm](https://docs.docker.com/engine/swarm/) if it is available.
 
-[//]: # (todo: insert image of the dashboard)
+![Portainer dashboard]({{ image: portainer-dashboard.png }})
 
 You can see details of all of them on dedicated pages and you can even control
 them from there - *pretty nice*.
 
-[//]: # (todo: insert image of the containers page)
+![Portainer containers]({{ image: portainer-containers.png }})
 
 You can pull new images or start new containers and services for example from
 these pages.
@@ -38,7 +38,7 @@ If you want to use this in *Docker Compose* you could have it defined like this:
 version: '2'
 services:
 
-  ... other services ...
+  ...other services...
 
   portainer:
     image: portainer/portainer:linux-arm64
