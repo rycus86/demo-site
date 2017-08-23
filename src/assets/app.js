@@ -269,8 +269,19 @@ window.cApp = (function () {
                 var target = $('.sticky-progress[data-progress-name="' + name + '"]');
 
                 if (!!target && !!target.get(0).MaterialProgress) {
-                    target.show(500);
+                    if (!target.is(':visible')) {
+                        target.show();
+                    }
+
                     target.get(0).MaterialProgress.setProgress(value);
+                }
+            },
+
+            hide: function (name) {
+                var target = $('.sticky-progress[data-progress-name="' + name + '"]');
+
+                if (!!target) {
+                    target.fadeOut(500);
                 }
             }
         },

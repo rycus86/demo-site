@@ -4,13 +4,11 @@
     var base_url = 'https://api.viktoradam.net/docker',
         username = 'rycus86',
         target = '#panel-dockerhub',
-        projects_to_load = -1;
 
-    var projectLoadFinished = function () {
-        if (--projects_to_load <= 0) {
-            $(target).children('.loading-panel').remove();
-        }
-    };
+        pendingTasks = 0,
+        pendingLoadProject = 0,
+        pendingRenderProject = 0,
+        pendingLoadTags = 0;
 
     var generateMarkup = function (repo, placeholder) {
         var trackGenerate = app.Tracking.start('Docker Hub render ' + username + '/' + repo.name, 'dockerhub');
@@ -20,7 +18,10 @@
             data: JSON.stringify(repo),
             contentType: 'application/json',
             complete: function () {
-                projectLoadFinished();
+                $(target).children('.loading-panel').remove();
+
+                pendingRenderProject--;
+                updateProgress();
             },
             success: function (html) {
                 trackGenerate.done();
@@ -47,12 +48,16 @@
         $.get({
             url: base_url + '/repositories/' + username + '/' + repository_name,
             error: function () {
-                projectLoadFinished();
+                $(target).children('.loading-panel').remove();
             },
             success: function (repo) {
                 trackProject.done();
 
                 generateMarkup(repo, placeholder);
+            },
+            complete: function (repo) {
+                pendingLoadProject--;
+                updateProgress();
             }
         });
     };
@@ -62,6 +67,8 @@
             return;
         } else {
             $(target).data('loaded', 'true');
+
+            app.StickyProgress.set('dockerhub', 2);
         }
 
         var trackProjects = app.Tracking.start('Docker Hub projects', 'dockerhub');
@@ -70,11 +77,17 @@
             url: base_url + '/repositories/' + username,
             error: function () {
                 $(target).children('.loading-panel').remove();
+
+                app.StickyProgress.set('dockerhub', 100);
+                app.StickyProgress.hide('dockerhub');
             },
             success: function (response) {
                 trackProjects.done();
 
-                projects_to_load = response.results.length;
+                app.StickyProgress.set('dockerhub', 5);
+
+                pendingLoadProject = pendingRenderProject = pendingLoadTags = response.results.length;
+                pendingTasks = response.results.length * 3;
 
                 response.results.sort(function (a, b) {
                     if (a.last_updated < b.last_updated) { return 1; } else { return -1; }
@@ -111,8 +124,23 @@
                 });
 
                 container.empty().append($('<p>').append(list));
+            },
+            complete: function () {
+                pendingLoadTags--;
+                updateProgress();
             }
         });
+    };
+
+    var updateProgress = function () {
+        var ratio = (pendingLoadProject + pendingRenderProject + pendingLoadTags) / pendingTasks;
+        var progress = 5 + 95 - Math.round(95 * ratio);
+
+        app.StickyProgress.set('dockerhub', progress);
+
+        if (pendingLoadProject + pendingRenderProject + pendingLoadTags == 0) {
+            app.StickyProgress.hide('dockerhub');
+        }
     };
 
     app.Startup.addInitTask(function() {

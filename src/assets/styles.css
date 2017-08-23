@@ -190,6 +190,7 @@ div.sticky-progress {
     max-width: none;
     height: 2px;
     position: sticky;
+    z-index: 999;
     top: 0;
     margin: -8px -8px 8px -8px;
     background-color: rgba(0, 150, 136, 0.3);

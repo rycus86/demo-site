@@ -3,7 +3,12 @@
 
     var base_url = 'https://api.viktoradam.net/github',
         username = 'rycus86',
-        target = '#panel-github';
+        target = '#panel-github',
+
+        pendingTasks = 0,
+        pendingRenderPanel = 0,
+        pendingLoadReadme = 0,
+        pendingRenderReadme = 0;
 
     var generateMarkup = function (repo) {
         var placeholder = $('<div/>').css('display', 'none');
@@ -16,6 +21,9 @@
             contentType: 'application/json',
             complete: function () {
                 $(target).children('.loading-panel').remove();
+
+                pendingRenderPanel--;
+                updateProgress();
             },
             success: function (html) {
                 trackGenerate.done();
@@ -32,6 +40,8 @@
                     url: base_url + '/repos/' + repo.full_name + '/readme/raw',
                     error: function () {
                         $('#github-readme-' + repo.name).empty().append($('<p><i>None</i></p>'));
+
+                        pendingRenderReadme--;
                     },
                     success: function (raw_readme) {
                         trackReadme.done();
@@ -53,8 +63,16 @@
 
                                 app.LazyLoad.images(markup);
                                 app.CodeHighlight.processCodeBlocks('#github-' + repo.name + ' .readme');
+                            },
+                            complete: function () {
+                                pendingRenderReadme--;
+                                updateProgress();
                             }
                         });
+                    },
+                    complete: function () {
+                        pendingLoadReadme--;
+                        updateProgress();
                     }
                 });
             }
@@ -66,6 +84,8 @@
             return;
         } else {
             $(target).data('loaded', 'true');
+
+            app.StickyProgress.set('github', 2);
         }
 
         var trackProjects = app.Tracking.start('GitHub projects', 'github');
@@ -74,9 +94,17 @@
             url: base_url + '/repos/' + username,
             error: function () {
                 $(target).children('.loading-panel').remove();
+
+                app.StickyProgress.set('github', 100);
+                app.StickyProgress.hide();
             },
             success: function (repos) {
                 trackProjects.done();
+
+                app.StickyProgress.set('github', 5);
+
+                pendingRenderPanel = pendingLoadReadme = pendingRenderReadme = repos.length;
+                pendingTasks = repos.length * 3;
 
                 repos.sort(function (a, b) {
                     if (a.fork && !b.fork) { return 1; }
@@ -88,6 +116,17 @@
                 });
             }
         });
+    };
+
+    var updateProgress = function () {
+        var ratio = (pendingRenderPanel + pendingLoadReadme + pendingRenderReadme) / pendingTasks;
+        var progress = 5 + 95 - Math.round(95 * ratio);
+
+        app.StickyProgress.set('github', progress);
+
+        if (pendingRenderPanel + pendingLoadReadme + pendingRenderReadme == 0) {
+            app.StickyProgress.hide('github');
+        }
     };
 
     app.Startup.addInitTask(function() {
