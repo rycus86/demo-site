@@ -114,6 +114,12 @@
                 }).forEach(function (repo) {
                     generateMarkup(repo);
                 });
+
+                // make sure the last panel is left aligned
+                for (var idx = 0; idx < 3 - (repos.length % 3); idx++) {
+                    var placeholder = $('<div/>').addClass('mdl-cell mdl-cell--4-col empty-cell');
+                    $(target).append(placeholder);
+                }
             }
         });
     };

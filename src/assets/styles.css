@@ -46,6 +46,11 @@ footer ul.mdl-mini-footer__link-list {
     background-color: #00bcd4 !important;
 }
 
+.mdl-cell.empty-cell {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
 .markdown h1,
 .markdown h2,
 .markdown h3,

@@ -94,6 +94,12 @@
                 }).forEach(function (repo) {
                     loadProject(repo.name);
                 });
+
+                // make sure the last panel is left aligned
+                for (var idx = 0; idx < 3 - (response.results.length % 3); idx++) {
+                    var placeholder = $('<div/>').addClass('mdl-cell mdl-cell--4-col empty-cell');
+                    $(target).append(placeholder);
+                }
             }
         });
     };
