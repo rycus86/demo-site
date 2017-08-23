@@ -16,6 +16,7 @@ window.cApp = (function () {
         cApp.Scroll.registerListeners();
 
         cApp.Navigation.ensureActiveTabIsVisible();
+        cApp.StickyProgress.initialize();
         cApp.CodeHighlight.initialize();
     });
 
@@ -256,6 +257,21 @@ window.cApp = (function () {
                         }, 1000);
                     });
                 });
+            }
+        },
+
+        StickyProgress: {
+            initialize: function () {
+                $('.sticky-progress').hide(); 
+            },
+
+            set: function (name, value) {
+                var target = $('.sticky-progress[data-progress-name="' + name + '"]');
+
+                if (!!target && !!target.get(0).MaterialProgress) {
+                    target.show(500);
+                    target.get(0).MaterialProgress.setProgress(value);
+                }
             }
         },
 

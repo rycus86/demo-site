@@ -185,6 +185,20 @@ footer ul.mdl-mini-footer__link-list {
     top: -20px;
 }
 
+div.sticky-progress {
+    width: calc(100% + 16px);
+    max-width: none;
+    height: 2px;
+    position: sticky;
+    top: 0;
+    margin: -8px -8px 8px -8px;
+    background-color: rgba(0, 150, 136, 0.3);
+}
+
+div.sticky-progress > .progressbar {
+    background-color: rgb(255, 110, 64);
+}
+
 section div div.loading-panel {
     text-align: center;
 }
