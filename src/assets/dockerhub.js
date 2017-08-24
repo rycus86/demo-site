@@ -126,7 +126,7 @@
                                 .append($('<span class="mdl-list__item-sub-title"/>')
                                          .append((tag.full_size / (1024.0 * 1024.0)).toFixed(2) + ' MB'));
 
-                    list.append($('<li class="mdl-list__item mdl-list__item--two-line"/>').append($item));
+                    $list.append($('<li class="mdl-list__item mdl-list__item--two-line"/>').append($item));
                 });
 
                 $container.empty().append($('<p>').append($list));
