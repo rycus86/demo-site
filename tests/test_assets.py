@@ -26,13 +26,13 @@ class AssetTest(unittest.TestCase):
         data = self.get_asset('datetime.js', 'application/javascript')
 
         self.assertIn('app.DateTime = {', data)
-        self.assertIn('formatTimeFromNow: function (container_id) {', data)
-        self.assertIn('formatDateTime: function (container_id) {', data)
+        self.assertIn('formatTimeFromNow: function (containerId) {', data)
+        self.assertIn('formatDateTime: function (containerId) {', data)
 
         data = self.get_asset('github.js', 'application/javascript')
 
         self.assertIn('app.Startup.addInitTask(function() {', data)
-        self.assertIn('base_url = \'https://api.viktoradam.net/github\'', data)
+        self.assertIn('baseUrl = \'https://api.viktoradam.net/github\'', data)
         self.assertIn('var generateMarkup = function (repo) {', data)
         self.assertIn('var loadProjects = function () {', data)
 
@@ -40,11 +40,11 @@ class AssetTest(unittest.TestCase):
 
         self.assertIn('app.DockerHub = {', data)
         self.assertIn('app.Startup.addInitTask(function() {', data)
-        self.assertIn('base_url = \'https://api.viktoradam.net/docker\'', data)
+        self.assertIn('baseUrl = \'https://api.viktoradam.net/docker\'', data)
         self.assertIn('var generateMarkup = function (repo, placeholder) {', data)
-        self.assertIn('var loadProject = function (repository_name) {', data)
+        self.assertIn('var loadProject = function (repositoryName) {', data)
         self.assertIn('var loadProjects = function () {', data)
-        self.assertIn('var generateTags = function (repo_full_name, container_id) {', data)
+        self.assertIn('var generateTags = function (repoFullName, containerId) {', data)
 
     def test_css_files(self):
         data = self.get_asset('styles.css', 'text/css; charset=utf-8')

@@ -21,33 +21,33 @@
             }
 
             var $currentTab = $('.mdl-layout__tab.is-active');
+            var $targetTab = null;
             var isFirstTab = $currentTab.index() === 0;
             var isLastTab = $currentTab.index() === this.$tabs.length - 1;
-            var targetTab = null;
 
             switch (ev.type) {
                 case 'swipeleft': {
                     if (isLastTab) {
-                        targetTab = this.$tabs.first();
+                        $targetTab = this.$tabs.first();
                     } else {
-                        targetTab = $currentTab.next();
+                        $targetTab = $currentTab.next();
                     }
 
                     break;
                 }
                 case 'swiperight': {
                     if (isFirstTab) {
-                        targetTab = this.$tabs.last();
+                        $targetTab = this.$tabs.last();
                     } else {
-                        targetTab = $currentTab.prev();
+                        $targetTab = $currentTab.prev();
                     }
 
                     break;
                 }
             }
             
-            if (!!targetTab) {
-                app.Navigation.goToTab(targetTab.attr('id').replace('tab-', ''));
+            if (!!$targetTab) {
+                app.Navigation.goToTab($targetTab.attr('id').replace('tab-', ''));
             }
         }
 

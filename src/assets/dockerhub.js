@@ -1,7 +1,7 @@
 (function (app) {
     'use strict';
 
-    var base_url = 'https://api.viktoradam.net/docker',
+    var baseUrl = 'https://api.viktoradam.net/docker',
         username = 'rycus86',
         target = '#panel-dockerhub',
 
@@ -26,27 +26,27 @@
             success: function (html) {
                 trackGenerate.done();
 
-                var content = $(html);
-                placeholder.replaceWith(content);
+                var $content = $(html);
+                placeholder.replaceWith($content);
 
-                content.find('.mdl-js-spinner').each(function() {
+                $content.find('.mdl-js-spinner').each(function() {
                     componentHandler.upgradeElement($(this).get(0));
                 });
 
-                app.LazyLoad.images(content);
+                app.LazyLoad.images($content);
                 app.CodeHighlight.processCodeBlocks('#dockerhub-' + repo.name + ' .readme');
             }
         });
     };
 
-    var loadProject = function (repository_name) {
-        var placeholder = $('<div/>').css('display', 'none');
-        $(target).append(placeholder);
+    var loadProject = function (repositoryName) {
+        var $placeholder = $('<div/>').css('display', 'none');
+        $(target).append($placeholder);
 
-        var trackProject = app.Tracking.start('Docker Hub load ' + username + '/' + repository_name, 'dockerhub');
+        var trackProject = app.Tracking.start('Docker Hub load ' + username + '/' + repositoryName, 'dockerhub');
 
         $.get({
-            url: base_url + '/repositories/' + username + '/' + repository_name,
+            url: baseUrl + '/repositories/' + username + '/' + repositoryName,
             error: function () {
                 $(target).children('.loading-panel').remove();
             },
@@ -74,7 +74,7 @@
         var trackProjects = app.Tracking.start('Docker Hub projects', 'dockerhub');
 
         $.get({
-            url: base_url + '/repositories/' + username,
+            url: baseUrl + '/repositories/' + username,
             error: function () {
                 $(target).children('.loading-panel').remove();
 
@@ -97,39 +97,39 @@
 
                 // make sure the last panel is left aligned
                 for (var idx = 0; idx < 3 - (response.results.length % 3); idx++) {
-                    var placeholder = $('<div/>').addClass('mdl-cell mdl-cell--4-col empty-cell');
-                    $(target).append(placeholder);
+                    var $placeholder = $('<div/>').addClass('mdl-cell mdl-cell--4-col empty-cell');
+                    $(target).append($placeholder);
                 }
             }
         });
     };
 
-    var generateTags = function (repo_full_name, container_id) {
-        var trackTags = app.Tracking.start('Docker Hub tags ' + repo_full_name, 'dockerhub');
+    var generateTags = function (repoFullName, containerId) {
+        var trackTags = app.Tracking.start('Docker Hub tags ' + repoFullName, 'dockerhub');
 
         $.get({
-            url: base_url + '/repositories/' + repo_full_name + '/tags',
+            url: baseUrl + '/repositories/' + repoFullName + '/tags',
             error: function () {
-                $('#' + container_id).empty().append($('<p><i>Failed to load tags</i></p>'));
+                $('#' + containerId).empty().append($('<p><i>Failed to load tags</i></p>'));
             },
             success: function (response) {
                 trackTags.done();
 
-                var container = $('#' + container_id);
-                var list = $('<ul class="mdl-list condensed-list"/>');
+                var $container = $('#' + container_id);
+                var $list = $('<ul class="mdl-list condensed-list"/>');
 
                 response.results.forEach(function (tag) {
-                    var item = $('<span class="mdl-list__item-primary-content"/>')
+                    var $item = $('<span class="mdl-list__item-primary-content"/>')
                                 .append($('<i class="material-icons mdl-list__item-icon mdl-color-text--accent">label</i>'))
                                 .append($('<span/>')
                                          .append(tag.name))
                                 .append($('<span class="mdl-list__item-sub-title"/>')
                                          .append((tag.full_size / (1024.0 * 1024.0)).toFixed(2) + ' MB'));
 
-                    list.append($('<li class="mdl-list__item mdl-list__item--two-line"/>').append(item));
+                    list.append($('<li class="mdl-list__item mdl-list__item--two-line"/>').append($item));
                 });
 
-                container.empty().append($('<p>').append(list));
+                $container.empty().append($('<p>').append($list));
             },
             complete: function () {
                 pendingLoadTags--;

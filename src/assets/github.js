@@ -1,7 +1,7 @@
 (function (app) {
     'use strict';
 
-    var base_url = 'https://api.viktoradam.net/github',
+    var baseUrl = 'https://api.viktoradam.net/github',
         username = 'rycus86',
         target = '#panel-github',
 
@@ -11,8 +11,8 @@
         pendingRenderReadme = 0;
 
     var generateMarkup = function (repo) {
-        var placeholder = $('<div/>').css('display', 'none');
-        $(target).append(placeholder);
+        var $placeholder = $('<div/>').css('display', 'none');
+        $(target).append($placeholder);
 
         var trackGenerate = app.Tracking.start('GitHub render ' + repo.full_name, 'github');
         $.post({
@@ -28,28 +28,28 @@
             success: function (html) {
                 trackGenerate.done();
 
-                var content = $(html);
-                placeholder.replaceWith(content);
+                var $content = $(html);
+                placeholder.replaceWith($content);
 
-                content.find('.mdl-js-spinner').each(function() {
+                $content.find('.mdl-js-spinner').each(function() {
                     componentHandler.upgradeElement($(this).get(0));
                 });
 
                 var trackReadme = app.Tracking.start('GitHub raw readme ' + repo.full_name, 'github');
                 $.get({
-                    url: base_url + '/repos/' + repo.full_name + '/readme/raw',
+                    url: baseUrl + '/repos/' + repo.full_name + '/readme/raw',
                     error: function () {
                         $('#github-readme-' + repo.name).empty().append($('<p><i>None</i></p>'));
 
                         pendingRenderReadme--;
                     },
-                    success: function (raw_readme) {
+                    success: function (rawReadme) {
                         trackReadme.done();
 
                         var trackMarkdown = app.Tracking.start('GitHub readme markdown ' + repo.full_name, 'github');
                         $.post({
                             url: '/markdown',
-                            data: raw_readme,
+                            data: rawReadme,
                             contentType: 'text/plain',
                             error: function () {
                                 $('#github-readme-' + repo.name).empty().append($('<p><i>Failed to render</i></p>'));
@@ -57,11 +57,11 @@
                             success: function (readme) {
                                 trackMarkdown.done();
 
-                                var markup = $(readme);
-                                markup.find('code').parents('p').addClass('code-wrapper');
-                                $('#github-readme-' + repo.name).empty().append(markup);
+                                var $markup = $(readme);
+                                $markup.find('code').parents('p').addClass('code-wrapper');
+                                $('#github-readme-' + repo.name).empty().append($markup);
 
-                                app.LazyLoad.images(markup);
+                                app.LazyLoad.images($markup);
                                 app.CodeHighlight.processCodeBlocks('#github-' + repo.name + ' .readme');
                             },
                             complete: function () {
@@ -91,7 +91,7 @@
         var trackProjects = app.Tracking.start('GitHub projects', 'github');
 
         $.get({
-            url: base_url + '/repos/' + username,
+            url: baseUrl + '/repos/' + username,
             error: function () {
                 $(target).children('.loading-panel').remove();
 
@@ -117,8 +117,8 @@
 
                 // make sure the last panel is left aligned
                 for (var idx = 0; idx < 3 - (repos.length % 3); idx++) {
-                    var placeholder = $('<div/>').addClass('mdl-cell mdl-cell--4-col empty-cell');
-                    $(target).append(placeholder);
+                    var $placeholder = $('<div/>').addClass('mdl-cell mdl-cell--4-col empty-cell');
+                    $(target).append($placeholder);
                 }
             }
         });

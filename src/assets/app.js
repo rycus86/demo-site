@@ -8,7 +8,7 @@ window.cApp = (function () {
         cApp.Startup.initTabs();
         cApp.Startup.initTabLinks();
 
-        cApp.Startup.init_tasks.forEach(function (task) {
+        cApp.Startup.initTasks_.forEach(function (task) {
             task.call();
         });
 
@@ -22,7 +22,7 @@ window.cApp = (function () {
 
     return {
         Startup: {
-            init_tasks: [],
+            initTasks_: [],
 
             initTabs: function () {
                 $('.mdl-layout__tab-bar').children().each(function () {
@@ -49,17 +49,17 @@ window.cApp = (function () {
             },
 
             addInitTask: function (task) {
-                cApp.Startup.init_tasks.push(task);
+                cApp.Startup.initTasks_.push(task);
             }
         },
 
         LazyLoad: {
             css: function () {
                 $('meta[name=custom-fetch-css]').each(function () {
-                    var placeholder = $(this);
-                    var href = placeholder.attr('content');
+                    var $placeholder = $(this);
+                    var href = $placeholder.attr('content');
 
-                    placeholder.replaceWith(
+                    $placeholder.replaceWith(
                         $('<link>').attr('rel', 'stylesheet')
                                    .attr('href', href)
                                    .attr('type', 'text/css'));
@@ -68,92 +68,92 @@ window.cApp = (function () {
 
             images: function (container) {
                 container.find('img[data-src]').each(function () {
-                    var img = $(this);
-                    var source = img.data('src');
+                    var $img = $(this);
+                    var source = $img.data('src');
 
                     if (source.indexOf('http://') !== 0) {
                         // do not load images on HTTP
-                        img.attr('src', source);
+                        $img.attr('src', source);
                     }
 
-                    img.removeAttr('data-src');
+                    $img.removeAttr('data-src');
                 });
 
                 container.find('*[data-background-image]').each(function () {
-                    var item = $(this);
+                    var $item = $(this);
 
-                    var position = item.data('background-position');
+                    var position = $item.data('background-position');
                     if (!!position) {
-                        item.css('background-position', position);
-                        item.removeAttr('data-background-position');
+                        $item.css('background-position', position);
+                        $item.removeAttr('data-background-position');
                     }
 
-                    var size = item.data('background-size');
+                    var size = $item.data('background-size');
                     if (!!size) {
-                        item.css('background-size', size);
-                        item.removeAttr('data-background-size');
+                        $item.css('background-size', size);
+                        $item.removeAttr('data-background-size');
                     }
 
-                    item.css('background-image', 'url(' + item.data('background-image') + ')');
-                    item.removeAttr('data-background-image');
+                    $item.css('background-image', 'url(' + $item.data('background-image') + ')');
+                    $item.removeAttr('data-background-image');
                 });
             },
         },
 
         Navigation: {
-            on_change_listeners: [],
+            onChangeListeners_: [],
 
             getSelectedTab: function () {
-                var current_link = $('a.mdl-layout__tab.is-active');
-                return current_link.attr('id').replace('tab-', '');
+                var $currentLink = $('a.mdl-layout__tab.is-active');
+                return $currentLink.attr('id').replace('tab-', '');
             },
 
-            isTabSelected: function (tab_id) {
-                return this.getSelectedTab() === tab_id;
+            isTabSelected: function (tabId) {
+                return this.getSelectedTab() === tabId;
             },
 
-            goToTab: function (tab_id) {
-                var current_link = $('a.mdl-layout__tab.is-active');
-                var target_link = $('#tab-' + tab_id);
+            goToTab: function (tabId) {
+                var $currentLink = $('a.mdl-layout__tab.is-active');
+                var $targetLink = $('#tab-' + tabId);
 
-                var current_id = current_link.attr('id').replace('tab-', '');
-                var target_id = tab_id;
+                var currentId = $currentLink.attr('id').replace('tab-', '');
+                var targetId = tabId;
 
-                if (current_id === target_id) {
+                if (currentId === targetId) {
                     return;
                 }
 
-                if (!document.getElementById(target_id)) {
+                if (!document.getElementById(targetId)) {
                     return;
                 }
 
-                cApp.StickyProgress.hide(current_id);
+                cApp.StickyProgress.hide(currentId);
 
-                var current = $('#' + current_id);
-                var target = $('#' + target_id);
+                var $current = $('#' + currentId);
+                var $target = $('#' + targetId);
 
-                current.fadeOut(150, function () {
-                    history.pushState({}, window.title, '/page/' + tab_id);
+                $current.fadeOut(150, function () {
+                    history.pushState({}, window.title, '/page/' + tabId);
 
-                    if (!!window.TabTitles && target_id in window.TabTitles) {
-                        document.title = window.TabTitles[target_id];
+                    if (!!window.TabTitles && targetId in window.TabTitles) {
+                        document.title = window.TabTitles[targetId];
                     }
 
-                    ga('set', 'page', '/page/' + tab_id);
+                    ga('set', 'page', '/page/' + tabId);
                     ga('send', 'pageview');
 
-                    current_link.toggleClass('is-active');
-                    target_link.toggleClass('is-active');
+                    $currentLink.toggleClass('is-active');
+                    $targetLink.toggleClass('is-active');
 
-                    current.toggleClass('is-active');
-                    target.toggleClass('is-active');
+                    $current.toggleClass('is-active');
+                    $target.toggleClass('is-active');
 
                     $('main').scrollTop(0);
 
-                    cApp.Navigation.fireTabChange(target_id);
+                    cApp.Navigation.fireTabChange(targetId);
                     cApp.Navigation.ensureActiveTabIsVisible();
 
-                    target.fadeIn(150);
+                    $target.fadeIn(150);
                 });
             },
 
@@ -170,17 +170,17 @@ window.cApp = (function () {
                 }
             },
 
-            onTabChange: function (target_tab, callback) {
-                cApp.Navigation.on_change_listeners.push({'target': target_tab, 'callback': callback});
+            onTabChange: function (targetTab, callback) {
+                cApp.Navigation.onChangeListeners_.push({'target': targetTab, 'callback': callback});
 
-                if (cApp.Navigation.getSelectedTab() === target_tab) {
+                if (cApp.Navigation.getSelectedTab() === targetTab) {
                     callback();
                 }
             },
 
-            fireTabChange: function (target_tab) {
-                cApp.Navigation.on_change_listeners.forEach(function (listener) {
-                    if (listener.target === target_tab) {
+            fireTabChange: function (targetTab) {
+                cApp.Navigation.onChangeListeners_.forEach(function (listener) {
+                    if (listener.target === targetTab) {
                         listener.callback();
                     }
                 });
@@ -188,31 +188,31 @@ window.cApp = (function () {
         },
 
         Scroll: {
-            listeners: [],
+            listeners_: [],
 
-            pending: false,
-            endScrollHandle: null,
+            pending_: false,
+            endScrollHandle_: null,
 
             initialize: function () {
-                var $this = cApp.Scroll;
+                var _this = cApp.Scroll;
 
                 $('main').scroll(function () {
-                    if ($this.pending) {
+                    if (_this.pending_) {
                         return;
                     }
 
-                    $this.pending = true;
+                    _this.pending_ = true;
 
-                    clearTimeout($this.endScrollHandle);
+                    clearTimeout(_this.endScrollHandle_);
 
-                    $this.onScroll();
+                    _this.onScroll();
 
                     setTimeout(function () {
-                        $this.pending = false;
+                        _this.pending_ = false;
                     }, 300);
 
-                    $this.endScrollHandle = setTimeout(function () {
-                        $this.onScroll();
+                    _this.endScrollHandle_ = setTimeout(function () {
+                        _this.onScroll();
                     }, 500);
                 });
             },
@@ -222,17 +222,17 @@ window.cApp = (function () {
             },
 
             onScroll: function () {
-                cApp.Scroll.listeners.forEach(function (listener) {
+                cApp.Scroll.listeners_.forEach(function (listener) {
                     listener();
                 });
             },
 
             setupFab: function () {
-                var button = $('.specs-fab-menu');
-                var footer = $('footer');
+                var $button = $('.specs-fab-menu');
+                var $footer = $('footer');
 
-                cApp.Scroll.listeners.push(function () {
-                    var margin = button.css('margin-bottom');
+                cApp.Scroll.listeners_.push(function () {
+                    var margin = $button.css('margin-bottom');
                     if (!!margin) {
                         margin = parseInt(margin.substring(0, margin.length - 2));
                     }
@@ -241,16 +241,16 @@ window.cApp = (function () {
                     var offset = footer.offset().top;
 
                     if (offset < threshold) {
-                        button.stop().animate({'margin-bottom': '-100px'}, 'fast').addClass('off-screen');
+                        $button.stop().animate({'margin-bottom': '-100px'}, 'fast').addClass('off-screen');
                     } else if (offset > threshold) {
-                        button.removeClass('off-screen').stop().animate({'margin-bottom': '0'}, 'fast');
+                        $button.removeClass('off-screen').stop().animate({'margin-bottom': '0'}, 'fast');
                     }
                 });
 
                 var $header = $('header');
                 var $main = $('main');
 
-                button.find('a').each(function (index, item) {
+                $button.find('a').each(function (index, item) {
                     var $item = $(item);
                     var $target = $($item.attr('href'));
 
@@ -272,8 +272,8 @@ window.cApp = (function () {
                 this.progressbar_.hide(); 
             },
 
-            set: function (tab_id, value) {
-                if (!cApp.Navigation.isTabSelected(tab_id)) {
+            set: function (tabId, value) {
+                if (!cApp.Navigation.isTabSelected(tabId)) {
                     return;
                 }
 
@@ -286,8 +286,8 @@ window.cApp = (function () {
                 }
             },
 
-            hide: function (tab_id) {
-                if (!cApp.Navigation.isTabSelected(tab_id)) {
+            hide: function (tabId) {
+                if (!cApp.Navigation.isTabSelected(tabId)) {
                     return;
                 }
                 
@@ -309,22 +309,22 @@ window.cApp = (function () {
             },
 
             processCodeBlocks: function (container) {
-                var code_blocks = $(container).find('pre code');
-                for (var idx = 0; idx < code_blocks.length; idx++) {
-                    window.hljs.highlightBlock(code_blocks[idx]);
+                var codeBlocks = $(container).find('pre code');
+                for (var idx = 0; idx < codeBlocks.length; idx++) {
+                    window.hljs.highlightBlock(codeBlocks[idx]);
                 }
             }
         },
 
         Tracking: {
             start: function (title, label) {
-                var start_time = new Date();
+                var startTime = new Date();
 
                 return {
                     done: function () {
-                        var end_time = new Date();
+                        var endTime = new Date();
 
-                        ga('send', 'timing', title, label, end_time - start_time);
+                        ga('send', 'timing', title, label, endTime - startTime);
                     }
                 };
             }
