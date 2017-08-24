@@ -96,7 +96,7 @@
                 $(target).children('.loading-panel').remove();
 
                 app.StickyProgress.set('github', 100);
-                app.StickyProgress.hide();
+                app.StickyProgress.hide('github');
             },
             success: function (repos) {
                 trackProjects.done();

@@ -108,6 +108,10 @@ window.cApp = (function () {
                 return current_link.attr('id').replace('tab-', '');
             },
 
+            isTabSelected: function (tab_id) {
+                return this.getSelectedTab() === tab_id;
+            },
+
             goToTab: function (tab_id) {
                 var current_link = $('a.mdl-layout__tab.is-active');
                 var target_link = $('#tab-' + tab_id);
@@ -123,7 +127,7 @@ window.cApp = (function () {
                     return;
                 }
 
-                cApp.Navigation.fireTabChange(target_id);
+                cApp.StickyProgress.hide(current_id);
 
                 var current = $('#' + current_id);
                 var target = $('#' + target_id);
@@ -146,6 +150,7 @@ window.cApp = (function () {
 
                     $('main').scrollTop(0);
 
+                    cApp.Navigation.fireTabChange(target_id);
                     cApp.Navigation.ensureActiveTabIsVisible();
 
                     target.fadeIn(150);
@@ -261,28 +266,32 @@ window.cApp = (function () {
         },
 
         StickyProgress: {
+            progressbar_: $('.sticky-progress'),
+
             initialize: function () {
-                $('.sticky-progress').hide(); 
+                this.progressbar_.hide(); 
             },
 
-            set: function (name, value) {
-                var target = $('.sticky-progress[data-progress-name="' + name + '"]');
+            set: function (tab_id, value) {
+                if (!cApp.Navigation.isTabSelected(tab_id)) {
+                    return;
+                }
 
-                if (!!target && !!target.get(0).MaterialProgress) {
-                    if (!target.is(':visible')) {
-                        target.show();
+                if (!!this.progressbar_.get(0).MaterialProgress) {
+                    if (!this.progressbar_.is(':visible')) {
+                        this.progressbar_.fadeIn('fast');
                     }
 
-                    target.get(0).MaterialProgress.setProgress(value);
+                    this.progressbar_.get(0).MaterialProgress.setProgress(value);
                 }
             },
 
-            hide: function (name) {
-                var target = $('.sticky-progress[data-progress-name="' + name + '"]');
-
-                if (!!target) {
-                    target.fadeOut(500);
+            hide: function (tab_id) {
+                if (!cApp.Navigation.isTabSelected(tab_id)) {
+                    return;
                 }
+                
+                this.progressbar_.fadeOut();
             }
         },
 

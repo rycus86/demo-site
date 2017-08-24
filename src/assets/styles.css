@@ -191,18 +191,29 @@ footer ul.mdl-mini-footer__link-list {
 }
 
 div.sticky-progress {
-    width: calc(100% + 16px);
+    width: 100%;
     max-width: none;
     height: 2px;
-    position: sticky;
-    z-index: 999;
-    top: 0;
-    margin: -8px -8px 8px -8px;
+    position: relative;
+    z-index: 2;
     background-color: rgba(0, 150, 136, 0.3);
+}
+
+div.sticky-progress .bar {
+    position: relative;
+    height: 2px;
 }
 
 div.sticky-progress > .progressbar {
     background-color: rgb(255, 110, 64);
+}
+
+div.sticky-progress > .bufferbar {
+    top: -2px;
+}
+
+div.sticky-progress > .auxbar {
+    display: none;
 }
 
 section div div.loading-panel {
