@@ -115,7 +115,7 @@
             success: function (response) {
                 trackTags.done();
 
-                var $container = $('#' + container_id);
+                var $container = $('#' + containerId);
                 var $list = $('<ul class="mdl-list condensed-list"/>');
 
                 response.results.forEach(function (tag) {
