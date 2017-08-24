@@ -53,7 +53,7 @@
             success: function (repo) {
                 trackProject.done();
 
-                generateMarkup(repo, placeholder);
+                generateMarkup(repo, $placeholder);
             },
             complete: function (repo) {
                 pendingLoadProject--;

@@ -29,7 +29,7 @@
                 trackGenerate.done();
 
                 var $content = $(html);
-                placeholder.replaceWith($content);
+                $placeholder.replaceWith($content);
 
                 $content.find('.mdl-js-spinner').each(function() {
                     componentHandler.upgradeElement($(this).get(0));
