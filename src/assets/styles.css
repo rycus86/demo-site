@@ -96,6 +96,25 @@ footer ul.mdl-mini-footer__link-list {
     text-decoration: none;
 }
 
+.markdown .table-wrapper {
+    overflow: auto;
+}
+
+.markdown .table-wrapper table {
+    width: 500px;
+    border-collapse: collapse;
+    margin: 4px;
+}
+
+.markdown .table-wrapper th, .markdown .table-wrapper td {
+    border: 1px solid #ccc;
+    padding: 4px;
+}
+
+.markdown .table-wrapper th, .markdown .table-wrapper tr:nth-child(2n) {
+    background: #eee;
+}
+
 .mdl-list.condensed-list {
     padding: 0;
 }

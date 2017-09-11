@@ -34,7 +34,8 @@
                 });
 
                 app.LazyLoad.images($content);
-                app.CodeHighlight.processCodeBlocks('#dockerhub-' + repo.name + ' .readme');
+                app.Markdown.processCodeBlocks('#dockerhub-' + repo.name + ' .readme');
+                app.Markdown.processTables('#dockerhub-' + repo.name + ' .readme');
             }
         });
     };

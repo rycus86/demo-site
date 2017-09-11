@@ -17,7 +17,7 @@ window.cApp = (function () {
 
         cApp.Navigation.ensureActiveTabIsVisible();
         cApp.StickyProgress.initialize();
-        cApp.CodeHighlight.initialize();
+        cApp.Markdown.initialize();
     });
 
     return {
@@ -237,8 +237,8 @@ window.cApp = (function () {
                         margin = parseInt(margin.substring(0, margin.length - 2));
                     }
 
-                    var threshold = button.offset().top + button.outerHeight() / 2 + margin;
-                    var offset = footer.offset().top;
+                    var threshold = $button.offset().top + $button.outerHeight() / 2 + margin;
+                    var offset = $footer.offset().top;
 
                     if (offset < threshold) {
                         $button.stop().animate({'margin-bottom': '-100px'}, 'fast').addClass('off-screen');
@@ -295,14 +295,14 @@ window.cApp = (function () {
             }
         },
 
-        CodeHighlight: {
+        Markdown: {
             initialize: function () {
                 if (!!hljs) {
                     hljs.configure({
                         languages: ['java', 'python', 'dockerfile', 'yaml', 'xml', 'html', 'shell', 'bash']
                     });
 
-                    $('pre code').each(function(i, block) {
+                    $('pre code').each(function (i, block) {
                         hljs.highlightBlock(block);
                     });
                 }
@@ -313,6 +313,13 @@ window.cApp = (function () {
                 for (var idx = 0; idx < codeBlocks.length; idx++) {
                     window.hljs.highlightBlock(codeBlocks[idx]);
                 }
+            },
+
+            processTables: function (container) {
+                var tables = $(container).find('table');
+                tables.each(function (i, table) {
+                    $(table).wrap($('<div>').addClass('table-wrapper'))
+                });
             }
         },
 

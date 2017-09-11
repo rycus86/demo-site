@@ -62,7 +62,8 @@
                                 $('#github-readme-' + repo.name).empty().append($markup);
 
                                 app.LazyLoad.images($markup);
-                                app.CodeHighlight.processCodeBlocks('#github-' + repo.name + ' .readme');
+                                app.Markdown.processCodeBlocks('#github-' + repo.name + ' .readme');
+                                app.Markdown.processTables('#github-' + repo.name + ' .readme');
                             },
                             complete: function () {
                                 pendingRenderReadme--;
