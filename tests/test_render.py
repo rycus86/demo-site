@@ -54,7 +54,15 @@ class RenderTest(unittest.TestCase):
     def test_render_markdown(self):
         response = self.client.post('/markdown',
                                     data='This will be a lazy loaded image from a placeholder:\n'
-                                         '[![img]({{ image: pycharm.png }})](/link/target)',
+                                         '[![img]({{ image: pycharm.png }})](/link/target)\n\n'
+                                         '```yaml\n'
+                                         'fenced:\n'
+                                         '  code:\n'
+                                         '    block:\n'
+                                         '```\n\n'
+                                         '| table  | test   |\n'
+                                         '| ------ | ------ |\n'
+                                         '| cell_1 | cell_2 |\n',
                                     content_type='text/plain')
 
         self.assertEqual(response.status_code, 200)
@@ -65,6 +73,11 @@ class RenderTest(unittest.TestCase):
 
         self.assertIn('<a href="/link/target">', content)
         self.assertRegexpMatches(content, '(?ms).*<img [^>]*data-src="/asset/[0-9a-f]+/images/pycharm.png".*')
+
+        self.assertIn('<pre><code class="yaml">fenced:\n  code:\n    block:', content)
+        self.assertIn('<table>', content)
+        self.assertIn('<th>table</th>\n<th>test</th>', content)
+        self.assertIn('<td>cell_1</td>\n<td>cell_2</td>', content)
 
     def test_render_dockerhub_without_description(self):
         payload = self.load_payload('dockerhub_payload_without_description.json')

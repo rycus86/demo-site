@@ -42,7 +42,7 @@ class _MarkdownExtension(Extension):
 
 
 def process_markdown(text, *args, **kwargs):
-    return markdown(text, *args, extensions=['markdown.extensions.fenced_code', _MarkdownExtension()], **kwargs)
+    return markdown(text, *args, extensions=['fenced_code', 'tables', _MarkdownExtension()], **kwargs)
 
 
 def load_resources():
