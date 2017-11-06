@@ -3,6 +3,10 @@ sudo: true
 python:
   - '2.7'
 
+sudo:
+  - required
+services:
+  - docker
 install: skip
 script:
   # prepare python modules
