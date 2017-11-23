@@ -25,4 +25,5 @@ on the frontend and with [Prometheus](https://prometheus.io) and
 The whole process including the deployments is automated,
 the only manual step being the `git push` command.
 
-To see how it works go to the *Specs* tab or click the button below.
+To see how it works go to the *Specs* tab or click the button below.  
+If you have any questions or would like to know more about it, get in touch on Twitter: [@rycus86](https://twitter.com/rycus86)
