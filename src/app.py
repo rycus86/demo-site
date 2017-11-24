@@ -70,7 +70,7 @@ def favicon():
 
 @app.route('/asset/<hash>/<path:asset_file>')
 @metrics.do_not_track()
-@metrics.histogram('http_request_static_asset',
+@metrics.histogram('flask_http_static_asset',
                    'HTTP request metrics for static assets by type',
                    labels={'status': lambda r: r.status_code,
                            'extension': lambda: os.path.splitext(request.path)[1]},
