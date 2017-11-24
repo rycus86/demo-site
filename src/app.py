@@ -1,6 +1,7 @@
 import os
 from flask import Flask, request, make_response, render_template, send_from_directory
 from flask_cache import Cache
+from prometheus_flask_exporter import PrometheusMetrics
 
 from utils import *
 
@@ -8,6 +9,7 @@ app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 30 * 24 * 60 * 60  # 1 month
 
 cache = Cache(app, config={'CACHE_TYPE': 'simple'})
+metrics = PrometheusMetrics(app)
 
 
 @app.route('/')
@@ -61,11 +63,18 @@ def render_markdown():
 
 
 @app.route('/favicon.ico')
+@metrics.do_not_track()
 def favicon():
     return send_from_directory('assets', 'favicon.ico')
 
 
 @app.route('/asset/<hash>/<path:asset_file>')
+@metrics.do_not_track()
+@metrics.histogram('http_request_static_asset',
+                   'HTTP request metrics for static assets by type',
+                   labels={'status': lambda r: r.status_code,
+                           'extension': lambda: os.path.splitext(request.path)[1]},
+                   buckets=(0.001, 0.01, 0.05, 0.1, 1, 5))
 def asset(hash, asset_file):
     return send_from_directory('assets', asset_file)
 
