@@ -34,7 +34,11 @@ jobs:
       if: branch = master
       script:
         - docker run --rm --privileged multiarch/qemu-user-static:register --reset
-        - docker build -t demo-site:$DOCKER_TAG --build-arg GIT_COMMIT=$TRAVIS_COMMIT -f $DOCKERFILE .
+        - >
+          docker build -t demo-site:$DOCKER_TAG
+            --build-arg GIT_COMMIT=$TRAVIS_COMMIT
+            --build-arg BUILD_TIMESTAMP=$(date +%s)
+            -f $DOCKERFILE .
         - docker tag demo-site:$DOCKER_TAG rycus86/demo-site:$DOCKER_TAG
         - docker login -u="rycus86" -p="$DOCKER_PASSWORD"
       after_success:

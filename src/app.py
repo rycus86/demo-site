@@ -12,7 +12,8 @@ cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 metrics = PrometheusMetrics(app)
 
 metrics.info('flask_app_info', 'Application info',
-             version=os.environ.get('GIT_COMMIT', 'unknown'))
+             git_commit=os.environ.get('GIT_COMMIT', 'unknown'),
+             built_at=os.environ.get('BUILD_TIMESTAMP', '0'))
 
 
 @app.route('/')
