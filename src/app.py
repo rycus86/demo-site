@@ -11,6 +11,9 @@ app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 30 * 24 * 60 * 60  # 1 month
 cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 metrics = PrometheusMetrics(app)
 
+metrics.info('flask_app_info', 'Application info',
+             version=os.environ.get('GIT_COMMIT', 'unknown'))
+
 
 @app.route('/')
 def main():
@@ -74,7 +77,7 @@ def favicon():
                    'HTTP request metrics for static assets by type',
                    labels={'status': lambda r: r.status_code,
                            'extension': lambda: os.path.splitext(request.path)[1]},
-                   buckets=(0.001, 0.01, 0.05, 0.1, 1, 5))
+                   buckets=(0.005, 0.01, 0.05, 0.1, 1, 5))
 def asset(hash, asset_file):
     return send_from_directory('assets', asset_file)
 
