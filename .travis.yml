@@ -15,9 +15,11 @@ jobs:
         # prepare python modules
         - pip install -r requirements.txt
         - pip install coveralls
-        # prepare reporter
+        # prepare reporters
         - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
         - chmod +x ./cc-test-reporter
+        - curl -fsSL https://testspace-client.s3.amazonaws.com/testspace-linux.tgz | tar -zxvf- -C .
+        - ./testspace config url rycus86.testspace.com
         # python tests
         - PYTHONPATH=src python -m coverage run --branch --source=src -m unittest discover -s tests -v
         # coverage reports
@@ -27,6 +29,7 @@ jobs:
           if [[ "$(python --version 2>&1)" = *2.7* ]]; then
             coveralls || exit 0
             ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT || exit 0
+            ./testspace coverage.xml
           fi
 
     - &deploy-stage
