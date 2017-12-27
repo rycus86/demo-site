@@ -25,6 +25,7 @@ jobs:
           nose2 -v \
             --plugin nose2.plugins.junitxml --junit-xml \
             --with-coverage --coverage-report xml --coverage-report term-missing
+      after_script:
         # coverage reports
         - |
           if [[ "$(python --version 2>&1)" = *2.7* ]]; then
