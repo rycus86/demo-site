@@ -14,14 +14,17 @@ jobs:
       script:
         # prepare python modules
         - pip install -r requirements.txt
-        - pip install coveralls
+        - pip install nose2 coverage coveralls
         # prepare reporters
         - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
         - chmod +x ./cc-test-reporter
         - curl -fsSL https://testspace-client.s3.amazonaws.com/testspace-linux.tgz | tar -zxvf- -C .
         - ./testspace config url rycus86.testspace.com
         # python tests
-        - PYTHONPATH=src python -m coverage run --branch --source=src -m unittest discover -s tests -v
+        - >
+          nose2 -v
+            --plugin nose2.plugins.junitxml --junit-xml
+            --with-coverage --coverage-report xml --coverage-report term-missing
         # coverage reports
         - python -m coverage report -m
         - python -m coverage xml
@@ -29,7 +32,7 @@ jobs:
           if [[ "$(python --version 2>&1)" = *2.7* ]]; then
             coveralls || exit 0
             ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT || exit 0
-            ./testspace coverage.xml
+            ./testspace nose2-junit.xml coverage.xml
           fi
 
     - &deploy-stage
