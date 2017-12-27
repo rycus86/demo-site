@@ -21,13 +21,11 @@ jobs:
         - curl -fsSL https://testspace-client.s3.amazonaws.com/testspace-linux.tgz | tar -zxvf- -C .
         - ./testspace config url rycus86.testspace.com
         # python tests
-        - >
-          nose2 -v
-            --plugin nose2.plugins.junitxml --junit-xml
+        - |
+          nose2 -v \
+            --plugin nose2.plugins.junitxml --junit-xml \
             --with-coverage --coverage-report xml --coverage-report term-missing
         # coverage reports
-        - python -m coverage report -m
-        - python -m coverage xml
         - |
           if [[ "$(python --version 2>&1)" = *2.7* ]]; then
             coveralls || exit 0
