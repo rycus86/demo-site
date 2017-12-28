@@ -8,6 +8,12 @@ services:
   - docker
 install: skip
 
+addons:
+  sonarcloud:
+    organization: "rycus86-github"
+    token:
+      secure: "BLkNZOd1D/4a3zuoD//uQK+cAW4JKzLJA3R/QA5GGSAC7Mul00vftdZ7PLJoAY1CM2qTBt+y2g2B6PiwKmTdnI2XRjh8AEtQw1UG8Hg+Z4oGo5p+RQxio/RXIEuE1mMLScTL9tQb8AzWB0Uwl3hl1g1+Gz3XKgFXDQs+AQfsKOG0PO9scNDvbyu3oGgDDV4RbuObmM9bWwfdqjOoDhNzRMztHFen4ChrBEstAb1A83fGAX6ZU/CWKiEPlXrus29TDZ/Qio3mFrNl5e01LpsASyAMAcTFPahUmhv/WuYo9mKFTkOD+DKPFWi3gvNbL/KPn31GNuw5FGpuGmCqRhMjz89Dh/B/OaYxQ6nYQ4E5wa1Y6sWf34vINh9pidEWY3ca82MZjvp5Tlss3OWZ04OHImBBqH+t34cDDOFWGhfzMNV3+KDWJQ6ZiZrAAK8hb5nAZlk+R1gfq/DHAOwGAvtuNU2LLBEg2yO0pPEzeMH4gFRpyHJeJFlKZLpPBy8YkFiIqmEMUdVpyaj5V3ycan2IZDVuKUrcefyOQL/nTq/3YT7QSBd9ZLYCujmQMOYao7kMURuH4ZXqjl8KtamQRqq6Nkg0Psj5s7AgvJoFs078uaRwaWrkPZUmjN3c6aRllAtSkJjZ2jnntOchswB0OVqNr1ogyBVGIYy73CpAewNGxqQ="
+
 jobs:
   include:
     - stage: test
@@ -32,6 +38,9 @@ jobs:
             coveralls || exit 0
             ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT || exit 0
             ./testspace nose2-junit.xml coverage.xml
+            sonar-scanner -Dsonar.projectKey=demo-site -Dsonar.sources=src \
+              -Dsonar.python.xunit.reportPath=nose2-junit.xml \
+              -Dsonar.python.coverage.reportPath=coverage.xml
           fi
 
     - &deploy-stage
