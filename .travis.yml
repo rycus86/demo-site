@@ -38,9 +38,13 @@ jobs:
             coveralls || exit 0
             ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT || exit 0
             ./testspace nose2-junit.xml coverage.xml
+            pylint src/*.py -r n \
+              --msg-template="{path}:{line}: [{msg_id}({symbol}), {obj}] {msg}" \
+              > pylint-report.txt ; echo -n
             sonar-scanner -Dsonar.projectKey=demo-site -Dsonar.sources=src \
               -Dsonar.python.xunit.reportPath=nose2-junit.xml \
-              -Dsonar.python.coverage.reportPath=coverage.xml
+              -Dsonar.python.coverage.reportPath=coverage.xml \
+              -Dsonar.python.pylint.reportPath=pylint-report.txt
           fi
 
     - &deploy-stage
