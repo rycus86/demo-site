@@ -42,6 +42,10 @@
   Code coverage
 - **Code Climate**: [https://codeclimate.com](https://codeclimate.com)  
   Code analysis
+- **TestSpace**: [https://testspace.com](https://testspace.com/)  
+  Test results and analytics
+- **SonarCloud**: [https://about.sonarcloud.io](https://about.sonarcloud.io/)  
+  Code analysis platform
 - **Docker**: [https://www.docker.com](https://www.docker.com)  
   *Container* platform
 - **Docker Hub**: [https://hub.docker.com](https://hub.docker.com)  
@@ -60,6 +64,8 @@
   *Google* search index dashboard
 - **Webpage Test**: [https://www.webpagetest.org](https://www.webpagetest.org)  
   Website Performance and Optimization Test
+- **Uptime Robot**: [https://uptimerobot.com](https://uptimerobot.com/)  
+  External service monitoring
 - **Cloudflare**: [https://www.cloudflare.com](https://www.cloudflare.com)  
   Content Delivery Network
 - **LetsEncrypt**: [https://letsencrypt.org](https://letsencrypt.org)  
@@ -70,6 +76,12 @@
   Monitoring for *time-series*
 - **Grafana**: [https://grafana.com](https://grafana.com)  
   Visualization platform for analytics and monitoring
+- **Fluentd**: [https://www.fluentd.org](https://www.fluentd.org/)  
+  Data Collector and Unified Logging Layer
+- **Elasticsearch**: [https://www.elastic.co/products/elasticsearch](https://www.elastic.co/products/elasticsearch)  
+  RESTful, Distributed Search and Analytics
+- **Kibana**: [https://www.elastic.co/products/kibana](https://www.elastic.co/products/kibana)  
+  Visualization for *Elasticsearch*
 - **Portainer**: [https://portainer.io](https://portainer.io)  
   *Docker* management UI
 
