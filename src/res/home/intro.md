@@ -14,7 +14,8 @@ from source code on [GitHub](https://github.com).
 The images are then pulled from [Docker Hub](https://hub.docker.com)
 onto [Pine64](https://www.pine64.org/?page_id=1194)
 and [Rock64](https://www.pine64.org/?page_id=7147) servers
-where they are running behind an [Nginx](https://nginx.org/en/) proxy server
+using [webhooks](https://github.com/rycus86/webhook-proxy)
+where the containers are running behind an [Nginx](https://nginx.org/en/) proxy server
 exposing secure HTTP/2 endpoints with SSL certificates
 from [Let's Encrypt](https://letsencrypt.org).
 
