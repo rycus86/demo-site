@@ -239,7 +239,7 @@ section div div.loading-panel {
     text-align: center;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 620px) {
     #panel-specs .mdl-card__media {
         text-align: center;
         height: 200px;

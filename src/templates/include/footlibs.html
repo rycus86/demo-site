@@ -12,9 +12,11 @@
 
 <script src="{{ assets['app.js'] }}" defer></script>
 <script src="{{ assets['datetime.js'] }}" defer></script>
-<script src="{{ assets['swipe.js'] }}" defer></script>
 <script src="{{ assets['github.js'] }}" defer></script>
 <script src="{{ assets['dockerhub.js'] }}" defer></script>
+
+<!-- Swipe is causing the text to be unselectable both on desktop and mobile, disabling until fixed -->
+<!-- script src="{{ assets['swipe.js'] }}" defer></script -->
 
 <script>
     'use strict';

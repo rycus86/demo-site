@@ -1,6 +1,10 @@
 {
   "links": [
     {
+      "title": "Blog",
+      "href": "https://blog.viktoradam.net"
+    },
+    {
       "title": "GitHub",
       "href": "https://github.com/rycus86"
     },
@@ -16,7 +20,7 @@
       "title": "Viktor Adam"
     },
     {
-      "title": "2017"
+      "title": "2018"
     }
   ]
 }
