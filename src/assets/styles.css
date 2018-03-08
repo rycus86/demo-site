@@ -197,7 +197,7 @@ footer ul.mdl-mini-footer__link-list {
     display: block;
 }
 
-#panel-github .markdown img {
+#panel-github .markdown img[src$="png"] {
     max-width: 100%;
     max-height: 100%;
 }
