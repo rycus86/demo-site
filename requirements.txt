@@ -1,4 +1,4 @@
 Flask
-Flask-Cache
+Flask-Caching
 markdown
 prometheus-flask-exporter

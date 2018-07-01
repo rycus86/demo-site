@@ -1,6 +1,5 @@
-import os
 from flask import Flask, request, make_response, render_template, send_from_directory
-from flask_cache import Cache
+from flask_caching import Cache
 from prometheus_flask_exporter import PrometheusMetrics
 
 from utils import *
