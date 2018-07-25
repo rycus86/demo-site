@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# make sure there aren't any local services
+if grep -ri "localhost" src/ | grep -iE '\.(py|js|css):' > /dev/null; then
+    echo "! There are references to 'localhost' in the code"
+    grep -nri "localhost" src/ | grep -iE '\.(py|js|css):' | grep --color "localhost"
+    exit 1
+else
+	echo "* No references to localhost in the codebase"
+fi

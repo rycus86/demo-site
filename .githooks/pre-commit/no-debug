@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# make sure debug=False for the Flask app
+if grep -i "debug=True" src/app.py > /dev/null; then
+    echo "! The Flask app is set to debug mode"
+    exit 1
+else
+	echo "* The Flask app is not in debug mode"
+fi
+

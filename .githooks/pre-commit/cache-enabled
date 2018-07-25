@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# make sure the Flask cache is in place
+if grep 'Cache(app,' src/app.py | grep -vE '^\s*#' > /dev/null; then
+	echo "* The Flask cache is enabled"
+else
+    echo "! The Flask cache is not enabled"
+    exit 1
+fi
+
