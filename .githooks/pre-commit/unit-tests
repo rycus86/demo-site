@@ -10,9 +10,10 @@ if [ -z "$SKIP_DOCKER" ] && [ "$HAS_DOCKER" -eq "0" ]; then
         *)            FROM="python:2.7-alpine" ;;
     esac
 
-    docker build -t demo-site-test-runner - << EOF > /dev/null
+    docker build -t demo-site-test-runner -f - . << EOF > /dev/null
     FROM ${FROM}
-    RUN pip install $(cat requirements.txt | paste -s -d ' ')
+    ADD requirements.txt /tmp/
+    RUN pip install -r /tmp/requirements.txt
     CMD PYTHONPATH=src python -m unittest discover -s tests -v
 EOF
     if [ "$?" -ne "0" ]; then
