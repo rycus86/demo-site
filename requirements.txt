@@ -2,3 +2,4 @@ Flask
 Flask-Caching
 markdown
 prometheus-flask-exporter
+setuptools>=65.5.1 # not directly required, pinned by Snyk to avoid a vulnerability
